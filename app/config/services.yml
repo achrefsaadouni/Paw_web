@@ -33,3 +33,15 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+    fos_user.doctrine_registry:
+        alias: doctrine
+    redirect.after.login:
+        class:  AppBundle\Redirection\AfterLoginRedirection
+        arguments:  ["@router"]
+    redirect.after.logout:
+        class: AppBundle\Redirection\AfterLogoutRedirection
+        arguments: ["@router"]
+    app.form.registration:
+        class: AppBundle\Form\RegistrationType
+        tags:
+             - { name: form.type, alias: app_user_registration }
