@@ -23,9 +23,9 @@ class DefaultController extends Controller
      */
     public function indexAdminAction(Request $r)
     {
-
+        $user = $this->getUser();
         return $this->render('AppBundle:Admin:index.html.twig',array(
-
+            'user' => $user,
         ));
     }
 
@@ -35,9 +35,9 @@ class DefaultController extends Controller
      */
     public function annonceTrouveAction()
     {
-
+        $user = $this->getUser();
         return $this->render('AppBundle:Membre:annonce_trouve.html.twig',array(
-
+            'user' => $user,
         ));
     }
 
@@ -48,9 +48,9 @@ class DefaultController extends Controller
      */
     public function boutiqueProduitsAction()
     {
-
+        $user = $this->getUser();
         return $this->render('AppBundle:Membre:boutique_produits.html.twig',array(
-
+            'user' => $user,
         ));
     }
     /**
@@ -58,9 +58,9 @@ class DefaultController extends Controller
      */
     public function reclamationAction()
     {
-
+        $user = $this->getUser();
         return $this->render('AppBundle:Membre:reclamation.html.twig',array(
-
+            'user' => $user,
         ));
     }
     /**
@@ -68,9 +68,9 @@ class DefaultController extends Controller
      */
     public function adoptionPrincipaleAction()
     {
-
+        $user = $this->getUser();
         return $this->render('AppBundle:Membre:adoption_liste.html.twig',array(
-
+            'user' => $user,
         ));
     }
     /**
@@ -78,9 +78,9 @@ class DefaultController extends Controller
      */
     public function veterinaireAction()
     {
-
+        $user = $this->getUser();
         return $this->render('AppBundle:Membre:veterinaire.html.twig',array(
-
+            'user' => $user,
         ));
     }
     /**
@@ -88,9 +88,9 @@ class DefaultController extends Controller
      */
     public function accouplementAction()
     {
-
+        $user = $this->getUser();
         return $this->render('AppBundle:Membre:accouplement_liste.html.twig',array(
-
+            'user' => $user,
         ));
     }
     /**
@@ -98,9 +98,9 @@ class DefaultController extends Controller
      */
     public function sittingAction()
     {
-
+        $user = $this->getUser();
         return $this->render('AppBundle:Membre:sitting.html.twig',array(
-
+            'user' => $user,
         ));
     }
     /**
@@ -108,9 +108,9 @@ class DefaultController extends Controller
      */
     public function walkingAction()
     {
-
+        $user = $this->getUser();
         return $this->render('AppBundle:Membre:walking.html.twig',array(
-
+            'user' => $user,
         ));
     }
 }

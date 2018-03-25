@@ -13,9 +13,9 @@ class AnnoncePerduController extends Controller
      */
     public function annoncePerduAction()
     {
-
+        $user = $this->getUser();
         return $this->render('AppBundle:Membre:annonce_perdu.html.twig',array(
-
+            'user' => $user,
         ));
     }
 }

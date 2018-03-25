@@ -13,16 +13,18 @@ class ProduitController extends Controller
      * @Route("/boutique" ,name="boutique_membre")
      */
     public function boutiqueAction(Request $request) {
+        $user = $this->getUser();
         return $this->render('AppBundle:Membre:boutique.html.twig',array(
-
+            'user' => $user,
         ));
     }
     /**
      * @Route("/admin/gererproduit" ,name="gererproduit_admin")
      */
     public function gererProduitAction(Request $request) {
+        $user = $this->getUser();
         return $this->render('AppBundle:admin:produit.html.twig',array(
-
+            'user' => $user,
         ));
     }
 }
