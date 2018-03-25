@@ -13,9 +13,9 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $r)
     {
-
+        $user = $this->getUser();
         return $this->render('AppBundle:Membre:index.html.twig',array(
-
+            'user' => $user,
         ));
     }
     /**

@@ -251,6 +251,11 @@ class Utilisateur extends BaseUser
         $this->code = $code;
     }
 
+    /**
+     * @return string
+     */
+
+
 
 }
 

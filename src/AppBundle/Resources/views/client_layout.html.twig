@@ -1,3 +1,4 @@
+{% trans_default_domain 'FOSUserBundle' %}
 <!DOCTYPE html>
 <html>
 
@@ -49,23 +50,23 @@
                 </li>
                 <li class="pull-right">
                     <ul class="list-inline icon-position">
-                        <li>
-                            <a href="mailto:"><i class="livicon" data-name="mail" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
-                            <label class="hidden-xs"><a href="mailto:" class="text-white">info@joshadmin.com</a></label>
-                        </li>
 
-                        <li>
-                            <a href="tel:"><i class="livicon" data-name="phone" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
-                            <label class="hidden-xs"><a href="tel:" class="text-white">(703) 717-4200</a></label>
-                        </li>
-                        <li>
-                            <a href="login:"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
-                            <label class="hidden-xs"><a href="http://localhost/paw_web/web/app_dev.php/login" class="text-white">Login</a></label>
-                        </li>
-                        <li>
-                            <a href="logout:"><i class="livicon" data-name="logout" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
-                            <label class="hidden-xs"><a href="http://localhost/paw_web/web/app_dev.php/logout" class="text-white">Logout</a></label>
-                        </li>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li>
+                                <a href="{{ path('fos_user_profile_show') }}"><i class="livicon" data-name="user" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
+                                <label class="hidden-xs"><a href="{{ path('fos_user_profile_show') }}" class="text-white">{{ user.email }}</a></label>
+                            </li>
+                            <li>
+                                <a href="logout:"><i class="livicon" data-name="logout" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
+                                <label class="hidden-xs"><a href="{{ path('fos_user_security_logout') }}" class="text-white">Logout</a></label>
+                            </li>
+
+                        {% else %}
+                            <li>
+                                <a href="login:"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
+                                <label class="hidden-xs"><a href="{{ path('fos_user_security_login') }}" class="text-white">Login</a></label>
+                            </li>
+                        {% endif %}
                     </ul>
                 </li>
             </ul>
