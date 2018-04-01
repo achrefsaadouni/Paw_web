@@ -52,6 +52,86 @@ class Achat
      */
     private $idClient;
 
+    /**
+     * @return int
+     */
+    public function getIdAchat()
+    {
+        return $this->idAchat;
+    }
+
+    /**
+     * @param int $idAchat
+     */
+    public function setIdAchat($idAchat)
+    {
+        $this->idAchat = $idAchat;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateAchat()
+    {
+        return $this->dateAchat;
+    }
+
+    /**
+     * @param \DateTime $dateAchat
+     */
+    public function setDateAchat($dateAchat)
+    {
+        $this->dateAchat = $dateAchat;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * @param float $prix
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * @param string $etat
+     */
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+    }
+
+    /**
+     * @return \Utilisateur
+     */
+    public function getIdClient()
+    {
+        return $this->idClient;
+    }
+
+    /**
+     * @param \Utilisateur $idClient
+     */
+    public function setIdClient($idClient)
+    {
+        $this->idClient = $idClient;
+    }
+
 
 }
 

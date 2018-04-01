@@ -1,0 +1,128 @@
+<div id="sample_editable_1_wrapper" class="">
+    <table class="table table-striped table-bordered table-hover dataTable no-footer"
+           id="sample_editable_1" role="grid">
+        <thead class="table_head">
+        <tr role="row">
+            <th class="sorting_asc" tabindex="0" aria-controls="sample_editable_1"
+                rowspan="1" colspan="1" >Id Achat
+            </th>
+            <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1"
+                colspan="1" aria-label="
+                                                 Libelle
+                                            : activate to sort column ascending">Nom & Prenom
+            </th>
+            <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1"
+                colspan="1" aria-label="
+                                                 Description
+                                            : activate to sort column ascending">Date
+            </th>
+            <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1"
+                colspan="1" aria-label="
+                                                 Type
+                                            : activate to sort column ascending">Etat
+            </th>
+            <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1"
+                colspan="1" aria-label="
+                                                 Prix
+                                            : activate to sort column ascending">Adresse
+            </th>
+            <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1"
+                colspan="1" aria-label="
+                                                 Quantite
+                                            : activate to sort column ascending">Numero
+            </th>
+            <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1"
+                colspan="1" aria-label="
+                                                 Image 1
+                                            : activate to sort column ascending">Prix Total
+            </th>
+            <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1"
+                colspan="1" aria-label="
+                                                 Edit
+                                            : activate to sort column ascending">Consulter
+            </th>
+            <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1"
+                colspan="1" aria-label="
+                                                 Edit
+                                            : activate to sort column ascending">Livrer
+            </th>
+            <th class="sorting" tabindex="0" aria-controls="sample_editable_1" rowspan="1"
+                colspan="1" aria-label="
+                                                 Delete
+                                            : activate to sort column ascending">Supprimer
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% set i = 1 %}
+        {% for a in achats %}
+            {% if i%2!=0 %}
+                <tr role="row" class="odd" data-id="{{ i }}">
+                    <td class="sorting_1">{{ a.idAchat }}</td>
+                    <td >{{ a.getIdClient.nom }} {{ a.getIdClient.prenom }}</td>
+                    <td>{{ a.dateAchat |date }}</td>
+                    <td>{{ a.etat }}</td>
+                    <td>{{ a.getIdClient.addresse  }}</td>
+                    <td class="center">{{ a.getIdClient.numero }}</td>
+                    <td> {{ a.prix }} </td>
+                    <td>
+                        <a  href="{{ path('consulterAchat',{'id':a.idAchat}) }}" >Consulter</a>
+                    </td>
+                    <td>
+                        <a  href="#" id="{{ a.idAchat }}">Livrer</a>
+                    </td>
+                    <td>
+                        <a class="delete" href="javascript:;" onclick="supprimer({{ a.idAchat }})">supprimer</a>
+                    </td>
+                </tr>
+                {% set i=i+1 %}
+            {% else %}
+                <tr role="row" class="even" data-id="{{ i }}">
+                    <td class="sorting_1">{{ a.idAchat }}</td>
+                    <td >{{ a.getIdClient.nom }} {{ a.getIdClient.prenom }}</td>
+                    <td>{{ a.dateAchat | date }}</td>
+                    <td>{{ a.etat }}</td>
+                    <td>{{ a.getIdClient.addresse  }}</td>
+                    <td class="center">{{ a.getIdClient.numero }}</td>
+                    <td> {{ a.prix }} </td>
+                    <td>
+                        <a  href="{{ path('consulterAchat',{'id':a.idAchat}) }}">Consulter</a>
+                    </td>
+                    <td>
+                        <a  href="#" id="{{ a.idAchat }}">Livrer</a>
+                    </td>
+                    <td>
+                        <a class="delete" href="javascript:;" onclick="supprimer({{ a.idAchat }})">supprimer</a>
+                    </td>
+                </tr>
+                {% set i=i+1 %}
+            {% endif %}
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+<script>
+    $(document).ready(function() {
+
+        console.log('document is ready');
+
+        $('a').on('click', function(event) {
+            var $target = $(event.target);
+            var itemId = $target.attr('id');
+            console.log(itemId);
+            var keyword = itemId;
+            if(isNaN(keyword) == false)
+            {
+                $.get("{{ path('livreAchat')}}?keyword=" + keyword, function(data, err, vars) {
+                    $("#panel-body").html(data);
+                })
+            }
+
+
+        });
+
+    })
+</script>

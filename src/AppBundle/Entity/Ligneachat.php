@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Ligneachat
  *
  * @ORM\Table(name="ligneachat", indexes={@ORM\Index(name="id_produit", columns={"id_produit"}), @ORM\Index(name="id_achat", columns={"id_achat"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\LigneachatRepository")
  */
 class Ligneachat
 {
@@ -47,6 +47,70 @@ class Ligneachat
      * })
      */
     private $idAchat;
+
+    /**
+     * @return int
+     */
+    public function getIdLigne()
+    {
+        return $this->idLigne;
+    }
+
+    /**
+     * @param int $idLigne
+     */
+    public function setIdLigne($idLigne)
+    {
+        $this->idLigne = $idLigne;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbrProduit()
+    {
+        return $this->nbrProduit;
+    }
+
+    /**
+     * @param int $nbrProduit
+     */
+    public function setNbrProduit($nbrProduit)
+    {
+        $this->nbrProduit = $nbrProduit;
+    }
+
+    /**
+     * @return \Produit
+     */
+    public function getIdProduit()
+    {
+        return $this->idProduit;
+    }
+
+    /**
+     * @param \Produit $idProduit
+     */
+    public function setIdProduit($idProduit)
+    {
+        $this->idProduit = $idProduit;
+    }
+
+    /**
+     * @return \Achat
+     */
+    public function getIdAchat()
+    {
+        return $this->idAchat;
+    }
+
+    /**
+     * @param \Achat $idAchat
+     */
+    public function setIdAchat($idAchat)
+    {
+        $this->idAchat = $idAchat;
+    }
 
 
 }

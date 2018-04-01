@@ -42,18 +42,6 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/veterinaire", name="veterinaireName")
-    /**
-     * @Route("/boutique", name="boutique_ProduitsName")
-     */
-    public function boutiqueProduitsAction()
-    {
-        $user = $this->getUser();
-        return $this->render('AppBundle:Membre:boutique_produits.html.twig',array(
-            'user' => $user,
-        ));
-    }
-    /**
      * @Route("/reclamation", name="reclamationName")
      */
     public function reclamationAction()
