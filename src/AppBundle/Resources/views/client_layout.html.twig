@@ -139,7 +139,25 @@
                 </li>
                 <li><a href="reclamations">Reclamation</a>
                 </li>
-                <li><a href="{{ path('boutique_membre') }}">Boutique</a>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Notre Boutique</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ path('boutique_membre',{'type':'Laisse, Collier et Harnais'}) }}">Laisse, Collier et Harnais</a>
+                        </li>
+                        <li><a href="{{ path('boutique_membre',{'type':'Lits et Couvertures'}) }}">Lits et Couvertures</a>
+                        </li>
+                        <li><a href="{{ path('boutique_membre',{'type':'Shampoings et Conditionneurs'}) }}">Shampoings et Conditionneurs</a>
+                        </li>
+                        <li><a href="{{ path('boutique_membre',{'type':'Vetements'}) }}">Vetements</a>
+                        </li>
+                        <li><a href="{{ path('boutique_membre',{'type':'Bols'}) }}">Bols</a>
+                        </li>
+                        <li><a href="{{ path('boutique_membre',{'type':'Cadeaux'}) }}">Cadeaux</a>
+                        </li>
+                        <li><a href="{{ path('boutique_membre',{'type':'Gâteries Et Nourritures'}) }}">Gâteries Et Nourritures</a>
+                        </li>
+                        <li><a href="{{ path('boutique_membre',{'type':'Jouets'}) }}">Jouets</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

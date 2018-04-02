@@ -1,0 +1,156 @@
+
+
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+    <html>
+
+    <head>
+<link rel="stylesheet" type="text/css" href="{{ asset('client/css/bootstrap.min.css') }}">
+<link rel="shortcut icon" href="{{ asset('client/images/favicon.png') }}" type="image/x-icon">
+<link rel="icon" href="{{ asset('client/images/favicon.png') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{ asset('client/css/custom.css') }}">
+<!--end of global css-->
+<!--page level css starts-->
+<link rel="stylesheet" type="text/css" href="{{ asset('client/css/cart.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('client/css/font-awesome.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('client/css/tabbular.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('client/vendors/bootstrap-rating-master/bootstrap-rating.css') }}">
+    <body>
+<div class="breadcum">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ path('home_member') }}"> <i class="livicon icon3 icon4" data-name="home" data-size="18" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Acceuil
+                </a>
+            </li>
+            <li class="hidden-xs">
+                <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                <a href="{{ path('boutique_membre') }}">Boutique</a>
+            </li>
+            <li class="hidden-xs">
+                <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                <a href="#">Detail Produit</a>
+            </li>
+        </ol>
+        <div class="pull-right">
+            <i class="livicon icon3" data-name="edit" data-size="20" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i> Single Product
+        </div>
+    </div>
+</div>
+<!-- //Breadcrumb Section End-->
+<!-- Container Section Start -->
+<div class="container">
+    <!--item view start-->
+    <div class="row">
+        <div class="mart10">
+            <!--product view-->
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="product_wrapper">
+                        <img id="zoom_09" src="http://localhost/paw_web/web/images/pawBoutique/{{ produit.image1 }}" data-zoom-image="http://localhost/paw_web/web/images/pawBoutique/{{ produit.image1 }}" class="img-responsive" />
+                    </div>
+                </div>
+                <div class="row">
+                    <!--individual products in product view-->
+                    <div id="gal1">
+                        <a href="#" data-image="http://localhost/paw_web/web/images/pawBoutique/{{ produit.image1 }}" data-zoom-image="http://localhost/paw_web/web/images/pawBoutique/{{ produit.image1 }}">
+                            <img id="img_01" src="http://localhost/paw_web/web/images/pawBoutique/{{ produit.image1 }}" class="img-responsive" />
+                        </a>
+                        <a href="#" data-image="http://localhost/paw_web/web/images/pawBoutique/{{ produit.image2 }}" data-zoom-image="http://localhost/paw_web/web/images/pawBoutique/{{ produit.image2 }}">
+                            <img id="img_02" src="http://localhost/paw_web/web/images/pawBoutique/{{ produit.image2 }}" class="img-responsive" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--individual product description-->
+            <div class="col-md-8">
+                <h2 class="text-primary">{{ produit.libelle }}</h2>
+                <br>
+                <p><h4>Type : </h4>{{ produit.type }}
+
+                <h4>Etat : </h4>
+                {% if produit.quantite == 0 %}
+                  <li> <i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>Hors Stock</li>
+                {% else %}
+
+                        <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>En Stock </li>
+
+                {% endif %}
+                </p>
+                <br>
+                <div class="text-big4">{{ produit.prix }} DNT</div>
+                <a href="#" class="btn btn-primary btn-lg text-white">Ajouter au panier</a>
+                <h4>Quantite</h4>
+                <form>
+                    <div class="form-group">
+                        <input type="number" class="form-control" min="1" style="width:70px;">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--item view end-->
+    <!--item desciption start-->
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Tabbable-Panel Start -->
+            <div class="tabbable-panel">
+                <!-- Tabbablw-line Start -->
+                <div class="tabbable-line">
+                    <!-- Nav Nav-tabs Start -->
+                    <ul class="nav nav-tabs ">
+                        <li class="active">
+                            <a href="#tab_default_1" data-toggle="tab">
+                                Description </a>
+                        </li>
+                    </ul>
+                    <!-- //Nav Nav-tabs End -->
+                    <!-- Tab-content Start -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab_default_1">
+                            <p> {{ produit.description }}</p>
+                            <ul>
+                                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#555555" data-hc="#555555"></i> Livraison a domicile disponible</li>
+                                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#555555" data-hc="#555555"></i>Garantie 1 ans</li>
+                                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#555555" data-hc="#555555"></i>Marque mondiale</li>
+                                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#555555" data-hc="#555555"></i>possibilite de paiement a la livraison</li>
+                            </ul></div>
+
+                        <!-- Tab-content End -->
+                    </div>
+                    <!-- //Tabbable-line End -->
+                </div>
+                <!-- Tabbable_panel End -->
+            </div>
+        </div>
+    </div>
+    <!--item desciption end-->
+</div>
+<!-- //Container Section End -->
+<!-- Footer Section Start -->
+
+<a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Return to top" data-toggle="tooltip" data-placement="left">
+    <i class="livicon" data-name="plane-up" data-size="18" data-loop="true" data-c="#fff" data-hc="white"></i>
+</a>
+
+
+
+
+
+    <script type="text/javascript" src="{{ asset('client/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('client/js/style-switcher.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ asset('client/js/raphael.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/js/livicons-1.4.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/js/josh_frontend.js') }}"></script>
+    <!--global js end-->
+    <!--page level js start-->
+    <script type="text/javascript" src="{{ asset('client/js/elevatezoom.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/vendors/bootstrap-rating-master/bootstrap-rating.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('client/js/cart.js') }}"></script>
+    </body>
+
+    </html>
+    <!--page level js start-->
+{% endblock content%}

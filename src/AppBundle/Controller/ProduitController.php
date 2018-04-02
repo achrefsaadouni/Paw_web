@@ -16,19 +16,19 @@ class ProduitController extends Controller
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/boutique",name="boutique_membre")
+     * @Route("/boutique?type={type}",name="boutique_membre")
      */
-    public function boutiqueAction(Request $request)
+    public function boutiqueAction($type,Request $request)
     {
 
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $articles = $em->getRepository("AppBundle:Produit")->findAll();
+        $articles = $em->getRepository("AppBundle:Produit")->findBy(array('type' => $type));
         $paginator = $this->get('knp_paginator');
         $result= $paginator->paginate(
           $articles,
           $request->query->getInt('page',1),
-          $request->query->getInt('limit',5)
+          $request->query->getInt('limit',6)
 
         );
         return $this->renderBoutique(["user" => $user, "articles" => $result]);
@@ -189,5 +189,18 @@ class ProduitController extends Controller
 
         $em->flush();
         return $this->redirectToRoute('afficheProduit');
+    }
+    /**
+     * @Route("/detailProduit?id={id}" ,name="detailProduit")
+     */
+    public function DetailAction($id,Request $request)
+    {
+        $user = $this->getUser();
+        $em=$this->getDoctrine()->getManager();
+        $produit=$em->getRepository("AppBundle:Produit")->find($id);
+        return $this->render('AppBundle:Membre:detailProduit.html.twig', array(
+            'produit'=>$produit,
+            'user'=>$user
+        ));
     }
 }

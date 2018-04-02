@@ -18,6 +18,7 @@ class Produit
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     *
      */
     private $id;
 
@@ -25,6 +26,7 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="libelle", type="string", length=30, nullable=false)
+     * @Assert\NotBlank()
      */
     private $libelle;
 
@@ -32,6 +34,7 @@ class Produit
      * @var float
      *
      * @ORM\Column(name="prix", type="float", precision=10, scale=0, nullable=false)
+     *@Assert\Range(min="0")
      */
     private $prix;
 
@@ -39,6 +42,7 @@ class Produit
      * @var integer
      *
      * @ORM\Column(name="quantite", type="integer", nullable=false)
+     * Assert\Range(min="0")
      */
     private $quantite;
 
@@ -46,6 +50,8 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     * @Assert\NotBlank()
+     *
      */
     private $description;
 
@@ -53,6 +59,7 @@ class Produit
      * @var string
      *
      * @ORM\Column(name="type", type="string", length=40, nullable=false)
+     * @Assert\NotBlank()
      */
     private $type;
 
