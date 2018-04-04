@@ -18,19 +18,14 @@ class ProduitRepository extends \Doctrine\ORM\EntityRepository
         return $querybuilder->addOrderBy("article.prix")->getQuery()->getResult();
     }
 
-    public function articlesParDate()
-    {
-        $querybuilder = $this->createQueryBuilder("article");
-        return $querybuilder->addOrderBy("article.updateAt")->getQuery()->getResult();
-    }
 
     public function searchByKeyword($keyword)
     {
-        $querybuilder = $this->createQueryBuilder("article");
+        $querybuilder = $this->createQueryBuilder("p");
         return $querybuilder
             ->where($querybuilder
                 ->expr()
-                ->like("article.libelle", ":keyword")
+                ->like("p.libelle", ":keyword")
             )
             ->setParameter("keyword","%".$keyword."%")
             ->getQuery()

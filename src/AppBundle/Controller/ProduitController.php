@@ -23,7 +23,10 @@ class ProduitController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $articles = $em->getRepository("AppBundle:Produit")->findBy(array('type' => $type));
+        if ($type == 'tous')
+            $articles = $em->getRepository("AppBundle:Produit")->findAll();
+        else
+            $articles = $em->getRepository("AppBundle:Produit")->findBy(array('type' => $type));
         $paginator = $this->get('knp_paginator');
         $result= $paginator->paginate(
           $articles,
@@ -201,6 +204,21 @@ class ProduitController extends Controller
         return $this->render('AppBundle:Membre:detailProduit.html.twig', array(
             'produit'=>$produit,
             'user'=>$user
+        ));
+    }
+
+    /**
+     * @Route("/membre/boutique/produit/recherche", name="rechercheProduit")
+     */
+    public function rechercheAction(Request $request)
+    {
+        $keyword = $request->get("keyword");
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository("AppBundle:Produit")->searchByKeyword($keyword);
+
+        return $this->render("AppBundle:Membre:boutique.html.twig", array(
+            "articles" => $articles,
+            "user" => $this->getUser(),
         ));
     }
 }

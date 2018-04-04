@@ -35,6 +35,29 @@
                     <div class="panel panel-default">
                         <div class="panel-heading text_bg">
                             <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapsenine">
+                                    <span class=" glyphicon glyphicon-plus success"></span>
+                                    <span class="success" id="8">Tous les Produits</span></a>
+                            </h4>
+                        </div>
+                        <div id="collapsenine" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="media">
+                                    <div class="media-left media-top">
+                                        <a href="#">
+                                            <i class="devicon-php-plain colored font100" ></i>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <p class="media-heading"><a href="#">prix croissant</a></br><a href="#">prix decroissant</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading text_bg">
+                            <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                                     <span class=" glyphicon glyphicon-plus success"></span>
                                     <span id="1" class="success">Laisse, Collier et Harnais</span></a>
@@ -216,6 +239,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading text_bg">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapsenine">
+                                    <span class=" glyphicon glyphicon-plus success"></span>
+                                    <span class="success" id="8">Tous les Produits</span></a>
+                            </h4>
+                        </div>
+                        <div id="collapsenine" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="media">
+                                    <div class="media-left media-top">
+                                        <a href="#">
+                                            <i class="devicon-php-plain colored font100" ></i>
+                                        </a>
+                                    </div>
+                                    <div class="media-body">
+                                        <p class="media-heading"><a href="#">prix croissant</a></br><a href="#">prix decroissant</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- //Panel group Section End -->
             </div>
@@ -241,7 +287,7 @@
                         {% endif %}
                         <h4 class="text-primary">{{ article.prix}} DNT</h4>
                         <a href="{{ path('detailProduit',{'id':article.id})  }}" class="btn btn-responsive button-alignment btn-primary text-white">Plus d'info</a>
-                        <a href="#" class="btn btn-responsive button-alignment btn-primary text-white">Ajouter au panier</a>
+                        <a id="{{ article.id }}" class="btn btn-responsive button-alignment btn-primary text-white">Ajouter au panier</a>
                     </div>
                 </div>
             {% endfor %}
@@ -291,4 +337,28 @@
             </row>
     </div>
 
+
+
+    <script>
+        $(document).ready(function() {
+
+            console.log('document is ready');
+
+            $('a').on('click', function(event) {
+                var $target = $(event.target);
+                var itemId = $target.attr('id');
+                console.log(itemId);
+                var keyword = itemId;
+                if(isNaN(keyword) == false)
+                {
+                    $.get("{{ path('acheterProduit') }}?keyword=" + keyword, function(data, err, vars) {
+
+                    })
+                }
+
+
+            });
+
+        })
+    </script>
 {% endblock content%}

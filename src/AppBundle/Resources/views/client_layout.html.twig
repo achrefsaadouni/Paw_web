@@ -62,14 +62,19 @@
                                 <a href="{{ path('fos_user_profile_show') }}"><i class="livicon" data-name="user" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
                                 <label class="hidden-xs"><a href="{{ path('fos_user_profile_show') }}" class="text-white">{{ user.email }}</a></label>
                             </li>
+
                             <li>
-                                <a href="logout:"><i class="livicon" data-name="logout" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
+                                <a href="{{ path('panier') }}"><i class="livicon" data-name="shopping-cart-in" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
+                                <label class="hidden-xs"><a href="{{ path('panier') }}" class="text-white">panier</a></label>
+                            </li>
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}"><i class="livicon" data-name="sign-out" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
                                 <label class="hidden-xs"><a href="{{ path('fos_user_security_logout') }}" class="text-white">Logout</a></label>
                             </li>
 
                         {% else %}
                             <li>
-                                <a href="login:"><i class="livicon" data-name="login" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
+                                <a href="{{ path('fos_user_security_login') }}"><i class="livicon" data-name="sign-in" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
                                 <label class="hidden-xs"><a href="{{ path('fos_user_security_login') }}" class="text-white">Login</a></label>
                             </li>
                         {% endif %}
@@ -141,6 +146,8 @@
                 </li>
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Notre Boutique</a>
                     <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ path('boutique_membre',{'type':'tous'}) }}">Tous les Produits</a>
+                        </li>
                         <li><a href="{{ path('boutique_membre',{'type':'Laisse, Collier et Harnais'}) }}">Laisse, Collier et Harnais</a>
                         </li>
                         <li><a href="{{ path('boutique_membre',{'type':'Lits et Couvertures'}) }}">Lits et Couvertures</a>

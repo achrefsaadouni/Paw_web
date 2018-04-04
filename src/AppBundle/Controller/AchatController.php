@@ -2,9 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Panier;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class AchatController extends Controller
 {
@@ -76,5 +78,97 @@ class AchatController extends Controller
 
     }
 
+
+    /**
+     * @Route("/client/boutique/panier" ,name="panier")
+     */
+    public function CartAction(Request $request)
+    {
+        $user = $this->getUser();
+        $em=$this->getDoctrine()->getManager();
+        $session = $request->getSession();
+        $panier = $session->has("panier") ? $session->get("panier") : new Panier();
+        return $this->render('AppBundle:Membre:cart.html.twig', array(
+            'user' => $user,
+            'panier' => $panier
+        ));
+
+    }
+
+    /**
+     * @Route("/client/boutique/viderPanier" ,name="viderPanier")
+     */
+    public function resetAction(Request $request)
+    {
+        $user = $this->getUser();
+        $session = $request->getSession();
+        $session->remove("panier");
+        return new Response("OK");
+    }
+
+    /**
+     * @Route("/client/boutique/article/panier/enlever/{id}", name="removeArticle")
+     */
+    public function supprimerArticleDuPanierAction(Request $request, $id)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $session = $request->getSession();
+        $article = $em->getRepository("AppBundle:Produit")->find($id);
+        $panier = $session->get("panier");
+        $panier->removeItem($article);
+        return $this->redirectToRoute("panier");
+    }
+
+
+    /**
+     * @Route("/client/boutique/article/acheter", name="acheterProduit")
+     */
+    public function buyAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $id=$request->get('keyword');
+        $session = $request->getSession();
+        $article = $em->getRepository("AppBundle:Produit")->find($id);
+        if ( empty($session->get("panier")) ) {
+                $panier = new Panier();
+                $panier->addItem($article);
+                $session->set("panier", $panier);
+
+        } else {
+                $panier = $session->get("panier");
+                $panier->addItem($article);
+        }
+
+        return $this->redirectToRoute("panier");
+    }
+
+    /**
+     * @Route("/client/boutique/article/panier/plus/{id}", name="plus")
+     */
+    public function plusAction(Request $request, $id)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $session = $request->getSession();
+        $article = $em->getRepository("AppBundle:Produit")->find($id);
+        $panier = $session->get("panier");
+        $panier->plus($article);
+        return $this->redirectToRoute("panier");
+    }
+    /**
+     * @Route("/client/boutique/article/panier/minus/{id}", name="minus")
+     */
+    public function minusAction(Request $request, $id)
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $session = $request->getSession();
+        $article = $em->getRepository("AppBundle:Produit")->find($id);
+        $panier = $session->get("panier");
+        $panier->minus($article);
+        return $this->redirectToRoute("panier");
+    }
 
 }
