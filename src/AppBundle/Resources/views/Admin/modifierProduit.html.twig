@@ -60,7 +60,7 @@
                                 </span>
                         </div>
                         <div class="panel-body">
-                            <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('modifierP') }}" method="post">
+                            <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('modifierP') }}" method="post" >
                                 <fieldset>
                                     <!-- Name input-->
                                     <div class="form-group" hidden >
@@ -70,45 +70,56 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="libelle">Libelle</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" value="{{ produit.libelle }}" name="libelle"></div>
+                                            <input  required type="text" class="form-control" value="{{ produit.libelle }}" name="libelle"></div>
                                     </div>
                                     <!-- Email input-->
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="type">Type</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" value="{{ produit.type }}" name="type"></div>
+                                            <select class="form-control" name="type">
+
+                                                <option  {% if produit.type == "Laisse, Collier et Harnais" %} selected {% endif %} value="Laisse, Collier et Harnais">Laisse, Collier et Harnais</option>
+                                                <option {% if produit.type == "Lits et Couvertures" %} selected {% endif %} value="Lits et Couvertures">Lits et Couvertures</option>
+                                                <option {% if produit.type == "Shampoings et Conditionneurs" %} selected {% endif %} value="Shampoings et Conditionneurs">Shampoings et Conditionneurs</option>
+                                                <option {% if produit.type == "Vetements" %} selected {% endif %} value="Vetements">Vetements</option>
+                                                <option {% if produit.type == "Bols" %} selected {% endif %} value="Bols">Bols</option>
+                                                <option {% if produit.type == "Cadeaux" %} selected {% endif %} value="Cadeaux">Cadeaux</option>
+                                                <option {% if produit.type == "Gâteries Et Nourritures" %} selected {% endif %} value="Gâteries Et Nourritures">Gâteries Et Nourritures</option>
+                                                <option {% if produit.type == "Jouets" %} selected {% endif %} value="Jouets">Jouets</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <!-- Message body -->
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="message">Description</label>
                                         <div class="col-md-9">
 
-                                            <textarea type="text" class="form-control resize_vertical" name="description">{{ produit.description }}</textarea>
+                                            <textarea required type="text" class="form-control resize_vertical" name="description">{{ produit.description }}</textarea>
 
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="prix">Prix</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" value="{{ produit.prix }}" name="prix">
+                                            <input required id="appbundle_produit_prix" type="text" class="form-control" value="{{ produit.prix }}" name="prix">
                                     </div> </div>
                                     <div class="form-group">
                                         <label class="col-md-3 control-label" for="quantite">Quantite</label>
                                         <div class="col-md-9">
-                                            <input type="text" class="form-control" value="{{ produit.quantite }}" name="quantite"></div>
+                                            <input required type="number" class="form-control" value="{{ produit.quantite }}" name="quantite" min="0"></div>
                                     </div>
                                     <div class="form-group">
 
                                         <label class="col-md-3 control-label" for="name">Image 1</label>
                                         <div class="col-md-9">
-                                            <input type="file"  name="image1" class="form-control">
+                                            <input  type="file"  name="image1" class="form-control">
                                             </div>
                                     </div>
                                     <div class="form-group">
 
                                         <label class="col-md-3 control-label" for="name">Image 2</label>
                                         <div class="col-md-9">
-                                         <input type="file"  name="image2" class="form-control">
+                                         <input  type="file"  name="image2" class="form-control">
                                         </div>
                                     </div>
                                     <!-- Form actions -->
@@ -126,15 +137,22 @@
                         <i class="livicon" data-name="plane-up" data-size="18" data-loop="true" data-c="#fff" data-hc="white"></i>
                     </a>
                     <!-- global js -->
-                    <script src="js/app.js" type="text/javascript"></script>
+                    <script src="{{ asset('admin/js/app.js') }}" type="text/javascript"></script>
                     <!-- end of global js -->
                     <!-- begining of page level js -->
                     <script src="{{ asset('admin/vendors/favicon/favicon.js') }}"></script>
                     <script src="{{ asset('admin/vendors/jasny-bootstrap/js/jasny-bootstrap.js') }}"></script>
                     <script src="{{ asset('admin/vendors/iCheck/js/icheck.js') }}"></script>
                     <script src="{{ asset('admin/js/pages/form_examples.js') }}"></script>
-
+                    <script>
+                        $("#appbundle_produit_prix").on('keyup', function(e) {
+                            var val = $(this).val();
+                            if (isNaN(val)||(parseFloat(val)<0)) {
+                                $(this).val(val.replace(/[^0-9.]/g, ''));
+                            }
+                        });
+                    </script>
                     <!-- end of page level js -->
-    </body>
+                </div></div></section></aside> </body>
     </html>
 {% endblock content%}
