@@ -3,6 +3,7 @@
 parameters:
     #parameter_name: value
     produit_directory: '%kernel.project_dir%/web/images/pawBoutique'
+    annonce_directory: '%kernel.project_dir%/web/images/pawLostFound'
 
 services:
     # default configuration for services in *this* file

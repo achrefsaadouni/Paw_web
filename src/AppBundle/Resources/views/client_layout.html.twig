@@ -98,11 +98,17 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="active"><a href="index"> Home</a>
                 </li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Trouvées & Perdus</a>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Annonces</a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="annonce_perdu">Annonces Perdus</a>
+                        <li><a href="{{ path('lister_annonce_perdue') }}">Annonces Perdus</a>
                         </li>
-                        <li><a href="annonce_trouve">Annonces Trouvées</a>
+                        <li><a href="{{ path('lister_annonce_trouver') }}">Annonces Trouvées</a>
+                        </li>
+                        <li><a href="{{ path('ajouter_annonce_perdue')}}">Ajouter une annonce Perdu</a>
+                        </li>
+                        <li><a href="{{ path('ajouter_annonce_trouver')}}">Ajouter une annonce Trouveé</a>
+                        </li>
+                        <li><a href="{{ path('afficher_mes_annonce')}}">Mes annonces </a>
                         </li>
 
                     </ul>

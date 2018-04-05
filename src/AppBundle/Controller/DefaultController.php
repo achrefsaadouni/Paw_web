@@ -30,16 +30,6 @@ class DefaultController extends Controller
     }
 
 
-    /**
-     * @Route("/annonce_trouve", name="annonce_trouveName")
-     */
-    public function annonceTrouveAction()
-    {
-        $user = $this->getUser();
-        return $this->render('AppBundle:Membre:annonce_trouve.html.twig',array(
-            'user' => $user,
-        ));
-    }
 
     /**
      * @Route("/reclamation", name="reclamationName")

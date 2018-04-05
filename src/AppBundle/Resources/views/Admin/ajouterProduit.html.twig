@@ -121,14 +121,17 @@
                     <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="Return to top" data-toggle="tooltip" data-placement="left">
                         <i class="livicon" data-name="plane-up" data-size="18" data-loop="true" data-c="#fff" data-hc="white"></i>
                     </a>
-                    <!-- global js -->
                     <script src="{{ asset('admin/js/app.js') }}" type="text/javascript"></script>
+
+                    <!-- global js -->
+
                     <!-- end of global js -->
                     <!-- begining of page level js -->
                     <script src="{{ asset('admin/vendors/favicon/favicon.js') }}"></script>
                     <script src="{{ asset('admin/vendors/jasny-bootstrap/js/jasny-bootstrap.js') }}"></script>
                     <script src="{{ asset('admin/vendors/iCheck/js/icheck.js') }}"></script>
                     <script src="{{ asset('admin/js/pages/form_examples.js') }}"></script>
+
                     <script>
                         $("#appbundle_produit_prix").on('keyup', function(e) {
                             var val = $(this).val();
@@ -137,9 +140,8 @@
                             }
                         });
                     </script>
-
                     <!-- end of page level js -->
-    </body>
+                </div></div></section></aside> </body>
     </html>
     {{ form_end(form) }}
 {% endblock content%}

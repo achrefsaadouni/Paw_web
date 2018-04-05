@@ -1,0 +1,62 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="text-center">
+            <h3 class="border-success"><span class="heading_border bg-success" >Voici touts les coordoneés de cette annonce</span></h3>
+        </div>
+        <!-- left Section Start -->
+
+    </div>
+
+
+
+    <div class="container">
+    <div class="row details">
+        <br><br><br>
+        <!-- Slider Section Start -->
+        <div class="col-md-5">
+
+            <div id="owl-demo" class="owl-carousel owl-theme">
+                <img src="{{ asset('images/pawLostFound/' ~ annonce.images)}}" class="img-responsive" alt="image animal" >
+
+
+            </div>
+
+        </div>
+        <!-- //Slider Section End -->
+        <!-- Project Description Section Start -->
+        <div class="col-md-6">
+            <h3 class="project">Animal Description</h3>
+            <p class="text-justify">
+            <ul>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son type est : {{ annonce.type }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Sa race est :{{ annonce.race }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Perdu le  : {{ annonce.datePerte|date('Y-m-d') }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son age   : {{ annonce.age }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Message complementaire  : {{ annonce.messageComplementaire }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Il porte un colier : {{ annonce.colier }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Perdu a   : {{ annonce.lieuPerdu}}</li>
+
+            </ul>
+
+            </p>
+            <h3>Details  Propritaire</h3>
+            <ul>
+
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Le proprietaire est : {{annonce.utilisateur.nom}}  {{annonce.utilisateur.prenom}}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son addresse : {{ annonce.utilisateur.addresse }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son numero :  {{ annonce.utilisateur.numero}}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son email :  {{ annonce.utilisateur.email}}</li>
+
+            </ul>
+        </div>
+        <!-- //Project Description Section End -->
+    </div>
+    <br><br><br><br><br><br><br><br><br>
+
+
+
+
+
+{% endblock %}

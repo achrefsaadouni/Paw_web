@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="inbox" path="/">
+        <default key="_controller">AppBundle:Message:inbox</default>
+    </route>
+
+    <route id="sent" path="/sent">
+        <default key="_controller">AppBundle:Message:sent</default>
+    </route>
+
+    <route id="deleted" path="/deleted">
+        <default key="_controller">AppBundle:Message:deleted</default>
+    </route>
+
+    <route id="search" path="/search">
+        <default key="_controller">AppBundle:Message:search</default>
+    </route>
+
+    <route id="thread_new" path="/new">
+        <default key="_controller">AppBundle:Message:newThread</default>
+    </route>
+    <route id="thread_new2" path="/new2">
+        <default key="_controller">AppBundle:Message:newThread2</default>
+    </route>
+
+    <route id="thread_delete" path="/{threadId}/delete" methods="POST|DELETE">
+        <default key="_controller">AppBundle:Message:delete</default>
+    </route>
+    
+    <route id="thread_undelete" path="/{threadId}/undelete" methods="POST">
+        <default key="_controller">AppBundle:Message:undelete</default>
+    </route>
+
+    <route id="thread_view" path="/{threadId}">
+        <default key="_controller">AppBundle:Message:thread</default>
+    </route>
+
+</routes>

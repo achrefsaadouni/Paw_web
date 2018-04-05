@@ -1,0 +1,94 @@
+{% extends "AppBundle::admin_layout.html.twig" %}
+
+{% block content %}
+    <aside class="right-side">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary filterable" style="overflow:auto;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i   data-size="18" data-loop="true" data-c="#fff" data-hc="white"></i> Liste des annonces Perdus
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="table2">
+                            <thead>
+                            <tr>
+                                <th>Prorietaire Annonce :</th>
+                                <th>Age Animal perdu :</th>
+                                <th>Couleur Animal perdu :</th>
+                                <th>Sexe Animal perdu :</th>
+                                <th>Race Animal perdu :</th>
+                                <th>Message sur Animal perdu :</th>
+                                <th>Type Animal perdu  :</th>
+                                <th>Animal perdu porte colier :</th>
+                                <th>Date perdu :</th>
+                                <th>Lieux perdu :</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for annonce in m  %}
+                            <tr>
+                                <td> {{annonce.utilisateur.nom}}  {{annonce.utilisateur.prenom}}</td>
+                                <td> {{ annonce.age }}</td>
+                                <td> {{ annonce.couleur }}</td>
+                                <td> {{ annonce.sex }}</td>
+                                <td> {{ annonce.race }}</td>
+                                <td> {{ annonce.messageComplementaire  }}</td>
+                                <td> {{ annonce.type }}</td>
+                                <td> {{ annonce.colier }}</td>
+                                <td> {{ annonce.datePerte|date('Y-m-d') }}</td>
+                                <td> {{ annonce.lieuPerdu }}</td>
+                                <td>
+
+                                    <span><a href="#" data-toggle="modal" data-target="#delete_confirm"><i class="livicon" data-name="remove-alt" data-size="19" data-loop="true" data-c="#ef6f6c" data-hc="#ef6f6c"></i></a></span>
+                                </td>
+                            </tr>
+
+
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                        <!-- Modal for showing delete confirmation -->
+                        <div class="modal fade" id="delete_confirm" tabindex="-1" role="dialog" aria-labelledby="user_delete_confirm_title" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title" >
+                                            Delete Annonce Perdu
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure to delete this Annonce? This operation is irreversible.
+                                    </div>
+
+    {% for annonce in m  %}
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <a href="{{ path('supprimer_annonce_perdu',{ "id" : annonce.id} )}}" class="btn btn-danger">Delete</a>
+                                    </div>
+
+        {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </aside>
+
+
+
+
+
+
+
+{% endblock content%}

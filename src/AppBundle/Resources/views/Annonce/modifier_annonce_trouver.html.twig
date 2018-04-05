@@ -1,0 +1,68 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+
+   <div class="container">
+      <div class="row">
+         <!-- Contact form Section Start -->
+         <div class="col-md-6">
+            <h2>Vous pouvez modifier votre annonce  </h2>
+            <form enctype="multipart/form-data" method="post" class="contact">
+               <div class="form-group">
+                  <select name="type">
+                     <option value="chien">chien</option>
+                     <option value="chat">chat</option>
+                     <option value="cheval">cheval</option>
+                  </select>
+                  <!--<input type="text" class="form-control input-lg" name="type" placeholder="type">-->
+               </div>
+               <div class="form-group">
+                  <input type="number" class="form-control input-lg" value="{{ m.age }}" name="age" placeholder="age" min="0" max="60">
+               </div>
+               <div class="form-group">
+                  <input type="text" class="form-control input-lg" value="{{ m.couleur }}" name="couleur" placeholder="couleur">
+               </div>
+               <div class="form-group">
+                  <select name="colier">
+                     <option {% if (m.colier=='oui') %} selected {% endif %} value="oui">oui</option>
+                     <option {% if (m.colier=='non') %} selected {% endif %}  value="non">non</option>
+                  </select>
+                  <!--  <input type="text" class="form-control input-lg" name="colier" placeholder="colier"> -->
+               </div>
+               <div class="form-group">
+                  <input type="text" value="{{ m.race }}" class="form-control input-lg" name="race" placeholder="race">
+               </div>
+               <div class="form-group">
+                  <select name="sexe">
+                     <option {% if (m.sex=='male') %} selected {% endif %} value="male">male</option>
+                     <option {% if (m.sex=='female') %} selected {% endif %} value="female">female</option>
+                  </select>
+                  <!--  <input type="text" class="form-control input-lg" name="sexe" placeholder="sexe"> -->
+               </div>
+               <div class="form-group">
+                  <input type="date" class="form-control input-lg" value="{{ (m.dateTrouvee).format("Y-m-d") }}" name="date" placeholder="date trouver">
+               </div>
+               <div class="form-group">
+                  <input type="text" class="form-control input-lg" value="{{ m.lieuTrouve }}" name="lieu" placeholder="lieu trouver">
+               </div>
+               <div class="form-group">
+                  <textarea class="form-control input-lg no-resize" name="message" rows="6" placeholder="message compelementaire">{{ m.messageComplementaire }}
+                  </textarea>
+               </div>
+               <div class="form-group">
+                  <input name="image" accept="image/*" type="file">
+               </div>
+               <div class="input-group">
+                  <button class="btn btn-primary" type="submit">  Valider  </button>
+               </div>
+            </form>
+         </div>
+
+      </div>
+   </div>
+
+
+
+
+
+{% endblock content%}

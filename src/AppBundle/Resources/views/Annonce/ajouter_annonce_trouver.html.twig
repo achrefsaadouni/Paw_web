@@ -1,0 +1,65 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <!-- Contact form Section Start -->
+            <div class="col-md-6">
+                <h2>Vous avez TROUVEE un animal: Déposez une annonce   </h2>
+                <form enctype="multipart/form-data" method="post" class="contact" >
+                    <div class="form-group">
+                        <select name="type">
+                            <option value="chien">chien</option>
+                            <option value="chat">chat</option>
+                            <option value="cheval">cheval</option>
+                        </select>
+                        <!--<input type="text" class="form-control input-lg" name="type" placeholder="type">-->
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control input-lg" name="age" placeholder="age" min="0" max="60" >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" name="couleur" placeholder="couleur">
+                    </div>
+                    <div class="form-group">
+                     <label> Porte t'il un colier :</label>   <select name="colier">
+                            <option value="oui">oui</option>
+                            <option value="non">non</option>
+                        </select>
+                      <!--  <input type="text" class="form-control input-lg" name="colier" placeholder="colier"> -->
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" name="race" placeholder="race">
+                    </div>
+                    <div class="form-group">
+                       <label>Le sexe de l'animal :</label> <select name="sexe">
+                            <option value="male">male</option>
+                            <option value="female">female</option>
+                        </select>
+                      <!--  <input type="text" class="form-control input-lg" name="sexe" placeholder="sexe"> -->
+                    </div>
+                    <div class="form-group">
+                    <label> Troouveé le  : </label>    <input type="date" class="form-control input-lg" name="date" placeholder="date trouver">
+                    </div>
+                    <div class="form-group">
+                     <label>Trouvé a  :</label>   <input type="text" class="form-control input-lg" name="lieu" placeholder="lieu trouver">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control input-lg no-resize" name="message" rows="6" placeholder="message compelementaire"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input name="image" accept="image/*" type="file">
+                    </div>
+                    <div class="input-group">
+                    <button class="btn btn-primary" type="submit">  Valider  </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+{% endblock content%}
