@@ -53,7 +53,7 @@ class Utilisateur extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="avatar", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="avatar", type="text", length=65535, nullable=true)
      */
     protected $avatar;
 
@@ -91,6 +91,15 @@ class Utilisateur extends BaseUser implements ParticipantInterface
      * @ORM\Column(name="code", type="text", length=65535, nullable=true)
      */
     protected $code;
+
+    /**
+     * Utilisateur constructor.
+     * @param string $avatar
+     */
+    public function __construct()
+    {
+        $this->avatar = 'user.png';
+    }
 
     /**
      * @return string
@@ -253,8 +262,13 @@ class Utilisateur extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * @return string
+     * @return \DateTime|null
      */
+    public function getLastLogin()
+    {
+        return $this->lastLogin;
+    }
+
 
 
 

@@ -265,7 +265,12 @@
                         {% endif %}
                         <h4 class="text-primary">{{ article.prix}} DNT</h4>
                         <a href="{{ path('detailProduit',{'id':article.id})  }}" class="btn btn-responsive button-alignment btn-primary text-white">Plus d'info</a>
-                        <a id="{{ article.id }}" class="btn btn-responsive button-alignment btn-primary text-white">Ajouter au panier</a>
+                        {% if article.quantite == 0 %}
+                        <a disabled="disable" id="{{ article.id }}" class="btn btn-responsive button-alignment btn-primary text-white">Ajouter au panier</a>
+            {% else %}
+                <a id="{{ article.id }}" class="btn btn-responsive button-alignment btn-primary text-white">Ajouter au panier</a>
+
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

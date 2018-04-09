@@ -9,10 +9,12 @@
 namespace AppBundle\Entity;
 
 
+use AppBundle\Repository\LigneachatRepository;
+
 class Panier
 {
     /**
-     * @var array
+     * @var array Ligneachat
      */
     protected $articles;
     /**
@@ -134,7 +136,7 @@ class Panier
      */
     public function minus($p)
     {
-        if($this->articles[$p->getId()]->getNbrProduit()+1!=0)
+        if($this->articles[$p->getId()]->getNbrProduit()>0)
         {
             $this->articles[$p->getId()]->setNbrProduit($this->articles[$p->getId()]->getNbrProduit()-1);
             $this->removeToTotal($p->getPrix());
@@ -162,5 +164,29 @@ class Panier
         $this->articles = array();
         $this->nombreArticles = 0;
         $this->total = 0;
+    }
+    public function payer($type,$user,$em)
+    {
+
+        $achat = new Achat();
+        $achat->setIdClient($user);
+        $achat->setPrix($this->total);
+        $achat->setEtat($type);
+        $em->persist($achat);
+        $em->flush();
+
+        foreach ( $this->articles as $i)
+        {
+            $produit = $em->getRepository("AppBundle:Produit")->findOneBy(array('id' => $i->getIdProduit()->getId()));
+            $i->setIdAchat($achat);
+            $produit->setQuantite($produit->getQuantite()-$i->getNbrProduit());
+            $ligne = new Ligneachat();
+            $ligne->setIdProduit($produit);
+            $ligne->setNbrProduit($i->getNbrProduit());
+            $ligne->setIdAchat($achat);
+            $em->persist($ligne);
+            $em->flush();
+        }
+
     }
 }

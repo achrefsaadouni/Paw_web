@@ -63,7 +63,9 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: '%mailer_transport%'
+    transport: gmail
+    encryption: ssl
+    auth_mode:  login
     host: '%mailer_host%'
     username: '%mailer_user%'
     password: '%mailer_password%'
@@ -79,6 +81,9 @@ fos_user:
     from_email:
         address: 'test@gmail.com'
         sender_name: 'achref'
+    profile:
+        form:
+            type: AppBundle\Form\ProfileFormType
 knp_paginator:
     page_range:                 5          # default page range used in pagination control
     default_options:

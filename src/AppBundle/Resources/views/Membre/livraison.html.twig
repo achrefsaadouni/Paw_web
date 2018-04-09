@@ -1,0 +1,137 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+    <div class="breadcum">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('home_member') }}"> <i class="livicon icon3 icon4" data-name="home" data-size="18" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Acceuil
+                    </a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="{{ path('panier') }}">Panier</a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="{{ path('commander') }}">Methode de paiement</a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="#">Livraison</a>
+                </li>
+            </ol>
+            <div class="pull-right">
+                <i class="livicon icon3" data-name="shopping-cart-in" data-size="20" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Paiement
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="text-center">
+                <h3 class="border-primary"><span class="heading_border bg-primary">Confirmation de votre achat</span></h3>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-12">
+            <blockquote>
+                <h3 class="warning">Confirmation d'achat</h3>
+                <div class="form-group input-group">
+                    <div class="input-group-addon">
+                        <i class="livicon" data-name="folder-lock" data-size="18" data-c="#000" data-hc="#000" data-loop="true"></i>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Code de Confirmation" id="code">
+                </div>
+
+                <p>
+                    Un code de confirmation a été envoyé votre addresse mail ,Vous devez saisir se code pour pouvoir finaliser votre commande
+                </p>
+                <input type="text" hidden="hidden"  id="aa" value="{{ code }}">
+                <p>
+                    Prix total de votre Commande est : {{ panier.total }}
+                </p>
+                <div>
+                    <button style="display:none;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="conf">
+                       Valider
+                    </button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2" id="ren">Réenvoyer le code
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Êtes-vous sûr de vouloir finaliser votre achat?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                    <button  onclick="location.href='{{ path('confirmerlivraison') }}'" class="btn btn-primary" id="oui" data-dismiss="modal">Oui</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Nouveau code</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Un nouveau code a été envoyé a votre addresse mail
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </blockquote>
+        </div>
+    </div>
+    </div>
+<script>
+    $(document).ready(function() {
+        console.log('document is ready');
+        $("#code").on('keyup', function() {
+            if($("#code").val() == $('#aa').val())
+            {
+                $("#conf").show();
+            }
+            else
+            {
+                $("#conf").hide();
+            }
+        });
+
+
+        $('#ren').on('click', function(event) {
+
+                $.get("{{ path('recode') }}", function(data, err, vars) {
+                    $('#aa').attr('value',data);
+                    if($("#code").val() == $('#aa').val())
+                    {
+                        $("#conf").show();
+                    }
+                    else
+                    {
+                        $("#conf").hide();
+                    }
+                })
+        });
+    })
+
+
+</script>
+{% endblock content%}

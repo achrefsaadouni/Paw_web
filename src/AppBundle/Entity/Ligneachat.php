@@ -48,6 +48,9 @@ class Ligneachat
      */
     private $idAchat;
 
+
+
+
     /**
      * @return int
      */

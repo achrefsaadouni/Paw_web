@@ -1,7 +1,16 @@
-{% extends "@FOSUser/layout.html.twig" %}
 
-{% trans_default_domain 'FOSUserBundle' %}
+<html>
+<body onload="fon()">
+</body>
 
-{% block fos_user_content %}
-    {{ include('@FOSUser/Security/login.html.twig') }}
-{% endblock fos_user_content %}
+</html>
+<script src="{{ asset('util/jquery-3.3.1.min.js') }}"></script>
+<script>
+
+    function fon() {
+
+        window.location = 'http://localhost/paw_web/web/app_dev.php/login';
+        console.log("sqfdqzsd");
+    }
+
+</script>

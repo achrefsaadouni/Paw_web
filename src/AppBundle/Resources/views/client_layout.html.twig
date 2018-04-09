@@ -1,4 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
+{% set user = app.user %}
 <!DOCTYPE html>
 <html>
 
@@ -77,6 +78,10 @@
                             </li>
 
                         {% else %}
+                            <li>
+                                <a href="{{ path('fos_user_registration_register') }}"><i class="livicon" data-name="user" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
+                                <label class="hidden-xs"><a href="{{ path('fos_user_registration_register') }}" class="text-white">S'inscrire</a></label>
+                            </li>
                             <li>
                                 <a href="{{ path('fos_user_security_login') }}"><i class="livicon" data-name="sign-in" data-size="18" data-loop="true" data-c="#fff" data-hc="#fff"></i></a>
                                 <label class="hidden-xs"><a href="{{ path('fos_user_security_login') }}" class="text-white">Login</a></label>

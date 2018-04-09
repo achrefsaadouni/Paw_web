@@ -208,7 +208,7 @@ class ProduitController extends Controller
     }
 
     /**
-     * @Route("/membre/boutique/produit/recherche", name="rechercheProduit")
+     * @Route("/boutique/produit/recherche", name="rechercheProduit")
      */
     public function rechercheAction(Request $request)
     {

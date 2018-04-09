@@ -53,6 +53,15 @@ class Achat
     private $idClient;
 
     /**
+     * Achat constructor.
+     * @param \DateTime $dateAchat
+     */
+    public function __construct()
+    {
+        $this->dateAchat = new \DateTime();
+    }
+
+    /**
      * @return int
      */
     public function getIdAchat()

@@ -1,0 +1,134 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+
+
+    <style>
+        .table>tbody>tr>td, .table>tfoot>tr>td{
+            vertical-align: middle;
+        }
+        @media screen and (max-width: 600px) {
+            table#cart tbody td .form-control{
+                width:20%;
+                display: inline !important;
+            }
+            .actions .btn{
+                width:36%;
+                margin:1.5em 0;
+            }
+
+            .actions .btn-info{
+                float:left;
+            }
+            .actions .btn-danger{
+                float:right;
+            }
+
+            table#cart thead { display: none; }
+            table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+            table#cart tbody tr td:first-child { background: #333; color: #fff; }
+            table#cart tbody td:before {
+                content: attr(data-th); font-weight: bold;
+                display: inline-block; width: 8rem;
+            }
+
+
+
+            table#cart tfoot td{display:block; }
+            table#cart tfoot td .btn{display:block;}
+
+        }
+
+
+    </style>
+
+    <div class="breadcum">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('home_member') }}"> <i class="livicon icon3 icon4" data-name="home" data-size="18" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Acceuil
+                    </a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="{{ path('panier') }}">Panier</a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="{{ path('commander') }}">Methode de paiement</a>
+                </li>
+            </ol>
+            <div class="pull-right">
+                <i class="livicon icon3" data-name="shopping-cart-in" data-size="20" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Paiement
+            </div>
+        </div>
+    </div>
+    <form class="container" method="post" action="{{ path('payer') }}">
+        <div class="row">
+            <div class="text-center">
+                <h3 class="border-primary"><span class="heading_border bg-primary">Methode De Paiement</span></h3>
+            </div>
+        </div>
+        <br><br><br>
+        <table id="cart" class="table table-hover table-condensed">
+            <thead>
+            <tr>
+                <th style="width:50%"></th>
+                <th style="width:10%"></th>
+                <th style="width:8%"></th>
+                <th style="width:8%"></th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            <td data-th="Product">
+                <div class="row">
+                    <div class="col-sm-2 hidden-xs"><img src="http://localhost/paw_web/web/images/pawIcons/livraison.jpg" alt="..." class="img-responsive"/></div>
+                    <div class="col-sm-10">
+                        <h4 class="nomargin">Vous payer lors de la livraison</h4>
+                        <p>
+
+                           </p>
+                    </div>
+                </div>
+            </td>
+            <td data-th="Price"> <input type="radio" name="methode" value="livraison" checked>A la livraison</td>
+            </tr>
+            <tr>
+            <td data-th="Product">
+                <div class="row">
+                    <div class="col-sm-2 hidden-xs"><img src="http://localhost/paw_web/web/images/pawIcons/paypal.png" alt="..." class="img-responsive"/></div>
+                    <div class="col-sm-10">
+                        <h4 class="nomargin">Vous payer Avec Paypal</h4>
+                        <p>
+                           </p>
+                    </div>
+                </div>
+            </td>
+                <td data-th="Price"> <input type="radio" name="methode" value="paypal">Paypal</td>
+            </tr>
+            <tr>
+            <td data-th="Product">
+                <div class="row">
+                    <div class="col-sm-2 hidden-xs"><img src="http://localhost/paw_web/web/images/pawIcons/stripe.png" alt="..." class="img-responsive"/></div>
+                    <div class="col-sm-10">
+                        <h4 class="nomargin">Vous payer Avec Votre Carte</h4>
+                        <p>
+                          </p>
+                    </div>
+                </div>
+            </td>
+                <td data-th="Price">  <input type="radio" name="methode" value="stripe">Carte Bancaire</td>
+                </tr>
+            </tbody>
+
+
+            <tfoot>
+            <td><h3>NB:un frais de 5 DNT s'ajoutera si votre commande ne depasse pas 30 DNT</h3></td>
+            <td><button type="submit" class="btn btn-warning"><i class="fa fa-angle-left";"></i> procéder au paiement</button></td>
+            </tfoot>
+        </table>
+    </form>
+    <br><br><br>
+{% endblock content%}

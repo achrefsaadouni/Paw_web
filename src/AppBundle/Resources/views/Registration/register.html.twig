@@ -25,8 +25,9 @@
                     <h3 class="panel-title text-center">S'inscrire</h3>
                 </div>
                 <div class="panel-body">
-                    <form accept-charset="UTF-8" role="form">
-                        <fieldset>
+                    <fieldset>
+                        {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+
                             <div class="form-group input-group">
                                 <div class="input-group-addon">
                                     <i class="livicon" data-name="user" data-size="18" data-c="#000" data-hc="#000" data-loop="true"></i>
@@ -75,6 +76,8 @@
                                 </div>
                                 {{ form_widget(form.numero, {'attr': {'class': 'form-control' ,'placeholder' :'Numero De Telephone'}}) }}
                             </div>
+
+
                             <div class="form-group">
                                 {{ form_widget(form.sexe, {'attr': {'class': '' }}) }}
                             </div>
@@ -83,15 +86,16 @@
                                 <a href="{{ path('fos_user_security_login') }}" class="text-center">J'ai un compte, je souhaite me connecter</a>
                             </div>
                             <div><p>     </p></div>
+
+
+
                             {{ form_widget(form) }}
                             <div>
-                                <input type="submit" value="{{ 'registration.submit'|trans }}" class="btn btn-lg btn-primary btn-block" />
+                                <input type="submit" value="{{ 'registration.submit'|trans }}"  class="btn btn-lg btn-primary btn-block" id="aaa"/>
                             </div>
-
                             {{ form_end(form) }}
-
                         </fieldset>
-                    </form>
+
                 </div>
             </div>
         </div>

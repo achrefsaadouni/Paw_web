@@ -42,8 +42,25 @@
 
 </style>
 
+    <div class="breadcum">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('home_member') }}"> <i class="livicon icon3 icon4" data-name="home" data-size="18" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Acceuil
+                    </a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="{{ path('panier') }}">Panier</a>
+                </li>
+            </ol>
+            <div class="pull-right">
+                <i class="livicon icon3" data-name="shopping-cart-in" data-size="20" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i> Votre Panier
+            </div>
+        </div>
+    </div>
 
-<div class="container">
+<div class="container" id="ajax">
     <div class="row">
         <div class="text-center">
             <h3 class="border-primary"><span class="heading_border bg-primary">Votre Panier</span></h3>
@@ -77,15 +94,16 @@
             </td>
             <td data-th="Price">{{ a.getIdProduit.prix }} DNT</td>
             <td data-th="Quantity">
-                <a href="{{ path('plus',{'id':a.getIdProduit.id}) }}" class="btn btn-success btn-sm" >+</a>
+                <a onclick="modif('plus',{{ a.getIdProduit.id }})"  class="btn btn-success btn-sm" >+</a>
+
                 {{ a.nbrProduit }}
-                <a href="{{ path('minus' ,{'id':a.getIdProduit.id}) }}" class="btn btn-danger btn-sm">-</a>
+                <a onclick="modif('minus',{{ a.getIdProduit.id }})" class="btn btn-danger btn-sm">-</a>
             </td>
             {% set var_1 = 0 + a.getIdProduit.prix|number_format(2,'.',',') %}
             {% set var_2 = 0 + a.nbrProduit|number_format(2,'.',',') %}
             <td data-th="Subtotal" class="text-center">{{ (var_1 * var_2)|number_format(2,'.',',')}} DNT</td>
             <td class="actions" data-th="">
-                <a href="{{ path('removeArticle',{'id':a.getIdProduit.id}) }}" class="btn btn-danger btn-sm">Enlever</a>
+                <a onclick="modif('removeArticle',{{ a.getIdProduit.id }})" class="btn btn-danger btn-sm">Enlever</a>
             </td>
         </tr>
 
@@ -100,7 +118,7 @@
             <td class="text-center"><strong>Total 1.99</strong></td>
         </tr>
         <tr>
-            {% if panier.total==0 and panier == null%}
+            {% if panier.total==0 and panier.totalItem == 0 and panier.articles == null%}
                 <td><h3>Votre Panier est vide</h3></td>
                 <td><a href="{{ path('boutique_membre',{'type':'tous'}) }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continuer vos achats</a></td>
 
@@ -110,11 +128,80 @@
 
                 <td class="hidden-xs text-center"><strong>{{ panier.total }} DNT</strong></td>
 
-                <td><a href="#" class="btn btn-success btn-block">Commander <i class="fa fa-angle-right"></i></a></td>
+                <td><a href="{{ path('commander') }}" class="btn btn-success btn-block">Commander <i class="fa fa-angle-right"></i></a></td>
             {% endif %}
+
+            <input type="text" id="valeur" hidden="hidden">
+            <input type="text" id="type" hidden="hidden">
         </tr>
         </tfoot>
     </table>
+    <script>
+
+        function modif(type,valeur) {
+
+            $("#valeur").val(valeur);
+            $("#type").val(type);
+        }
+
+        $('a').on('click', function(event) {
+
+            if($("#type").val()=='plus')
+            {
+                $.get("{{ path('plus')}}?id="+$("#valeur").val(), function(data, err, vars) {
+                    $('#ajax').html(data)
+                });
+            }
+            else if($("#type").val()=='minus')
+            {
+                $.get("{{ path('minus')}}?id="+$("#valeur").val(), function(data, err, vars) {
+                    $('#ajax').html(data)
+                });
+            }
+            else if($("#type").val()=='removeArticle')
+            {
+                $.get("{{ path('removeArticle')}}?id="+$("#valeur").val(), function(data, err, vars) {
+                    $('#ajax').html(data)
+                });
+            }
+
+        })
+
+    </script>
 </div>
     <br><br><br>
+
+
+    <script>
+
+            function modif(type,valeur) {
+
+                $("#valeur").val(valeur);
+                $("#type").val(type);
+            }
+
+            $('a').on('click', function(event) {
+
+                if($("#type").val()=='plus')
+                {
+                    $.get("{{ path('plus')}}?id="+$("#valeur").val(), function(data, err, vars) {
+                        $('#ajax').html(data)
+                    });
+                }
+                else if($("#type").val()=='minus')
+                {
+                    $.get("{{ path('minus')}}?id="+$("#valeur").val(), function(data, err, vars) {
+                        $('#ajax').html(data)
+                    });
+                }
+                else if($("#type").val()=='enlever')
+                {
+                    $.get("{{ path('removeArticle')}}?id="+$("#valeur").val(), function(data, err, vars) {
+                        $('#ajax').html(data)
+                    });
+                }
+
+            })
+
+    </script>
 {% endblock content%}

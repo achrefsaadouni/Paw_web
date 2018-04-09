@@ -3,10 +3,99 @@
 {% extends "AppBundle::client_layout.html.twig" %}
 
 {% block content %}
-{{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
-    {{ form_widget(form) }}
-<div>
-    <input type="submit" value="{{ 'profile.edit.submit'|trans }}" />
-</div>
-{{ form_end(form) }}
+    <div class="breadcum">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('home_member') }}"> <i class="livicon icon3 icon4" data-name="home" data-size="18" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Acceuil
+                    </a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="{{ path('fos_user_profile_show') }}">Profile</a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="#">Modifier Profile</a>
+                </li>
+            </ol>
+            <div class="pull-right">
+                <i class="livicon icon3" data-name="users" data-size="20" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i> Modifier Profile
+            </div>
+        </div>
+    </div>
+    <br> <br>
+    <div class="container">
+
+
+
+
+                            {{ form_start(form, { 'action': path('fos_user_profile_edit'), 'attr': { 'class': 'fos_user_profile_edit' } }) }}
+                            <div class="form-group input-group">
+                                <div class="input-group-addon">
+                                    <i class="livicon" data-name="user" data-size="18" data-c="#000" data-hc="#000" data-loop="true"></i>
+                                </div>
+                                {{ form_widget(form.nom, {'attr': {'class': 'form-control' , 'placeholder' :'Nom'}}) }}
+                            </div>
+                            <div class="form-group input-group">
+                                <div class="input-group-addon">
+                                    <i class="livicon" data-name="user" data-size="18" data-c="#000" data-hc="#000" data-loop="true"></i>
+                                </div>
+                                {{ form_widget(form.prenom, {'attr': {'class': 'form-control' , 'placeholder' :'Prenom'}}) }}
+                            </div>
+                            <div class="form-group input-group">
+                                <div class="input-group-addon">
+                                    <i class="livicon" data-name="user" data-size="18" data-c="#000" data-hc="#000" data-loop="true"></i>
+                                </div>
+                                {{ form_widget(form.username, {'attr': {'class': 'form-control' , 'placeholder' :'Nom De Compte'}}) }}
+                            </div>
+                            <div class="form-group input-group">
+                                <div class="input-group-addon">
+                                    <i class="livicon" data-name="mail" data-size="18" data-c="#000" data-hc="#000" data-loop="true"></i>
+                                </div>
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control' , 'placeholder' :'Email'}}) }}
+                            </div>
+                            <div class="form-group input-group">
+                                <div class="input-group-addon">
+                                    <i class="livicon" data-name="key" data-size="18" data-c="#000" data-hc="#000" data-loop="true"></i>
+                                </div>
+                                {{ form_widget(form.current_password, {'attr': {'class': 'form-control' ,'placeholder' :'mot de passe'}}) }}
+                            </div>
+                            <div class="form-group input-group">
+                                <div class="input-group-addon">
+                                    <i class="livicon" data-name="map" data-size="18" data-c="#000" data-hc="#000" data-loop="true"></i>
+                                </div>
+                                {{ form_widget(form.addresse, {'attr': {'class': 'form-control' ,'placeholder' :'address'}}) }}
+                            </div>
+                            <div class="form-group input-group">
+                                <div class="input-group-addon">
+                                    <i class="livicon" data-name="phone" data-size="18" data-c="#000" data-hc="#000" data-loop="true"></i>
+                                </div>
+                                {{ form_widget(form.numero, {'attr': {'class': 'form-control' ,'placeholder' :'Numero De Telephone'}}) }}
+                            </div>
+
+
+                            <div class="form-group">
+                                {{ form_widget(form.sexe, {'attr': {'class': '' }}) }}
+                            </div>
+
+
+
+
+                            {{ form_widget(form) }}
+                            <div>
+                                <input type="submit" value="{{ 'profile.edit.submit'|trans }}"  class="btn btn-lg btn-primary btn-block" id="aaa"/>
+                            </div>
+                            {{ form_end(form) }}
+        <br> <br> <br>
+
+
+                    </div>
+
+    <!-- global js -->
+    <!-- end of page level js-->
+
+    {{ form_end(form) }}
+
+
 {% endblock content%}

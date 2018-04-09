@@ -1,0 +1,49 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+
+    <div class="breadcum">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('home_member') }}"> <i class="livicon icon3 icon4" data-name="home" data-size="18" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Acceuil
+                    </a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="{{ path('consultermesAchat') }}">Mes Achats</a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="#">Consulter Achat</a>
+                </li>
+            </ol>
+            <div class="pull-right">
+                <i class="livicon icon3" data-name="edit" data-size="20" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i> Consulter Achat
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="text-center">
+                <h3 class="border-primary"><span class="heading_border bg-primary">Detail Achat</span></h3>
+            </div>
+            {% for a in lignes %}
+                {% set var_1 = 0 + a.getIdProduit.prix|number_format(2,'.',',') %}
+                {% set var_2 = 0 + a.nbrProduit|number_format(2,'.',',') %}
+            <div class="col-md-3 col-sm-5 profile">
+                <div class="thumbnail bg-white">
+                    <img src="http://localhost/paw_web/web/images/pawBoutique/{{ a.getIdProduit.image1 }}" alt="team-image" width="100" height="100" >
+                    <div class="caption">
+                        <b>{{ a.getIdProduit.libelle }}</b>
+                        <br><span class="primary"> Quantite Acheté : </span>{{ a.nbrProduit }}
+                        <br><span class="primary"> Prix Unitaire : </span>{{  a.getIdProduit.prix }} DNT
+                        <div class="divide"><span class="primary">Prix Total : </span>{{ (var_1 * var_2)|number_format(2,'.',',')}} DNT
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content%}

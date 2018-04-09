@@ -4,9 +4,108 @@
 
 {% block content %}
 
-    <div class="fos_user_user_show">
-        <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-        <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-        <a href="{{ path('fos_user_profile_edit') }}">Modifier Profile</a>
+
+    <div class="breadcum">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('home_member') }}"> <i class="livicon icon3 icon4" data-name="home" data-size="18" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i>Acceuil
+                    </a>
+                </li>
+                <li class="hidden-xs">
+                    <i class="livicon icon3" data-name="angle-double-right" data-size="18" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                    <a href="{{ path('fos_user_profile_show') }}">Profile</a>
+                </li>
+            </ol>
+            <div class="pull-right">
+                <i class="livicon icon3" data-name="users" data-size="20" data-loop="true" data-c="#3d3d3d" data-hc="#3d3d3d"></i> Profile
+            </div>
+        </div>
     </div>
+    <!-- //Breadcrumb Section End -->
+    <!-- Container Section Start -->
+    <br> <br>
+    <div class="container">
+        <!-- Slider Section Start -->
+        <div class="row">
+            <div class="text-center">
+                <h3 class="border-success"><span class="heading_border bg-success" >Votre Profile</span></h3>
+            </div>
+            <!-- Left Heading Section Start -->
+            <div class="col-md-7 col-sm-12">
+                <h2><label class="danger"> Bienvenu  {{ user.username }} </label></h2>
+                <p class="primary">
+                    Votre Nom : {{ user.nom }}
+                </p>
+                <p class="primary">
+                    Votre Prenom : {{ user.prenom }}
+                </p>
+                <p class="primary">
+                    Votre Email : {{ user.email }}
+                </p>
+                <p class="primary">
+                    Votre Addresse : {{ user.addresse }}
+                </p >
+                <p class="primary">
+                    Votre Numero : {{ user.numero }}
+                </p>
+                <p class="primary">
+                    Votre Dernière Connexion : {{ user.getLastLogin | date("m/d/Y H:i:s") }}
+                </p>
+                <a class="btn btn-responsive button-alignment btn-primary text-white" href="{{ path('fos_user_profile_edit') }}">Modifier Profile</a>
+
+            </div>
+            <!-- //Left Heaing Section End -->
+            <!-- Slider Start -->
+            <div class="col-md-5 col-sm-12 ">
+
+                <img src="http://localhost/paw_web/web/images/pawUsers/{{ user.avatar }}" alt="slider-image" height="200" width="200">
+                <br><br>
+                <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="conf">
+                    Modidifer votre image de profile
+                </button>
+            </div>
+            <!-- //Slider End -->
+        </div>
+        <!-- //Slider Section End -->
+        <!-- Services Section Start -->
+        <div class="row">
+            <div class="text-center">
+                <h3 class="border-success"><span class="heading_border bg-success" >Nos Services</span></h3>
+            </div>
+            <section class="purchas-main">
+                <div class="container bg-border">
+                    <div class="row">
+                        <div class="col-md-7 col-sm-7 col-xs-12">
+                            <h1 class="purchae-hed">Consulter Tous Vos Achats</h1></div>
+                        <div class="col-md-5 col-sm-5 col-xs-12"><a href="{{ path('consultermesAchat') }}" class="btn btn-primary purchase-styl pull-right">Consulter</a></div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+        <!-- // Services Section End -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <form class="modal-dialog" action="{{ path('editImage') }}" method="post" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Choisissez votre nouvelle image
+                        <input type="file" class="form-control" name="im">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                        <input  type="submit" class="btn btn-primary" id="oui">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
 {% endblock content%}
