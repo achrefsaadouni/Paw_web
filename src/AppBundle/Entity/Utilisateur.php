@@ -67,7 +67,7 @@ class Utilisateur extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="role", type="string", length=30, nullable=false)
+     * @ORM\Column(name="role", type="string", length=30, nullable=true)
      */
     protected $role;
 
@@ -98,6 +98,7 @@ class Utilisateur extends BaseUser implements ParticipantInterface
      */
     public function __construct()
     {
+        parent::__construct();
         $this->avatar = 'user.png';
     }
 
@@ -197,21 +198,6 @@ class Utilisateur extends BaseUser implements ParticipantInterface
         $this->dateinscription = $dateinscription;
     }
 
-    /**
-     * @return string
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * @param string $role
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-    }
 
     /**
      * @return string

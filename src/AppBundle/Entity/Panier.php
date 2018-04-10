@@ -169,6 +169,7 @@ class Panier
     {
 
         $achat = new Achat();
+        $user = $em->getRepository("AppBundle:Utilisateur")->findOneBy(array('id' => $user->getId()));
         $achat->setIdClient($user);
         $achat->setPrix($this->total);
         $achat->setEtat($type);

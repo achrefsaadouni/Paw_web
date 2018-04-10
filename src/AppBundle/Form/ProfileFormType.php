@@ -21,7 +21,8 @@ class ProfileFormType extends AbstractType
         $builder->add('nom')->add('prenom')->add('addresse') ->add('numero') ->add('sexe', ChoiceType::class, array(
             'choices' => array('Homme' => 'homme', 'Femme' => 'femme'),
             'expanded' => true,
-        ));
+        ))
+        ;
     }
 
     public function getParent()

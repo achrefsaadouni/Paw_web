@@ -1,5 +1,79 @@
 {% extends "AppBundle::client_layout.html.twig" %}
 
 {% block content %}
-    Bonjour
+
+
+
+
+    <div id="owl-demo" class="owl-carousel owl-theme">
+        <div class="item"><img src="{{ asset('client/images/slide_1.jpg') }}" width="1360" height="503" alt="slider-image">
+        </div>
+        <div class="item"><img src="{{ asset('client/images/slide_2.jpg') }}" width="1360" height="503" alt="slider-image">
+        </div>
+        <div class="item"><img src="{{ asset('client/images/slide_3.jpg') }}" width="1360" height="503" alt="slider-image">
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <!-- Testimonial Section -->
+        <div class="text-center">
+            <h3 class="border-primary"><span class="heading_border bg-primary">Conseils</span></h3>
+        </div>
+        <div class="col-md-4">
+            <div class="author">
+                <p class="text-right">
+                    Gardez vos animaux de compagnie dans la maison
+                    <br>
+                </p>
+                <p>
+                    <label>Les animaux jeunes ou vieux ainsi que les sujets à poil court sont plus vulnérables au froid que les autres et ne devraient pas rester dehors sans surveillance.</label>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="author">
+                <p class="text-right">
+                    Procurez un abri à votre animal
+                    <br>
+
+                </p>
+                <p>
+                    <label>Utilisez de la paille pour mieux isoler sa niche et montez-lui un lit confortable et bien chaud qui ne repose pas directement sur le sol.</label>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="author">
+
+                <p class="text-right">
+                    L’antigel est toxique.
+                    <br>
+
+                </p>
+                <p>
+                    <label>Essuyez avec soin l’antigel que vous auriez laissé tomber et gardez les produits chimiques d’usage domestique hors de la portée de votre animal. Pensez à utiliser des produits renfermant du propylèneglycol plutôt que de l’éthylène glycol.</label>
+                </p>
+            </div>
+        </div>
+        <!-- Testimonial Section End -->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% endblock content%}
