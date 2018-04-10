@@ -13364,7 +13364,7 @@ Raphael.fn.createLivicon = function (iconid, iconname, size, color, hovercolor, 
   return true;
 }; //end createLivicon
 
-//jQuery plugin with three methods: addLivicon, removeLivicon, updateLivicon (from v1.2)
+//jQuery Plugin with three methods: addLivicon, removeLivicon, updateLivicon (from v1.2)
 (function($){
 
   //function for count unique integer number for adding to every icon's ID (if necessary)
@@ -13373,7 +13373,7 @@ Raphael.fn.createLivicon = function (iconid, iconname, size, color, hovercolor, 
     return uniqueNum.counter++;
   }
 
-  $.fn.extend({ //creating jQuery plugin with three methods
+  $.fn.extend({ //creating jQuery Plugin with three methods
 
     addLivicon: function(options) {
       return this.each(function(){

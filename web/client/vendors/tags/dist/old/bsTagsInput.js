@@ -5,10 +5,10 @@ angular.module('bsTagsInput', [])
  * @restrict A
  *
  * @description
- * Sets up an input field for tag inputs, using the bootstrap-tagsinput jQuery plugin.
+ * Sets up an input field for tag inputs, using the bootstrap-tagsinput jQuery Plugin.
  *
  * @element INPUT or SELECT
- * @param {Object} options passed to the bootstrap-tagsinput plugin at initialization.
+ * @param {Object} options passed to the bootstrap-tagsinput Plugin at initialization.
  *
  * @example
     <doc:example>
@@ -89,7 +89,7 @@ angular.module('bsTagsInput', [])
  * Using typeahead.js, adds autocompletion support to a bsTagsInput field.
  *
  * @element INPUT or SELECT
- * @param {Object} options passed to the typeahead.js plugin.
+ * @param {Object} options passed to the typeahead.js Plugin.
  */
 .directive('bsTagsTypeahead', function() {
   return {

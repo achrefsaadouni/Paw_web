@@ -987,7 +987,7 @@ var GraphPie = GraphPie || (function($) {
 	return GraphPie;
 })(jQuery);
 
-//UI/jQuery plugin for displaying SVGGraph.js graphs with all their functionality
+//UI/jQuery Plugin for displaying SVGGraph.js graphs with all their functionality
 (function($) {
 	$.fn.graphify = $.fn.graphify || function(options) {
 		options = options || {};

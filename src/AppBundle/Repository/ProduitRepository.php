@@ -12,46 +12,51 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function articlesParPrix()
-    {
-        $querybuilder = $this->createQueryBuilder("article");
-        return $querybuilder->addOrderBy("article.prix")->getQuery()->getResult();
-    }
 
 
-    public function searchByKeyword($keyword)
+    public function findAllDispo($keyword)
     {
         $querybuilder = $this->createQueryBuilder("p");
         return $querybuilder
-            ->where($querybuilder
-                ->expr()
-                ->like("p.libelle", ":keyword")
-            )
-            ->setParameter("keyword","%".$keyword."%")
+            ->where("p.quantite >0")
+            ->andWhere("p.type like ?1")
+            ->setParameter(1, $keyword)
             ->getQuery()
             ->getResult();
     }
 
-    public function getArticles($first_result, $max_results = 6)
+    public function Order($type,$critere)
     {
-        $qb = $this->createQueryBuilder('article');
-        $qb
-            ->select('produit')
-            ->setFirstResult($first_result)
-            ->setMaxResults($max_results);
+        if($critere=="ASC")
+        {
+            $querybuilder = $this->createQueryBuilder("p");
+            return $querybuilder
+                ->where("p.type like ?1")
+                ->orderBy("p.prix",'ASC')
+                ->setParameter(1, $type)
+                ->getQuery()
+                ->getResult();
+        }
+        $querybuilder = $this->createQueryBuilder("p");
+        return $querybuilder
+            ->where("p.type like ?1")
+            ->orderBy("p.prix",'DESC')
+            ->setParameter(1, $type)
+            ->getQuery()
+            ->getResult();
 
-        $pag = new Paginator($qb);
-        return $pag;
     }
 
-    public function  getLatestArticles(){
-        $qb = $this->createQueryBuilder('article');
-        $qb
-            ->select('article')
-            ->where("article.vendu= :rep ")
-            ->setParameter(":rep", false)
-            ->setMaxResults(6);
-        return $qb->getQuery()->getResult();
+    public function searchByKeyword($key)
+    {
+        return $this->createQueryBuilder('p')
+            ->where("p.libelle like ?1")
+            ->orWhere("p.type like ?2")
+            ->setParameter(1, $key.'%')
+            ->setParameter(2, $key.'%')
+            ->getQuery()
+            ->getResult();
     }
+
 
 }

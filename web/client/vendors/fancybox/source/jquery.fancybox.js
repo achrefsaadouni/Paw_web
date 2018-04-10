@@ -1924,7 +1924,7 @@
 		}
 	};
 
-	// jQuery plugin initialization
+	// jQuery Plugin initialization
 	$.fn.fancybox = function (options) {
 		var index,
 			that     = $(this),

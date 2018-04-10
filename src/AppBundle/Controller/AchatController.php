@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Order;
 use AppBundle\Entity\Panier;
+use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -162,16 +164,26 @@ class AchatController extends Controller
         $user = $this->getUser();
         $id=$request->get('keyword');
         $session = $request->getSession();
+        $nbr = 1;
+        if($request->get('nbr')!=null)
+        {
+            $nbr =  $request->get('nbr');
+        }
+
         $article = $em->getRepository("AppBundle:Produit")->find($id);
-        if ( empty($session->get("panier")) ) {
+        for ($i = 0 ;$i<$nbr;$i++)
+        {
+            if ( empty($session->get("panier")) ) {
                 $panier = new Panier();
                 $panier->addItem($article);
                 $session->set("panier", $panier);
 
-        } else {
+            } else {
                 $panier = $session->get("panier");
                 $panier->addItem($article);
+            }
         }
+
 
         return $this->redirectToRoute("panier");
     }
@@ -246,6 +258,31 @@ class AchatController extends Controller
             ));
         }
 
+        elseif ($methode==('paypal'))
+        {
+            $prix =$request->getSession()->get("panier")->getTotal();
+            if($prix<30)
+            {
+                $prix+=5;
+            }
+            $amount = $prix/2.7;
+            return $this->redirectToRoute('order', array('amount' =>$amount), 301);
+        }
+        else
+        {
+            $prix =$request->getSession()->get("panier")->getTotal();
+            if($prix<30)
+            {
+                $prix+=5;
+                $request->getSession()->get("panier")->setTotal($prix);
+            }
+
+            return $this->render('AppBundle:Membre:stripe.html.twig', array(
+
+            ));
+        }
+
+
     }
 
     /**
@@ -297,8 +334,9 @@ class AchatController extends Controller
                $panier->setTotal($panier->getTotal()+5);
            }
            $panier->payer("Non Payer",$user,$em);
-           $session->set('panier',new Panier());
            $session->remove('code');
+           $session->remove("panier");
+           $session->set('panier',new Panier());
        }
 
         return $this->redirectToRoute("home_member");
@@ -312,4 +350,51 @@ class AchatController extends Controller
         // uniqid(), which is based on timestamps
         return md5(uniqid());
     }
+
+
+    /**
+     * @Route("/client/boutique/confirmer/stripe" ,name="confirmerstripe")
+     */
+    public function stripeAction(Request $request)
+    {
+        $session = $request->getSession();
+        $amount = $session->get('panier')->getTotal()* 41;
+        $session = $request->getSession();
+        \Stripe\Stripe::setApiKey("sk_test_s3qNFSFh0IqhB0vaSTwTe9n8");
+
+        $charge = \Stripe\Charge::create(array(
+            "amount" => $amount,
+            "currency" => "usd",
+            "source" => $request->get('stripeToken'), // obtained with Stripe.js
+            "metadata" => array("order_id" => "6735"),
+        ));
+        if ($charge->jsonSerialize()["status"] == "succeeded")
+        {
+            $user = $this->getUser();
+            $em = $this->getDoctrine()->getManager();
+            $session = $request->getSession();
+            $panier = $session->has("panier") ? $session->get("panier") : new Panier();
+            $panier->payer("Payer",$user,$em);
+            $session->remove("panier");
+            $session->set('panier',new Panier());
+            return $this->redirectToRoute("succeed");
+        }
+
+           return $this->redirectToRoute("fail");
+    }
+    /**
+     * @Route("/client/boutique/confirmer/stripe/succes" ,name="succeed")
+     */
+    public function successAction()
+    {
+     return  $this->render("@App/Membre/success.html.twig");
+    }
+    /**
+     * @Route("/client/boutique/confirmer/stripe/fail" ,name="fail")
+     */
+    public function failAction()
+    {
+       return  $this->render("@App/Membre/fail.html.twig");
+    }
+
 }

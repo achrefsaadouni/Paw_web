@@ -16,7 +16,7 @@ class ProduitController extends Controller
     /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/boutique?type={type}",name="boutique_membre")
+     * @Route("/boutique/type={type}",name="boutique_membre")
      */
     public function boutiqueAction($type,Request $request)
     {
@@ -215,10 +215,44 @@ class ProduitController extends Controller
         $keyword = $request->get("keyword");
         $em = $this->getDoctrine()->getManager();
         $articles = $em->getRepository("AppBundle:Produit")->searchByKeyword($keyword);
+        return $this->render("@App/Membre/search.html.twig",["articles" => $articles]);
 
-        return $this->render("AppBundle:Membre:boutique.html.twig", array(
-            "articles" => $articles,
-            "user" => $this->getUser(),
-        ));
+    }
+
+
+    /**
+     * @Route("/boutique/filtre/type={type}&critere={critere}", name="filtreProduit")
+     */
+    public function FiltreAction(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $type=$request->get('type');
+        $critere=$request->get('critere');
+        if ($type == 'tous')
+        {
+            if($critere == "dispo")
+            $articles = $em->getRepository("AppBundle:Produit")->findAllDispo("%");
+            else
+                $articles = $em->getRepository("AppBundle:Produit")->Order("%",$critere);
+        }
+
+        else
+            if($critere == "dispo")
+                $articles = $em->getRepository("AppBundle:Produit")->findAllDispo($type);
+            else
+                $articles = $em->getRepository("AppBundle:Produit")->Order($type,$critere);
+
+
+
+        $paginator = $this->get('knp_paginator');
+        $result= $paginator->paginate(
+            $articles,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',6)
+
+        );
+        return $this->renderBoutique([ "articles" => $result]);
+
     }
 }

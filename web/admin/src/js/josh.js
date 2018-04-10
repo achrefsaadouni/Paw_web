@@ -130,12 +130,12 @@ function fix_sidebar() {
 /*
  * SIDEBAR MENU
  * ------------
- * This is a custom plugin for the sidebar menu. It provides a tree view.
+ * This is a custom Plugin for the sidebar menu. It provides a tree view.
  * 
  * Usage:
  * $(".sidebar).tree();
  * 
- * Note: This plugin does not accept any options. Instead, it only requires a class
+ * Note: This Plugin does not accept any options. Instead, it only requires a class
  *       added to the element that contains a sub-menu.
  *       
  * When used with the sidebar, for example, it would look something like this:

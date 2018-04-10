@@ -1310,7 +1310,7 @@ window.Modernizr = (function( window, document, undefined ) {
     // Assign private properties to the return object with prefix
     Modernizr._version      = version;
 
-    // expose these for the plugin API. Look in the source for how to join() them against your input
+    // expose these for the Plugin API. Look in the source for how to join() them against your input
     /*>>prefixes*/
     Modernizr._prefixes     = prefixes;
     /*>>prefixes*/

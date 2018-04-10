@@ -1,6 +1,6 @@
 $("#zoom_09").elevateZoom(); 
             
-  //initiate the plugin and pass the id of the div containing gallery images
+  //initiate the Plugin and pass the id of the div containing gallery images
 $("#zoom_09").elevateZoom({gallery:'gal1', cursor: 'pointer', galleryActiveClass: 'active', imageCrossfade: true}); 
 
 //pass the images to Fancybox

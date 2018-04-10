@@ -1,0 +1,206 @@
+
+            <!--Content Section Start -->
+            <!-- Best Deal Section Start -->
+            <div class="row">
+                <h3>Categorie</h3>
+
+                <div class="col-md-3 col-sm-6">
+                    <!-- Pnael group section Start -->
+                    <div class="margin-t30 hidden-xs hidden-sm"></div>
+                    <div class="panel-group" id="accordion">
+                        <!--Php Section Start -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading text_bg">
+                                <h4 class="panel-title">
+                                    <a  href="{{ path('boutique_membre',{'type':'tous'}) }}">
+                                        <span class=" glyphicon glyphicon-plus success"></span>
+                                        <span class="success" id="t1">Tous les Produits</span></a>
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading text_bg">
+                                <h4 class="panel-title">
+                                    <a  href="{{ path('boutique_membre',{'type':'Laisse, Collier et Harnais'}) }}">
+                                        <span class=" glyphicon glyphicon-plus success"></span>
+                                        <span class="success" id="t14">Laisse, Collier et Harnais</span></a>
+                                </h4>
+                            </div>
+
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading text_bg">
+                                <h4 class="panel-title">
+                                    <a  href="{{ path('boutique_membre',{'type':'Lits et Couvertures'}) }}">
+                                        <span class=" glyphicon glyphicon-plus success"></span>
+                                        <span class="success" id="t2">Lits et Couvertures</span></a>
+                                </h4>
+                            </div>
+
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading text_bg">
+                                <h4 class="panel-title">
+                                    <a  href="{{ path('boutique_membre',{'type':'Shampoings et Conditionneurs'}) }}">
+                                        <span class=" glyphicon glyphicon-plus success"></span>
+                                        <span class="success" id="t3">Shampoings et Conditionneurs</span></a>
+                                </h4>
+                            </div>
+
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading text_bg">
+                                <h4 class="panel-title">
+                                    <a href="{{ path('boutique_membre',{'type':'Vetements'}) }}">
+                                        <span class=" glyphicon glyphicon-plus success"></span>
+                                        <span class="success" id="t4">Vetements</span></a>
+                                </h4>
+                            </div>
+
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading text_bg">
+                                <h4 class="panel-title">
+                                    <a href="{{ path('boutique_membre',{'type':'Bols'}) }}">
+                                        <span class=" glyphicon glyphicon-plus success"></span>
+                                        <span class="success" id="t5">Bols</span></a>
+                                </h4>
+                            </div>
+
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading text_bg">
+                                <h4 class="panel-title">
+                                    <a href="{{ path('boutique_membre',{'type':'Cadeaux'}) }}">
+                                        <span class=" glyphicon glyphicon-plus success"></span>
+                                        <span class="success" id="t6">Cadeaux</span></a>
+                                </h4>
+                            </div>
+
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading text_bg">
+                                <h4 class="panel-title">
+                                    <a href="{{ path('boutique_membre',{'type':'Gâteries Et Nourritures'}) }}">
+                                        <span class=" glyphicon glyphicon-plus success"></span>
+                                        <span class="success" id="t7">Gâteries Et Nourritures</span></a>
+                                </h4>
+                            </div>
+
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading text_bg">
+                                <h4 class="panel-title">
+                                    <a href="{{ path('boutique_membre',{'type':'Jouets'}) }}">
+                                        <span class=" glyphicon glyphicon-plus success"></span>
+                                        <span class="success" id="t8">Jouets</span></a>
+                                </h4>
+                            </div>
+
+                        </div>
+
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading text_bg">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#filtre">
+                                        <span class=" glyphicon glyphicon-plus success"></span>
+                                        <span class="success">Filtrer </span></a>
+                                </h4>
+                            </div>
+                            <div id="filtre" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="media">
+                                        <div class="media-left media-top">
+                                            <a href="#">
+                                                <i class="devicon-php-plain colored font100" ></i>
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <p class="media-heading"><a id="croissant" >Prix Croissant</a></p>
+                                            <p> <a id="decroissant">Prix Decroissant</a></p>
+                                            <p> <a id="disponible" >Produit Disponible</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                    <!-- //Panel group Section End -->
+                </div>
+
+
+                <!-- contenu du boutique -->
+
+
+                {% for article in articles %}
+                    <div class="box col-md-3 ">
+                        <div class=" thnumbnail text-center">
+                            <a href="#"><img src="http://localhost/paw_web/web/images/pawBoutique/{{ article.image1 }}"  alt="sony image" width="80" height="80"></a>
+
+                            <h5 class="text-primary">{{ article.libelle }}</h5>
+                            {% if article.quantite == 0 %}
+                                <ul>
+                                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>Hors Stock</li>
+                                </ul>
+                            {% else %}
+                                <ul>
+                                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i>En Stock </li>
+                                </ul>
+                            {% endif %}
+                            <h4 class="text-primary">{{ article.prix}} DNT</h4>
+                            <a href="{{ path('detailProduit',{'id':article.id})  }}" class="btn btn-responsive button-alignment btn-primary text-white">Plus d'info</a>
+                            {% if article.quantite == 0 %}
+                                <a disabled="disable" id="{{ article.id }}" class="btn btn-responsive button-alignment btn-primary text-white">Ajouter au panier</a>
+                            {% else %}
+                                <a id="{{ article.id }}" class="btn btn-responsive button-alignment btn-primary text-white">Ajouter au panier</a>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

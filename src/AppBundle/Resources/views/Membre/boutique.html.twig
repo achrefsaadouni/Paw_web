@@ -22,6 +22,23 @@
     <!-- //Breadcrumb Section End-->
     <!-- Container Section Start -->
     <div class="container">
+        <div class="row">
+            <div class="text-center">
+                <h3 class="border-primary"><span class="heading_border bg-primary">Notre Boutique</span></h3>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-lg-6">
+        <div class="form-group input-group">
+            <div class="input-group-addon">
+                <i class="livicon" data-name="search" data-size="18" data-c="#000" data-hc="#000" data-loop="true"></i>
+            </div>
+            <input type="text" class="form-control" placeholder="Rechercher" id="search">
+        </div>
+        </div>
+    </div>
+
+        <div id="ajax">
         <!--Content Section Start -->
         <!-- Best Deal Section Start -->
         <div class="row">
@@ -35,196 +52,103 @@
                     <div class="panel panel-default">
                         <div class="panel-heading text_bg">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapsenine">
+                                <a  href="{{ path('boutique_membre',{'type':'tous'}) }}">
                                     <span class=" glyphicon glyphicon-plus success"></span>
                                     <span class="success" id="t1">Tous les Produits</span></a>
                             </h4>
                         </div>
-                        <div id="collapsenine" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="media">
-                                    <div class="media-left media-top">
-                                        <a href="#">
-                                            <i class="devicon-php-plain colored font100" ></i>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="media-heading"><a href="#">prix croissant</a></br><a href="#">prix decroissant</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading text_bg">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                <a  href="{{ path('boutique_membre',{'type':'Laisse, Collier et Harnais'}) }}">
                                     <span class=" glyphicon glyphicon-plus success"></span>
-                                    <span id="1" class="success">Laisse, Collier et Harnais</span></a>
+                                    <span class="success" id="t14">Laisse, Collier et Harnais</span></a>
                             </h4>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="media">
-                                    <div class="media-left media-top">
-                                        <a href="#">
-                                            <i class="devicon-php-plain colored font100" ></i>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="media-heading"><a href="#">prix croissant</a></br><a href="#">prix decroissant</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading text_bg">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                <a  href="{{ path('boutique_membre',{'type':'Lits et Couvertures'}) }}">
                                     <span class=" glyphicon glyphicon-plus success"></span>
                                     <span class="success" id="t2">Lits et Couvertures</span></a>
                             </h4>
                         </div>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="media">
-                                    <div class="media-left media-top">
-                                        <a href="#">
-                                            <i class="devicon-php-plain colored font100" ></i>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="media-heading"><a href="#">prix croissant</a></br><a href="#">prix decroissant</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading text_bg">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                <a  href="{{ path('boutique_membre',{'type':'Shampoings et Conditionneurs'}) }}">
                                     <span class=" glyphicon glyphicon-plus success"></span>
                                     <span class="success" id="t3">Shampoings et Conditionneurs</span></a>
                             </h4>
                         </div>
-                        <div id="collapseThree" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="media">
-                                    <div class="media-left media-top">
-                                        <a href="#">
-                                            <i class="devicon-php-plain colored font100" ></i>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="media-heading"><a href="#">prix croissant</a></br><a href="#">prix decroissant</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading text_bg">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                <a href="{{ path('boutique_membre',{'type':'Vetements'}) }}">
                                     <span class=" glyphicon glyphicon-plus success"></span>
                                     <span class="success" id="t4">Vetements</span></a>
                             </h4>
                         </div>
-                        <div id="collapseFour" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="media">
-                                    <div class="media-left media-top">
-                                        <a href="#">
-                                            <i class="devicon-php-plain colored font100" ></i>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="media-heading"><a href="#">prix croissant</a></br><a href="#">prix decroissant</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading text_bg">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                                <a href="{{ path('boutique_membre',{'type':'Bols'}) }}">
                                     <span class=" glyphicon glyphicon-plus success"></span>
                                     <span class="success" id="t5">Bols</span></a>
                             </h4>
                         </div>
-                        <div id="collapseFive" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="media">
-                                    <div class="media-left media-top">
-                                        <a href="#">
-                                            <i class="devicon-php-plain colored font100" ></i>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="media-heading"><a href="#">prix croissant</a></br><a href="#">prix decroissant</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading text_bg">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+                                <a href="{{ path('boutique_membre',{'type':'Cadeaux'}) }}">
                                     <span class=" glyphicon glyphicon-plus success"></span>
                                     <span class="success" id="t6">Cadeaux</span></a>
                             </h4>
                         </div>
-                        <div id="collapseSix" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="media">
-                                    <div class="media-left media-top">
-                                        <a href="#">
-                                            <i class="devicon-php-plain colored font100" ></i>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="media-heading"><a href="#">prix croissant</a></br><a href="#">prix decroissant</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading text_bg">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
+                                <a href="{{ path('boutique_membre',{'type':'Gâteries Et Nourritures'}) }}">
                                     <span class=" glyphicon glyphicon-plus success"></span>
                                     <span class="success" id="t7">Gâteries Et Nourritures</span></a>
                             </h4>
                         </div>
-                        <div id="collapseSeven" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="media">
-                                    <div class="media-left media-top">
-                                        <a href="#">
-                                            <i class="devicon-php-plain colored font100" ></i>
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="media-heading"><a href="#">prix croissant</a></br><a href="#">prix decroissant</a></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-heading text_bg">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
+                                <a href="{{ path('boutique_membre',{'type':'Jouets'}) }}">
                                     <span class=" glyphicon glyphicon-plus success"></span>
                                     <span class="success" id="t8">Jouets</span></a>
                             </h4>
                         </div>
-                        <div id="collapseEight" class="panel-collapse collapse">
+
+                    </div>
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading text_bg">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#filtre">
+                                    <span class=" glyphicon glyphicon-plus success"></span>
+                                    <span class="success">Filtrer </span></a>
+                            </h4>
+                        </div>
+                        <div id="filtre" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <div class="media">
                                     <div class="media-left media-top">
@@ -233,12 +157,20 @@
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <p class="media-heading"><a href="#">prix croissant</a></br><a href="#">prix decroissant</a></p>
+                                        <p class="media-heading"><a id="croissant" >Prix Croissant</a></p>
+                                            <p> <a id="decroissant">Prix Decroissant</a></p>
+                                        <p> <a id="disponible" >Produit Disponible</a></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
+
+
+
 
                 </div>
                 <!-- //Panel group Section End -->
@@ -277,14 +209,14 @@
 
 
 
-
-
-
-
-
-
-
         </div>
+
+
+
+
+
+
+
 
 
 
@@ -318,14 +250,32 @@
 
         </div>
             </div>
+
     </div>
 
-
+    </div>
 
     <script>
         $(document).ready(function() {
 
             console.log('document is ready');
+
+            $("#search").on('keyup', function() {
+
+                keyword = $("#search").val();
+                if(keyword!="")
+                {
+                    $.get("{{ path('rechercheProduit')}}?keyword=" + keyword, function(data, err, vars) {
+                        $("#ajax").html(data);
+                    })
+                }
+
+
+            });
+
+
+
+
 
             $('a').on('click', function(event) {
                 var $target = $(event.target);
@@ -338,10 +288,104 @@
 
                     })
                 }
+                if(itemId=="croissant")
+                {
+                    var url = window.location.pathname
+
+                    console.log(url);
+                    var res = url.split("=");
+                    var t = res[1];
+                    if(t.startsWith("tous"))
+                        t='tous';
+                    if(t.startsWith("Vet"))
+                        t='Vetements';
+                    if(t.startsWith("Bols"))
+                        t='Bols';
+                    if(t.startsWith("Cadeaux"))
+                        t='Cadeaux';
+                    if(t.startsWith("Jouets"))
+                        t='Jouets';
+                    if(t.startsWith("G"))
+                        t='Gâteries Et Nourritures';
+                    if(t.startsWith('Li'))
+                        t='Lits et Couvertures';
+                    if(t.startsWith('La'))
+                        t='Laisse, Collier et Harnais';
+                    if(t.startsWith("Sha"))
+                        t='Shampoings et Conditionneurs';
+                    window.location = 'http://localhost/paw_web/web/app_dev.php/boutique/filtre/type='+t+'&critere=ASC'
+
+                }
+                if (itemId=="decroissant")
+                {
+                    var url = window.location.pathname
+
+                    console.log(url);
+
+                    var res = url.split("=");
+                    var t = res[1];
+                    if(t.startsWith("tous"))
+                        t='tous';
+                    if(t.startsWith("Vet"))
+                        t='Vetements';
+                    if(t.startsWith("Bols"))
+                        t='Bols';
+                    if(t.startsWith("Cadeaux"))
+                        t='Cadeaux';
+                    if(t.startsWith("Jouets"))
+                        t='Jouets';
+                    if(t.startsWith("G"))
+                        t='Gâteries Et Nourritures';
+                    if(t.startsWith('Li'))
+                        t='Lits et Couvertures';
+                    if(t.startsWith('La'))
+                        t='Laisse, Collier et Harnais';
+                    if(t.startsWith("Sha"))
+                        t='Shampoings et Conditionneurs';
+
+
+
+
+                    window.location = 'http://localhost/paw_web/web/app_dev.php/boutique/filtre/type='+t+'&critere=DESC';
+
+                }
+                if(itemId=="disponible")
+                {
+                    var url = window.location.pathname
+
+                    console.log(url);
+                    var res = url.split("=");
+                    var t = res[1];
+                    if(t.startsWith("tous"))
+                        t='tous';
+                    if(t.startsWith("Vet"))
+                        t='Vetements';
+                    if(t.startsWith("Bols"))
+                        t='Bols';
+                    if(t.startsWith("Cadeaux"))
+                        t='Cadeaux';
+                    if(t.startsWith("Jouets"))
+                        t='Jouets';
+                    if(t.startsWith("G"))
+                        t='Gâteries Et Nourritures';
+                    if(t.startsWith('Li'))
+                        t='Lits et Couvertures';
+                    if(t.startsWith('La'))
+                        t='Laisse, Collier et Harnais';
+                    if(t.startsWith("Sha"))
+                        t='Shampoings et Conditionneurs';
+                    window.location = 'http://localhost/paw_web/web/app_dev.php/boutique/filtre/type='+t+'&critere=dispo'
+
+
+                }
 
 
             });
 
+
+
         })
     </script>
+
+
 {% endblock content%}

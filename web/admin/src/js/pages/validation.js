@@ -289,7 +289,7 @@ $(document).ready(function() {
         errorMsg = $("#error-msg"),
         validMsg = $("#valid-msg");
 
-// initialise plugin
+// initialise Plugin
     telInput.intlTelInput({
         utilsScript: "vendors/intl-tel-input/utils.js"
     });

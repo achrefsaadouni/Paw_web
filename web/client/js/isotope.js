@@ -197,7 +197,7 @@ function isotopeDefinition( Outlayer, getSize, matchesSelector, Item, LayoutMode
     this._sort();
     this._layout();
   };
-  // alias to _init for main plugin method
+  // alias to _init for main Plugin method
   Isotope.prototype._init = Isotope.prototype.arrange;
 
   // HACK

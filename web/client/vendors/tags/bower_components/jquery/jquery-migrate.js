@@ -48,7 +48,7 @@ function migrateWarn( msg) {
 function migrateWarnProp( obj, prop, value, msg ) {
 	if ( Object.defineProperty ) {
 		// On ES5 browsers (non-oldIE), warn if the code tries to get prop;
-		// allow property to be overwritten in case some other plugin wants it
+		// allow property to be overwritten in case some other Plugin wants it
 		try {
 			Object.defineProperty( obj, prop, {
 				configurable: true,

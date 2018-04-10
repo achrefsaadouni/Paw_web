@@ -66,7 +66,7 @@ window.onload = function () { // wait for load in a dumb way because B-0
     var data = {
       vars: vars,
       css: $('#less-section input:checked')  .map(function () { return this.value }).toArray(),
-      js:  $('#plugin-section input:checked').map(function () { return this.value }).toArray()
+      js:  $('#Plugin-section input:checked').map(function () { return this.value }).toArray()
     }
 
     if ($.isEmptyObject(data.vars) && !data.css.length && !data.js.length) return
@@ -87,7 +87,7 @@ window.onload = function () { // wait for load in a dumb way because B-0
     .success(function(result) {
       var data = JSON.parse(result.files['config.json'].content)
       if (data.js) {
-        $('#plugin-section input').each(function () {
+        $('#Plugin-section input').each(function () {
           $(this).prop('checked', ~$.inArray(this.value, data.js))
         })
       }
@@ -203,7 +203,7 @@ window.onload = function () { // wait for load in a dumb way because B-0
   }
 
   function generateJavascript() {
-    var $checked = $('#plugin-section input:checked')
+    var $checked = $('#Plugin-section input:checked')
     if (!$checked.length) return false
 
     var js = $checked
@@ -218,7 +218,7 @@ window.onload = function () { // wait for load in a dumb way because B-0
   }
 
   var inputsComponent = $('#less-section input')
-  var inputsPlugin    = $('#plugin-section input')
+  var inputsPlugin    = $('#Plugin-section input')
   var inputsVariables = $('#less-variables-section input')
 
   $('#less-section .toggle').on('click', function (e) {
@@ -226,7 +226,7 @@ window.onload = function () { // wait for load in a dumb way because B-0
     inputsComponent.prop('checked', !inputsComponent.is(':checked'))
   })
 
-  $('#plugin-section .toggle').on('click', function (e) {
+  $('#Plugin-section .toggle').on('click', function (e) {
     e.preventDefault()
     inputsPlugin.prop('checked', !inputsPlugin.is(':checked'))
   })

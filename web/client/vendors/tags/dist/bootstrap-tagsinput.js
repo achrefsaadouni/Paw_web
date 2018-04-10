@@ -409,7 +409,7 @@
   };
 
   /**
-   * Register JQuery plugin
+   * Register JQuery Plugin
    */
   $.fn.tagsinput = function(arg1, arg2) {
     var results = [];

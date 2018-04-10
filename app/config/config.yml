@@ -60,6 +60,8 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        mappings:
+            JMSPaymentCoreBundle: ~
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -84,6 +86,17 @@ fos_user:
     profile:
         form:
             type: AppBundle\Form\ProfileFormType
+
+jms_payment_paypal:
+    username: vingarde-paw_api1.live.fr # not your account username
+    password: P72A9CTTXMUNMEVR # not your account password
+    signature: AefugdmprYqHikETMp2kC9hjQfFfAgZvkINEZZ1P5fQoiTGa1P.-pMh3
+    debug: true
+
+# app/config/config.yml
+jms_payment_core:
+    encryption:
+        secret: def0000016200df817ff5067efa69baa532822999f6cd4cb1803f07d6be4f50558049263de04d8b44df9b7bb0021726da336ba9ed13a2a5ad99766f618957de1835ecc03
 knp_paginator:
     page_range:                 5          # default page range used in pagination control
     default_options:

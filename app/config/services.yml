@@ -51,3 +51,11 @@ services:
         class: AppBundle\Form\ProfileFormType
         tags:
              - { name: form.type, alias: app_user_profile }
+    payment.plugin.paypal:
+        class: AppBundle\Plugin\PaypalPlugin
+        tags: [{name: payment.plugin}]
+    credit_card_type:
+            class: AppBundle\Form\CreditCardType
+            tags:
+                - { name: form.type, alias: credit_card }
+                - { name: payment.method_form_type }
