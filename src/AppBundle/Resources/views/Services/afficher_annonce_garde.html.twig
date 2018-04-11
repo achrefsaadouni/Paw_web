@@ -1,0 +1,57 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="text-center">
+            <h3 class="border-success"><span class="heading_border bg-success" >Vous pouvez gérer vos annonce ici</span></h3>
+        </div>
+        <!-- left Section Start -->
+
+    </div>
+
+
+
+    <div class="container">
+    <div class="row details">
+        <br><br><br>
+        <!-- Slider Section Start -->
+        <div class="col-md-5">
+
+            <div id="owl-demo" class="owl-carousel owl-theme">
+                <img src="http://localhost/paw_web/web/images/pawLostFound/{{annonce.images}}" class="img-responsive" alt="image animal" >
+
+
+            </div>
+
+        </div>
+
+        <!-- //Slider Section End -->
+        <!-- Project Description Section Start -->
+        <div class="col-md-6">
+            <h3 class="project">Description de l'annonce</h3>
+            <p class="text-justify">
+            <ul>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Type de votre animal : {{ annonce.type }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Sa race est :{{ annonce.race }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son age   : {{ annonce.age }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Message complementaire  : {{ annonce.messageComplementaire }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Couleur   : {{ annonce.couleur}}</li>
+
+            </ul>
+
+            </p>
+            <h3>Details  du service</h3>
+            <ul>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Date de garde  : {{ annonce.datesit|date('Y-m-d') }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Dure de garde  : {{ annonce.duresit }}</li>
+                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> To do list  : {{ annonce.todolist }}</li>
+            </ul>
+            <a  class="btn btn-primary btn-warning text-white" href="{{ path('modifier_annonce_garde',{ "id" : annonce.id} )}}">Modifier</a>
+            <a  class="btn btn-primary btn-danger text-white" href="{{ path('supprimer_annonce_garde',{ "id" : annonce.id} )}}">Supprimer</a>
+            <br>
+        </div>
+        <br>
+        <!-- //Project Description Section End -->
+    </div>
+    <br>
+{% endblock content%}

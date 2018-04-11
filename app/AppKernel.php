@@ -21,6 +21,8 @@ class AppKernel extends Kernel
             new FOS\MessageBundle\FOSMessageBundle(),
             new JMS\Payment\CoreBundle\JMSPaymentCoreBundle(),
             new JMS\Payment\PaypalBundle\JMSPaymentPaypalBundle(),
+            new CMEN\GoogleChartsBundle\CMENGoogleChartsBundle(),
+            new blackknight467\StarRatingBundle\StarRatingBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

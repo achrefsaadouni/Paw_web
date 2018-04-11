@@ -1,0 +1,50 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/starrating/css/rating.css') }}" />
+
+
+
+
+
+
+
+
+    <div class="row">
+        <!-- Our Team Heading Start -->
+        <div class="text-center">
+            <h3 class="border-success"><span class="heading_border bg-success" >Nos vétérinaires</span></h3>
+        </div>
+        <!-- //Our Team Heading End -->
+        <!-- Image1 Section Start -->
+    {% for veterinaire in v %}
+        <div class="col-md-3 col-sm-5 col-xs-10 profile">
+            <div class="thumbnail bg-white  text-center">
+                <img src="{{ asset('images/pawVets/' ~ veterinaire.images) }}" alt="image veterinaire" class="img-responsive">
+                <div class="caption">
+                    <b>{{ veterinaire.nom }} {{ veterinaire.prenom }}</b>
+                    <br /> Vétérinaire
+                    <br /> {{ veterinaire.adresse }}
+                    <br /> {{ veterinaire.region }}
+                    <br /> {{ veterinaire.email }}
+                    <br /> {{ veterinaire.numero }}
+                    <div class="divide">
+                    </div>
+
+                        {{ 3|rating(5) }}<br>
+                    <button  class="btn btn-primary"  id="button" align="center"><a href="{{ path('affichePos_membre',{"id" : veterinaire.id}) }}" style="color: white">Afficher sur la carte</a></button>
+
+                </div>
+            </div>
+        </div>
+        <!-- //Image1 Section End -->
+    {% endfor %}
+    </div>
+    <div class="navigation" style="text-align: center">
+        {{ knp_pagination_render(v) }}
+
+    </div>
+
+{% endblock content%}

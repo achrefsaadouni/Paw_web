@@ -1,0 +1,42 @@
+
+
+<div class="searching">
+
+    {% for annonce in m %}
+        <div class="col-sm-6 col-md-3">
+            <div class="thumbnail text-center">
+
+                <img src="{{ asset('images/pawLostFound/' ~ annonce.images)}}" class="img-responsive" alt="image animal" height="150" width="150">
+
+                <br/>
+                <h5 class="text-primary">Voici les coordoneés de l'animal en question</h5>
+                <ul>
+                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son type est : {{ annonce.type }}</li>
+                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Sa race est :{{ annonce.race }}</li>
+                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Perdu le  : {{ annonce.datePerte|date('Y-m-d') }}</li>
+                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Le nom  du proprietaire est : {{annonce.utilisateur.nom}}</li>
+                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son addresse : {{ annonce.utilisateur.addresse }}</li>
+                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son numero :  {{ annonce.utilisateur.numero}}</li>
+                </ul>
+
+
+                <a  class="btn btn-primary btn-block text-white" href="{{ path('afficher_annonce_perdu',{ "id" : annonce.id} )}}">View</a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+
+
+
+
+    {% endfor %}
+
+
+
+
+</div>

@@ -1,0 +1,121 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('client/css/cards.css') }}">
+    {#   {{ dump(accouplement) }}  #}
+    <div class="container">
+
+
+
+
+
+
+
+
+        <div class="text-center">
+            <h3 class="border-success"><span class="heading_border bg-success" >Les annonces d'accouplement</span></h3>
+        </div>
+
+
+        <div class="row">
+            {% for a in m %}
+                <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ asset('images/pawPets/' ~ a.images) }}" width="200" height="200">
+                        <div class="card-block">
+
+                            <h class="card-title mt-3">Je propose à la reproduction un :<br> {{ a.type }} </h>
+                            <h4>Age : {{ a.age }}</h4>
+                            <div class="meta">
+                                <a>Race : {{ a.race }}</a>
+                            </div>
+                            <div class="card-text">
+                                Sexe : {{ a.sex }}
+                            </div>
+                        </div>
+                        <div class="card-footer" align="center">
+                            <small>{{ a.date|date("d-m-Y") }}</small>
+                            <br>
+                            <button  class="btn btn-success"  id="button" align="center"><a style="color: white" href="{{ path('updateAccouplement_membre',{"id" : a.id}) }}">Modifier</a></button>
+                            <button  class="btn btn-danger"  id="button1" align="center" ><a style="color: white" href="{{ path('deleteAccouplement_membre',{"id" : a.id}) }}">Supprimer</a></button>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+    <br><br>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Détails</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="card">
+                        <img class="card-img-top" style="width:inherit;height: 200px;position:relative;left:30%" src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif">
+                        <div class="card-block">
+
+
+
+
+
+
+
+
+
+
+
+                            <div class="meta">
+                                <a></a>
+                            </div>
+                            <div class="card-text">
+
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <small></small>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ asset('client/js/jquery.min.js') }}"></script>
+
+    <script>
+
+        $("document").ready(function(){
+            $(".button-show").click(function(){
+                $("#type").text($(this).data("type"));
+                $("#race").text($(this).data("race"));
+                $("#sexe").text($(this).data("sexe"));
+                $("#age").text($(this).data("age"));
+                $("#couleur").text($(this).data("couleur"));
+                $("#poil").text($(this).data("poil"));
+                $("#message").text($(this).data("message"));
+                $("#date").text($(this).data("date"));
+                $("#lieu").text($(this).data("lieu"));
+                $("#vaccin").text($(this).data("vaccin"));
+                $("#dossier").text($(this).data("dossier"));
+
+            })
+        });
+    </script>
+    <div class="navigation" style="text-align: center">
+        {{ knp_pagination_render(m) }}
+
+    </div>
+{% endblock content%}

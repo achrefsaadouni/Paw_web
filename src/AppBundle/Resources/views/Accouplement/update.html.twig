@@ -1,0 +1,20 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+<h1 align="center">Formulaire de modification</h1>
+    <br><br>
+{{ form_start(form1) }}
+    Type d'animal : {{ form_widget(form1.type)}}<br><br>
+    Age : {{ form_widget(form1.age)}}<br><br>
+    Sexe : {{ form_widget(form1.sex)}}
+    Race : {{ form_widget(form1.race)}}<br><br>
+    Couleur : {{ form_widget(form1.couleur)}}<br><br>
+    Type de poil : {{ form_widget(form1.typepoil)}}<br><br>
+    Vaccin mise à jour ? : {{ form_widget(form1.vaccin)}}
+    Dossier médical : {{ form_widget(form1.dossier)}}
+    Lieu : {{ form_widget(form1.lieu_trouve)}}<br><br>
+    Message complémentaire : {{ form_widget(form1.messageComplementaire)}}<br><br>
+
+{{ form_widget(form1.save, {'label':'Modifier'}) }}<br><br>
+{{ form_end(form1) }}
+{% endblock content%}

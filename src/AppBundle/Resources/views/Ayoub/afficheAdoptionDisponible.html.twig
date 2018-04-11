@@ -1,0 +1,71 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+    <br>
+    <div class="container">
+    <div class="text-center">
+        <h3 class="border-primary"><span class="heading_border bg-primary">Liste des offres d'adoption disponible</span></h3>
+    </div>
+    <br>
+    <div style="text-align: center">
+        <input type="text" class="form-control" placeholder="rechercher" id="recherche"  name="annoncerecherche" style="width: 200px">
+
+{% if j >0 %}
+    {# table body #}
+    <div class="searching">
+        {% for item in pagination %}
+            <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);max-width: 600px;margin: auto;text-align: center; ">
+                <img src="http://localhost/paw_web/web/images/pawAdoption/{{ item.images }}" alt="John" style="width:100%">
+                <p style="color: grey;font-size: 16px; margin-left: 430px;font-style: italic" >{{ item.date | date('d-m-Y') }} à {{ item.date | date('H:i') }}</p>
+                <h1>{{ item.type }}</h1>
+                <h4>Race : {{ item.race }}</h4>
+                <h4>Age : {{ item.age }}</h4>
+                <h4>Sexe : {{ item.sex }}</h4>
+                <h4>Couleur : {{ item.couleur }}</h4>
+                {% if item.typeadoption =='Temporaire' %}
+                    <h4>Date début : {{ item.debutadoption | date('d-m-Y') }} jusqu'au : {{ item.finadoption | date('d-m-Y') }}</h4>
+                {% endif %}
+                <br>
+                <h4>Postée par : {{ item.utilisateur.nom | upper}} {{ item.utilisateur.prenom }}</h4>
+                <p style="color: grey;font-size: 16px; font-style: italic;text-align: center;" >Plus de détails : {{ item.messageComplementaire }}</p>
+
+                <br>
+                {% if item.rep %}
+                    Vous avez déjà demandé d'adopter cet animal
+                {% else %}
+                    <a href="{{ path('EnregistrerAdoption_membre',{'id':item.id}) }}" style="color: #0e90d2"> Je veux l'adopter </a>
+                {% endif %}
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+        {% else %}
+            <div class="searching"><strong>Il n'ya aucune annonce</strong></div>
+        {% endif %}
+
+    </div>
+
+    </div>
+    <br>
+    <script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('#recherche').on('keyup', function () {
+                $search = $(this).val();
+                $.ajax({
+                    url: "{{ path('offre_recherche') }}",
+                    data: {'search': $search }
+                }).done(function (response) {
+                    $('.searching').html(response)
+                }).catch(function (err) {
+
+                });
+            });
+        });
+
+
+    </script>
+{% endblock content%}

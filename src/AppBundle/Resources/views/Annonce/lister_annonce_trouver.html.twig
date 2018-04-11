@@ -5,10 +5,31 @@
 
 <div class="container">
     <!--Content Section Start -->
+
+    <div class="text-center">
+        <h3 class="border-success"><span class="heading_border bg-success" ><i>Consulter toutes les  Annonces Trouveés </i></span></h3>
+    </div>
+    <div class="control-bar sandbox-control-bar mt10" >
+        <span class="btn btn-primary mr10 mb10 filter " data-color="white" data-filter="chien"> <a style="color: #0a0a0a" href="{{ path('afficherChien1') }}"> Chien </a></span>
+        <span class="btn btn-primary mr10 mb10 filter" data-color="white" data-filter="chat"> <a style="color: #0a0a0a" href="{{ path('afficherChat1') }}">Chat </a></span>
+        <span class="btn btn-primary mr10 mb10 filter" data-color="white" data-filter="cheval"><a style="color: #0a0a0a" href="{{ path('afficherCheval1') }}">Cheval </a></span>
+        <span class="btn btn-primary mr10 mb10 filter" data-color="white" data-filter="chevre"><a style="color: #0a0a0a" href="{{ path('afficherChevre1') }}">chévre </a></span>
+        <span class="btn btn-primary mr10 mb10 filter" data-color="white" data-filter="oiseau"><a style="color: #0a0a0a" href="{{ path('afficherOiseau1') }}">Oiseaux </a></span>
+
+    </div>
+
     <!-- Best Deal Section Start -->
     <div class="row">
 
-        <h3>Consulter toutes les  Annonces Trouveés</h3>
+        <br><br>
+
+        <input type="text" class="form-control" placeholder="rechercher par lieux trouvée" id="recherche" name="annoncerecherche" style="width: 200px">
+
+        <br><br>
+
+        <div class="searching">
+
+
         {% for annonce in m %}
         <div class="col-sm-6 col-md-3">
             <div class="thumbnail text-center">
@@ -21,6 +42,8 @@
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son type est : {{ annonce.type }}</li>
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Sa race est :{{ annonce.race }}</li>
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Trouveé le  : {{ annonce.dateTrouvee|date('Y-m-d') }}</li>
+                    <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Trouveé a  : {{ annonce.lieuTrouve }}</li>
+                    lieuTrouv
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Le nom  du proprietaire est : {{annonce.utilisateur.nom}}</li>
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son addresse : {{ annonce.utilisateur.addresse }}</li>
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son numero :  {{ annonce.utilisateur.numero}}</li>
@@ -39,7 +62,7 @@
 
         {% endfor %}
 
-
+        </div>
 
 
     </div>
@@ -50,5 +73,27 @@
     </div>
 <br><br><br><br>
 
+
+    <script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('#recherche').on('keyup', function () {
+                $search = $(this).val();
+                $.ajax({
+                    url: "{{ path('a_recherche2') }}",
+                    data: {'search2': $search }
+                }).done(function (response) {
+                    $('.searching').html(response)
+                }).catch(function (err) {
+
+                });
+            });
+        });
+
+
+    </script>
 
 {% endblock content%}

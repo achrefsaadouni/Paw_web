@@ -1,0 +1,46 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+    <br>
+    <div class="container">
+    <div class="text-center">
+        <h3 class="border-primary"><span class="heading_border bg-primary">Mes reclamations</span></h3>
+    </div>
+    <div style="text-align: center">
+
+    <table class="table table-hover table-responsive">
+        <tr>
+            {# sorting of properties based on query components #}
+            <th style="text-align: center"> Objet</th>
+            <th style="text-align: center">Message</th>
+            <th style="text-align: center"> Type</th>
+            <th style="text-align: center"> Date</th>
+            <th style="text-align: center"> Voir Réponse </th>
+        </tr>
+
+
+        {# table body #}
+        {% for reclamation in liste %}
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>{{ reclamation.objet }}</td>
+                <td>{{ reclamation.text }}</td>
+                <td>{{ reclamation.type }}</td>
+                <td>{{ reclamation.date | date('Y-m-d') }}, {{ reclamation.date | date('H:i:s') }}</td>
+                {% if reclamation.etat == 'Traitée' %}
+                    <td>
+                        <a href="{{ path('voirRéponse_membre',{'id':reclamation.id}) }}">Réponse</a>
+                    </td>
+                {% else %}
+                    <td>
+                        Non traitée
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+
+
+    </div>
+    </div>
+    <br>
+{% endblock content%}

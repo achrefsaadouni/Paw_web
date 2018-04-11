@@ -1,0 +1,69 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+
+    <div class="container" >
+        <div class="row" >
+            <!-- Contact form Section Start -->
+            <div class="col-md-5 " align="center" >
+                <div class="text-center">
+                    <h3 class="border-success"><span class="heading_border bg-success">Modifier votre annonce</span></h3>
+                </div>
+                <form enctype="multipart/form-data" method="post" class="grid" >
+                    <div class="form-group row">
+                        <div class="form-group" >
+                            <label>Le type de l'animal :</label>
+                            <select name="type">
+                                <option value="chien">chien</option>
+                                <option value="chat">chat</option>
+                                <option value="cheval">cheval</option>
+                            </select>
+                            <!--<input type="text" class="form-control input-lg" name="type" placeholder="type">-->
+                        </div>
+                        <div  class="form-group" >
+                            <input type="number" class="form-control input-lg" name="age" placeholder="age" min="0" max="60" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" name="couleur" placeholder="couleur">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" name="race" placeholder="race">
+                        </div>
+                        <div class="form-group">
+                            <label>Le sexe de l'animal :</label> <select name="sexe">
+                                <option value="male">male</option>
+                                <option value="female">female</option>
+                            </select>
+                            <!--  <input type="text" class="form-control input-lg" name="sexe" placeholder="sexe"> -->
+                        </div>
+                        <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                            <label> Date de dressage : </label>
+                            <input type="date" class="form-control input-lg" name="date" placeholder="date dressage">
+                        </div>
+                        <div class="form-group">
+                            <label>Choisissez le type de dressage :</label>
+                            <select name="typeTr">
+                                <option value="debutant">Dressage de debutant</option>
+                                <option value="avancé">Dressage Avancé</option>
+                                <option value="chiot">Dressage des chiot </option>
+                            </select>
+                            <!--<input type="text" class="form-control input-lg" name="type" placeholder="type">-->
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control input-lg no-resize" name="message" rows="6" placeholder="message compelementaire"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input name="image" accept="image/*" type="file">
+                        </div>
+                        <div class="input-group">
+                            <button class="btn btn-primary" type="submit">  Confirmer  </button>
+                        </div>
+                     </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content%}

@@ -1,0 +1,27 @@
+{% for item in pagination %}
+    {% if item.typeAnnonce=='Annonce_adoption' and item.etatadoption=='Disponible' and item.utilisateur != user %}
+        <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);max-width: 600px;margin: auto;text-align: center; ">
+            <img src="http://localhost/paw_web/web/images/pawAdoption/{{ item.images }}" alt="John" style="width:100%">
+            <p style="color: grey;font-size: 16px; margin-left: 430px;font-style: italic" >{{ item.date | date('d-m-Y') }} à {{ item.date | date('H:i') }}</p>
+            <h1>{{ item.type }}</h1>
+            <h4>Race : {{ item.race }}</h4>
+            <h4>Age : {{ item.age }}</h4>
+            <h4>Sexe : {{ item.sex }}</h4>
+            <h4>Couleur : {{ item.couleur }}</h4>
+            {% if item.typeadoption =='Temporaire' %}
+                <h4>Date début : {{ item.debutadoption | date('d-m-Y') }} jusqu'au : {{ item.finadoption | date('d-m-Y') }}</h4>
+            {% endif %}
+            <br>
+            <h4>Postée par : {{ item.utilisateur.nom | upper}} {{ item.utilisateur.prenom }}</h4>
+            <p style="color: grey;font-size: 16px; font-style: italic;text-align: center;" >Plus de détails : {{ item.messageComplementaire }}</p>
+
+            <br>
+            {% if item.rep %}
+                Vous avez déjà demandé d'adopter cet animal
+            {% else %}
+                <a href="{{ path('EnregistrerAdoption_membre',{'id':item.id}) }}" style="color: #0e90d2"> Je veux l'adopter </a>
+            {% endif %}
+        </div>
+        <br>
+    {% endif %}
+    {% endfor %}

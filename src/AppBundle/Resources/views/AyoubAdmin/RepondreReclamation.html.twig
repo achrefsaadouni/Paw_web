@@ -1,0 +1,42 @@
+{% extends "AppBundle::admin_layout.html.twig" %}
+
+{% block content %}
+    <aside class="right-side" >
+    <div style="text-align: center">
+    {% if reclamation %}
+        <h1> Répondre à cette reclamation</h1>
+        <strong> Reclamation concernant : </strong> {{ reclamation.objet }}
+        <br>
+        <strong> Message complémentaire : </strong>{{ reclamation.text }}
+        <br>
+        <strong> Envoyée le : </strong> {{ reclamation.date | date('d-m-Y')}}
+        <br>
+        <strong> A : </strong> {{ reclamation.date | date('H:i:s')}}
+        <br>
+        <strong> Type{Reclamation/Remerciment} </strong>{{ reclamation.type }}
+        <br>
+        <strong> Par le membre : </strong> {{ reclamation.idUtilisateur.nom }} {{ reclamation.idUtilisateur.prenom }}
+        <br>
+        <strong> Ayant le username : </strong>{{ reclamation.idUtilisateur.username }}
+        <br>
+        <strong> Ayant l'email : </strong>{{ reclamation.idUtilisateur.email }}
+
+        <br>
+        <br>
+
+        {{ form_start(form) }}
+
+        {{ form_end(form) }}
+
+    {% else %}
+        <h1> Page invalide </h1>
+    {% endif %}
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    </aside>
+
+{% endblock content%}

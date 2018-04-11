@@ -1,0 +1,47 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+    <br>
+    <div class="container">
+
+    <div class="text-center">
+        <h3 class="border-primary"><span class="heading_border bg-primary">Vous avez choisi de céder votre animal</span></h3>
+    </div>
+    <div style="text-align: center">
+        <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);max-width: 600px;margin: auto;text-align: center; ">
+            <img src="http://localhost/paw_web/web/images/pawAdoption/{{ annonce.images }}" alt="John" style="width:100%">
+            <p style="color: grey;font-size: 16px; margin-left: 430px;font-style: italic" >{{ annonce.date | date('d-m-Y') }} à {{ annonce.date | date('H:i') }}</p>
+            <h1>{{ annonce.type }}</h1>
+            <h4>Race : {{ annonce.race }}</h4>
+            <h4>Age : {{ annonce.age }}</h4>
+            <h4>Sexe : {{ annonce.sex }}</h4>
+            <h4>Couleur : {{ annonce.couleur }}</h4>
+            {% if annonce.typeadoption =='Temporaire' %}
+                <h4>Date début : {{ annonce.debutadoption | date('d-m-Y') }} jusqu'au : {{ annonce.finadoption | date('d-m-Y') }}</h4>
+            {% endif %}
+            <br>
+            <p style="color: grey;font-size: 16px; font-style: italic;text-align: center;" >Plus de détails : {{ annonce.messageComplementaire }}</p>
+
+            <br>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <h3 class="border-primary"><span class="heading_border bg-primary">A cet utilisateur</span></h3>
+    </div>
+    <div style="text-align: center">
+        <img src="http://localhost/paw_web/web/images/pawUsers/{{ annonce.utilisateur.avatar }}" alt="slider-image" height="200" width="200">
+        <br>
+        <br>
+        <strong>Username: </strong>{{ annonce.utilisateur.username }}<br>
+        <strong>Nom: </strong>{{ annonce.utilisateur.nom }}<br>
+        <strong>Prenom: </strong>{{ annonce.utilisateur.prenom }}<br>
+        <strong>Adresse: </strong>{{ annonce.utilisateur.addresse }}<br>
+        <strong>Email: </strong>{{ annonce.utilisateur.email }}<br>
+        <strong>Numero </strong>{{ annonce.utilisateur.numero }}<br>
+    </div>
+    </div>
+
+
+    <br>
+{% endblock content%}

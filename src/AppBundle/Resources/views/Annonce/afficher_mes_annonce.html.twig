@@ -6,7 +6,9 @@
         <!-- Best Deal Section Start -->
         <div class="row">
 
-            <h3>Bienvenue {{ user.username }}  toutes vous annonces trouveés</h3>
+            <div class="text-center">
+                <h3 class="border-success"><span class="heading_border bg-success" >Bienvenue {{ user.username }}  toutes vous annonces trouveés</span></h3>
+            </div>
             {% for annonce in m %}
                 <div class="col-sm-6 col-md-3">
                     <div class="thumbnail text-center">
@@ -60,7 +62,10 @@
         <!-- Best Deal Section Start -->
         <div class="row">
 
-            <h3>Vous trouverais ainsi {{ user.username }}  toutes vous annonces De Perte</h3>
+
+            <div class="text-center">
+                <h3 class="border-success"><span class="heading_border bg-success" >Vous trouverais ainsi   toutes vous annonces De Perte</span></h3>
+            </div>
             {% for annonce in k %}
                 <div class="col-sm-6 col-md-3">
                     <div class="thumbnail text-center">

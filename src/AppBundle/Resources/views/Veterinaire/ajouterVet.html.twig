@@ -1,0 +1,60 @@
+{% extends "AppBundle::admin_layout.html.twig" %}
+
+{% block content %}
+    <aside class="right-side">
+<h1 align="center">Formulaire d'ajout</h1>
+
+{{ form_start(form) }}
+    {#{{ form_widget(form.longitude.setRendered()) }}#}
+    {#{{ form_widget(form.latitude.setRendered()) }}#}
+
+{{ form_end(form) }}
+
+
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            #map {
+                height: 400px;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+    <h3>Sélectionner la position</h3>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 5,
+                center: new google.maps.LatLng(36.8189700, 10.1657900)
+            });
+
+            var marker = new google.maps.Marker({
+
+            position: {lat: 36.8189700, lng: 10.1657900},
+            map: map,
+            draggable: true
+            });
+
+            google.maps.event.addListener(marker, 'dragend', function() {
+            $('#appbundle_veterinaire_latitude').val(marker.position.lat());
+            $('#appbundle_veterinaire_longitude').val(marker.position.lng());
+            });
+
+        }
+
+
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArxvIgHziE481rfNg1Se16XnM9XH_G4i8&callback=initMap">
+    </script>
+    </body>
+    </html>
+
+    </aside>
+{% endblock content%}

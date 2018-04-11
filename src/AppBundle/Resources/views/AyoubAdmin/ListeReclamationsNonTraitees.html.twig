@@ -1,0 +1,54 @@
+{% extends "AppBundle::admin_layout.html.twig" %}
+
+{% block content %}
+    <br>
+    <aside class="right-side" >
+    <div style="text-align: center">
+        <h1>Liste des FeedBack non traités</h1>
+
+        {% if pagination.getTotalItemCount > 0 %}
+            <div id="table1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="table1"></label></div>            <table class="table table-hover table-responsive">
+                <tr>
+                    {# sorting of properties based on query components #}
+                    <th style="text-align: center"> {{ knp_pagination_sortable(pagination, 'Objet', 'a.objet') }}</th>
+                    <th style="text-align: center"> {{ knp_pagination_sortable(pagination, 'Message complémentaire', 'a.text') }}</th>
+                    <th style="text-align: center"> {{ knp_pagination_sortable(pagination, 'Type {Remerciment/Reclamation}', 'a.type') }}</th>
+                    <th style="text-align: center"> Nom & Prenom utilisateur</th>
+                    <th style="text-align: center"> {{ knp_pagination_sortable(pagination, 'Date', ['a.date', 'a.date']) }}</th>
+                    <th style="text-align: center"> Répondre </th>
+                </tr>
+
+
+                {% for reclamation in pagination %}
+                    <tr>
+                        <td>{{ reclamation.objet }}</td>
+                        <td>{{ reclamation.text }}</td>
+                        <td>{{ reclamation.type }}</td>
+                        <td>{{ reclamation.idUtilisateur.nom }} {{ reclamation.idUtilisateur.prenom }}</td>
+                        <td>{{ reclamation.date | date('d-m-Y')}} {{ reclamation.date | date('H:i:s')}}</td>
+                        <td>
+                            <a href="{{ path('repondreReclamation_admin',{'id':reclamation.id}) }}">Répondre</a>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </table>
+
+        {% else %}
+            <br><br>
+            <strong>Il n'y a aucun Feedback non traité</strong>
+            <br><br>
+        {% endif %}
+
+
+
+
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+    </div>
+    </aside>
+    <br>
+{% endblock content%}

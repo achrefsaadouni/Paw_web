@@ -1,19 +1,42 @@
 {% extends "AppBundle::client_layout.html.twig" %}
 
 {% block content %}
-
-
+<br>
+    <br><br>
     <div class="container">
         <!--Content Section Start -->
         <!-- Best Deal Section Start -->
+        <div class="text-center">
+            <h3 class="border-success"><span class="heading_border bg-success" ><i>Consulter toutes les  Annonces Perdus </i></span></h3>
+        </div>
+      <br>
+        <div class="control-bar sandbox-control-bar mt10" >
+            <span class="btn btn-primary mr10 mb10 filter " data-filter="chien"> <a style="color: #0a0a0a" href="{{ path('afficherChien') }}"> Chien </a></span>
+            <span class="btn btn-primary mr10 mb10 filter" data-filter="chat"> <a style="color: #0a0a0a" href="{{ path('afficherChat') }}">Chat </a></span>
+            <span class="btn btn-primary mr10 mb10 filter" data-filter="cheval"><a style="color: #0a0a0a" href="{{ path('afficherCheval') }}">Cheval </a></span>
+            <span class="btn btn-primary mr10 mb10 filter" data-filter="chevre"><a style="color: #0a0a0a" href="{{ path('afficherChevre') }}">chévre </a></span>
+            <span class="btn btn-primary mr10 mb10 filter" data-filter="oiseau"><a style="color: #0a0a0a" href="{{ path('afficherOiseau') }}">Oiseaux </a></span>
+
+        </div>
+
         <div class="row">
 
-            <h3><i>Consulter toutes les  Annonces Perdus </i></h3>
+
 
             <br><br>
-            <input type="text" class="form-control" placeholder="rechercher" id="annoncerecherche" name="annoncerecherche" style="width: 200px">
 
-<br><br><br>
+            <input type="text" class="form-control" placeholder="rechercher par lieux perdue " id="recherche"  name="annoncerecherche" style="width: 200px">
+
+<br><br>
+
+           <div class="searching">
+
+
+
+
+
+
+
             {% for annonce in m %}
                 <div class="col-sm-6 col-md-3">
                     <div class="thumbnail text-center">
@@ -26,6 +49,7 @@
                             <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son type est : {{ annonce.type }}</li>
                             <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Sa race est :{{ annonce.race }}</li>
                             <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Perdu le  : {{ annonce.datePerte|date('Y-m-d') }}</li>
+                            <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Perdu a  : {{ annonce.lieuPerdu }}</li>
                             <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Le nom  du proprietaire est : {{annonce.utilisateur.nom}}</li>
                             <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son addresse : {{ annonce.utilisateur.addresse }}</li>
                             <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son numero :  {{ annonce.utilisateur.numero}}</li>
@@ -47,7 +71,9 @@
 
 
             {% endfor %}
-        </div>
+
+           </div>
+           </div>
     </div>
 
     <div class="navigation text-center">
@@ -60,5 +86,26 @@
 
 
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('#recherche').on('keyup', function () {
+                $search = $(this).val();
+                $.ajax({
+                    url: "{{ path('a_recherche') }}",
+                    data: {'search': $search }
+                }).done(function (response) {
+                    $('.searching').html(response)
+                }).catch(function (err) {
+
+                });
+            });
+        });
+
+
+    </script>
 
 {% endblock content%}

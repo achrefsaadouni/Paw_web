@@ -41,16 +41,18 @@
             </ul>
 
             </p>
-            <h3>Details  Propritaire</h3>
+            <h3>Details  Propriétaire</h3>
             <ul>
 
                 <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Le proprietaire est : {{annonce.utilisateur.nom}}  {{annonce.utilisateur.prenom}}</li>
                 <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son addresse : {{ annonce.utilisateur.addresse }}</li>
                 <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son numero :  {{ annonce.utilisateur.numero}}</li>
                 <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son email :  {{ annonce.utilisateur.email}}</li>
-
             </ul>
+            <a  class="btn btn-primary btn-block text-white" href="{{ path('lister_annonce_perdue' )}}">Retour a la page d'acceuil</a>
+
         </div>
+
         <!-- //Project Description Section End -->
     </div>
     <br><br><br><br><br><br><br><br><br>

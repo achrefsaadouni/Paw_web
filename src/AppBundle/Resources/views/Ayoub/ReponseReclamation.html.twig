@@ -1,0 +1,41 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+    <div class="container">
+    <br>
+
+    <br>
+    <div style="text-align: center">
+        {% if reclamation and reponse %}
+            <div class="text-center">
+                <h3 class="border-primary"><span class="heading_border bg-primary">Réponse à votre feedback</span></h3>
+            </div>
+        <strong> Feedback concernant : </strong> {{ reclamation.objet }}
+        <br>
+        <strong> Votre message complémentaire : </strong>{{ reclamation.text }}
+        <br>
+        <strong> Envoyée le : </strong> {{ reclamation.date | date('d-m-Y')}} <strong> A : </strong> {{ reclamation.date | date('H:i:s')}}
+        <br>
+        <strong> Type Feedback{Reclamation/Remerciment} </strong>{{ reclamation.type }}
+
+        <br>
+        <br>
+
+
+        <strong> Réponse : </strong> {{ reponse.text }}
+        <br>
+        <strong> Envoyée le : </strong> {{ reponse.date | date('d-m-Y')}} <strong> A : </strong> {{ reponse.date | date('H:i:s')}}
+        {% else %}
+            <div class="text-center">
+                <h3 class="border-primary"><span class="heading_border bg-primary">Page invalide</span></h3>
+            </div>
+        {% endif %}
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    </div>
+{% endblock content%}

@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Entity\Annonce;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\VarDumper\VarDumper;
@@ -300,7 +301,7 @@ class AnnonceController extends Controller
             $em->persist($annonce);
             $em->flush();
 
-       //     return $this->redirectToRoute('lister_annonce_trouver');
+            return $this->redirectToRoute('lister_annonce_perdue');
         }
 
 
@@ -472,6 +473,34 @@ class AnnonceController extends Controller
         ));
     }
 
+    /**
+     * @Route("/ListerAnnonceTrouveAdmin" , name="annoncetrouve")
+     */
+    public function ListerAnnonceTrouveAdminAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getManager() ;
+        $user = $this->getUser();
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy(['typeAnnonce'=>'annonce trouve']);
+
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+
+        $paginator= $this->get('knp_paginator') ;
+        $annonce= $paginator->paginate(
+            $annonce,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+
+
+        return $this->render('AppBundle:Admin:annoncetrouve.html.twig', array(
+            'm'=>$annonce,
+            'user'=> $user
+        ));
+    }
 
 
     /**
@@ -493,6 +522,499 @@ class AnnonceController extends Controller
         return $this->redirectToRoute("annonceperdu", array('id'=>$id));
 
     }
+
+
+
+    /**
+     * @Route("/listerAnnoncePerduChien", name="afficherChien")
+     */
+    public function AfficherAnnoncePerduChienAction(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager() ;
+        $user = $this->getUser();
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
+            'typeAnnonce'=>'annonce perdu'
+            ,'type'=>'chien'
+
+        ]);
+
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+
+        $paginator= $this->get('knp_paginator') ;
+        $annonce= $paginator->paginate(
+            $annonce,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+
+
+
+        return $this->render('AppBundle:Annonce:lister_annonce_perdue.html.twig',array(
+
+            'm'=>$annonce,
+            'user' => $user
+        ));
+
+    }
+
+    /**
+     * @Route("/listerAnnoncePerduChat", name="afficherChat")
+     */
+    public function AfficherAnnoncePerduChatAction(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager() ;
+        $user = $this->getUser();
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
+            'typeAnnonce'=>'annonce perdu',
+            'type'=>'chat'
+
+        ]);
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+
+        $paginator= $this->get('knp_paginator') ;
+        $annonce= $paginator->paginate(
+            $annonce,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+
+
+        return $this->render('AppBundle:Annonce:lister_annonce_perdue.html.twig',array(
+
+            'm'=>$annonce,
+            'user' => $user
+        ));
+
+    }
+
+
+    /**
+     * @Route("/listerAnnoncePerduCheval", name="afficherCheval")
+     */
+    public function AfficherAnnoncePerduChevalAction(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager() ;
+        $user = $this->getUser();
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
+            'typeAnnonce'=>'annonce perdu',
+            'type'=>'cheval'
+
+        ]);
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+
+        $paginator= $this->get('knp_paginator') ;
+        $annonce= $paginator->paginate(
+            $annonce,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+
+
+        return $this->render('AppBundle:Annonce:lister_annonce_perdue.html.twig',array(
+
+            'm'=>$annonce,
+            'user' => $user
+        ));
+
+    }
+
+    /**
+     * @Route("/listerAnnoncePerduChevre", name="afficherChevre")
+     */
+    public function AfficherAnnoncePerduChevreAction(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager() ;
+        $user = $this->getUser();
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
+            'typeAnnonce'=>'annonce perdu',
+            'type'=>'chevre'
+
+        ]);
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+
+        $paginator= $this->get('knp_paginator') ;
+        $annonce= $paginator->paginate(
+            $annonce,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+
+
+        return $this->render('AppBundle:Annonce:lister_annonce_perdue.html.twig',array(
+
+            'm'=>$annonce,
+            'user' => $user
+        ));
+
+    }
+
+    /**
+     * @Route("/listerAnnoncePerduOiseau", name="afficherOiseau")
+     */
+    public function AfficherAnnoncePerduOiseauAction(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager() ;
+        $user = $this->getUser();
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
+            'typeAnnonce'=>'annonce perdu',
+            'type'=>'oiseaux'
+
+        ]);
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+
+        $paginator= $this->get('knp_paginator') ;
+        $annonce= $paginator->paginate(
+            $annonce,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+
+
+        return $this->render('AppBundle:Annonce:lister_annonce_perdue.html.twig',array(
+
+            'm'=>$annonce,
+            'user' => $user
+        ));
+
+    }
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+    /**
+     * @Route("/listerAnnonceTrouveChien", name="afficherChien1")
+     */
+    public function AfficherAnnoncePerduChien1Action(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager() ;
+        $user = $this->getUser();
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
+            'typeAnnonce'=>'annonce trouve'
+            ,'type'=>'chien'
+
+        ]);
+
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+
+        $paginator= $this->get('knp_paginator') ;
+        $annonce= $paginator->paginate(
+            $annonce,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+
+
+
+        return $this->render('AppBundle:Annonce:lister_annonce_trouver.html.twig',array(
+
+            'm'=>$annonce,
+            'user' => $user
+        ));
+
+    }
+
+    /**
+     * @Route("/listerAnnoncetrouveChat", name="afficherChat1")
+     */
+    public function AfficherAnnoncePerduChat1Action(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager() ;
+        $user = $this->getUser();
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
+            'typeAnnonce'=>'annonce trouve',
+            'type'=>'chat'
+
+        ]);
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+
+        $paginator= $this->get('knp_paginator') ;
+        $annonce= $paginator->paginate(
+            $annonce,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+
+
+        return $this->render('AppBundle:Annonce:lister_annonce_trouver.html.twig',array(
+
+            'm'=>$annonce,
+            'user' => $user
+        ));
+
+    }
+
+
+    /**
+     * @Route("/listerAnnoncetrouveCheval", name="afficherCheval1")
+     */
+    public function AfficherAnnoncePerduCheval1Action(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager() ;
+        $user = $this->getUser();
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
+            'typeAnnonce'=>'annonce trouve',
+            'type'=>'cheval'
+
+        ]);
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+
+        $paginator= $this->get('knp_paginator') ;
+        $annonce= $paginator->paginate(
+            $annonce,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+
+
+        return $this->render('AppBundle:Annonce:lister_annonce_trouver.html.twig',array(
+
+            'm'=>$annonce,
+            'user' => $user
+        ));
+
+    }
+
+    /**
+     * @Route("/listerAnnoncetrouveChevre", name="afficherChevre1")
+     */
+    public function AfficherAnnoncePerduChevre1Action(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager() ;
+        $user = $this->getUser();
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
+            'typeAnnonce'=>'annonce trouve',
+            'type'=>'chevre'
+
+        ]);
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+
+        $paginator= $this->get('knp_paginator') ;
+        $annonce= $paginator->paginate(
+            $annonce,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+
+
+        return $this->render('AppBundle:Annonce:lister_annonce_trouver.html.twig',array(
+
+            'm'=>$annonce,
+            'user' => $user
+        ));
+
+    }
+
+    /**
+     * @Route("/listerAnnoncetrouveOiseau", name="afficherOiseau1")
+     */
+    public function AfficherAnnoncePerduOiseau1Action(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager() ;
+        $user = $this->getUser();
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
+            'typeAnnonce'=>'annonce trouve',
+            'type'=>'oiseaux'
+
+        ]);
+
+        /**
+         * @var $paginator \Knp\Component\Pager\Paginator
+         */
+
+        $paginator= $this->get('knp_paginator') ;
+        $annonce= $paginator->paginate(
+            $annonce,
+            $request->query->getInt('page',1),
+            $request->query->getInt('limit',4)
+
+        );
+
+
+        return $this->render('AppBundle:Annonce:lister_annonce_trouver.html.twig',array(
+
+            'm'=>$annonce,
+            'user' => $user
+        ));
+
+    }
+
+
+    /**
+     * @Route("/recherche", name="a_recherche")
+     */
+    public function rechercheAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if ($request->isXmlHttpRequest()) {
+            $search = $request->get('search');
+            dump($search);
+            $annonce = new Annonce();
+            $repo= $em->getRepository('AppBundle:Annonce');
+            $annonce = $repo->findAnnonce($search);
+            return $this->render('AppBundle:Annonce:search.html.twig'
+                , array('m' => $annonce));
+        }
+
+
+
+    }
+
+    /**
+     * @Route("/recherche2", name="a_recherche2")
+     */
+    public function recherche2Action(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if ($request->isXmlHttpRequest()) {
+            $search = $request->get('search2');
+            dump($search);
+            $annonce = new Annonce();
+            $repo= $em->getRepository('AppBundle:Annonce');
+            $annonce = $repo->findAnnonce2($search);
+            return $this->render('AppBundle:Annonce:search2.html.twig'
+                , array('m' => $annonce));
+        }
+
+
+
+    }
+
+
+
+
+    /**
+     * @Route("/stat", name="stat")
+     */
+    public  function stataction()
+    {
+        $pieChart=new PieChart();
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $annonceperdu = $em->getRepository('AppBundle:Annonce')->findBy(array('typeAnnonce'=> 'annonce perdu'));
+        $annoncetrouve = $em->getRepository('AppBundle:Annonce')->findBy(array('typeAnnonce'=> 'annonce trouve'));
+        $nbr1 = 1;
+        $nbr2 = 1 ;
+        foreach ($annonceperdu as $annonceperdus)
+        {
+            $nbr1 = $nbr1 + 1 ;
+        }
+        foreach ($annoncetrouve as $annoncetrouves)
+        {
+            $nbr2 = $nbr2+1;
+        }
+
+        $pieChart->getData()->setArrayToDataTable(
+            [['annonce', 'annonce'],
+                ['annonce perdu',     $nbr1],
+                ['annonce trouve',      $nbr2],
+
+            ]
+        );
+
+        $pieChart->getOptions()->setTitle('Pourcentages des Annonces Perdus et Trouvés');
+        $pieChart->getOptions()->setHeight(500);
+        $pieChart->getOptions()->setWidth(900);
+        $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setColor('#009900');
+        $pieChart->getOptions()->getTitleTextStyle()->setItalic(true);
+        $pieChart->getOptions()->getTitleTextStyle()->setFontName('Arial');
+        $pieChart->getOptions()->getTitleTextStyle()->setFontSize(20);
+
+
+
+
+        return $this->render('AppBundle:Admin:stat.html.twig', array(
+            'piechart'=>$pieChart ,
+            'user'=>$user
+        ));
+    }
+
+    /**
+     * @Route("/admin/supprimerAnnonceT" ,name="supprimerAnnonceT_admin")
+     */
+    public function DeleteAction(Request $request)
+    {
+        $id_offre = $request->get("keyword");
+        $em=$this->getDoctrine()->getManager();
+        $offre=$em->getRepository("AppBundle:Annonce")->find($id_offre);
+
+
+        $em->remove($offre);
+        $em->flush();
+        return $this->redirectToRoute('annonce');
+
+    }
+    /**
+     * @Route("/admin/supprimerAnnonceP" ,name="supprimerAnnonceP_admin")
+     */
+    public function Delete1Action(Request $request)
+    {
+        $id_offre = $request->get("keyword");
+        $em=$this->getDoctrine()->getManager();
+        $offre=$em->getRepository("AppBundle:Annonce")->find($id_offre);
+
+
+        $em->remove($offre);
+        $em->flush();
+        return $this->redirectToRoute('annonceperdu');
+
+    }
+
 
 
 

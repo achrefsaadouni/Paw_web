@@ -1,0 +1,82 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+    <br>
+<div class="container">
+    <div class="text-center">
+        <h3 class="border-primary"><span class="heading_border bg-primary">Mes Offres d'adoption</span></h3>
+    </div>
+    <div style="text-align: center">
+
+        <div class="row details">
+            {# table body #}
+            {% for item in pagination %}
+
+
+
+
+                <!-- Slider Section Start -->
+                <div class="col-md-6">
+                    <div id="owl-demo" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+                        <div class="owl-wrapper-outer">
+                            <div class="owl-item" style="width: 600px;">
+                                <div class="item">
+                                    <img src="{{ asset('images/pawAdoption/' ~ item.images )  }}"alt="slider-image" class="img-responsive" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- //Slider Section End -->
+                <!-- Project Description Section Start -->
+                <div class="col-md-6">
+                    <h3 class="project">Description de l'animal</h3>
+                    <ul>
+                        <li><b>Animal:</b>&nbsp;{{ item.type }}</li>
+                        <br>
+                        <li><b>Race :</b>&nbsp;{{ item.race}}</li>
+                        <br>
+                        <li><b>Age:</b>&nbsp;{{ item.age }}</li>
+                        <br>
+                        <li><b>Sexe:</b>&nbsp;{{ item.sex }}</li>
+                        <br>
+                        <li><b>Couleur:</b>&nbsp;{{ item.couleur }}</li>
+                        <br>
+                    </ul>
+
+
+                {% if item.etatadoption == 'Non Disponible' %}
+                    <a href="{{ path('voirAcceptation_membre',{'id':item.id}) }}">Voir à qui vous avez cédé cet animal</a>
+                {% elseif item.reps %}
+                    <a href="{{ path('voirDemandeAdoption_membre',{'id':item.id}) }}">Voir les réponses de cette offre</a>
+                {% else %}
+                    Cette Offre n'a pas encore de réponse
+                {% endif %}
+                </div>
+                <!-- //Project Description Section End -->
+
+
+                <br><br>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+    <br>
+    <br>
+    <br>
+    {# display navigation #}
+
+
+
+    <br>
+    <br>
+    <br>    <br>
+    <br>
+    <br>
+
+
+{% endblock content%}
+
+

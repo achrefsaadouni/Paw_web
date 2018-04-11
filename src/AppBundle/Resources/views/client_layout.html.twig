@@ -115,38 +115,47 @@
 
                     </ul>
                 </li>
-
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Adoption</a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="adoption">Les offres disponibles</a>
+                        <li><a href="{{ path('LesAdoptionsDisponible_membre')}}">Les offres d'adoptions disponibles</a>
                         </li>
-                        <li><a href="adoption">Ajouter une offre</a>
+                        <li><a href="{{ path('AdoptionAjout_membre')}}">Ajouter une offre d'adoption</a>
                         </li>
-                        <li><a href="adoption">Mes offres</a>
+                        <li><a href="{{ path('MesOffresAdoption_membre')}}">Mes offres d'adoption</a>
                         </li>
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Accouplement</a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="accouplement">Les annonces disponibles</a>
+                        <li><a href="{{ path('affiche_membre') }}">Les annonces disponibles</a>
                         </li>
-                        <li><a href="accouplement">Ajouter une annonce</a>
+                        <li><a href="{{ path('ajouter_membre') }}">Ajouter une annonce</a>
                         </li>
-                        <li><a href="accouplement">Mes annonces d'accouplement</a>
+                        <li><a href="{{ path('afficher_mes_annonce_accouplement') }}">Mes annonces d'accouplement</a>
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Sitting&Walking</a>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Services</a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="walking">Walking</a>
+                        <li><a href="{{ path('ajouter_annonce_dressage') }}">Dresser votre animal</a>
                         </li>
-                        <li><a href="sitting">Sitting</a>
+                        <li><a href="{{ path('lister_annonce_dressage') }}">Mes annonces de dressage</a>
+                        </li>
+                        <li><a href="{{ path('ajouter_annonce_garde') }}">Deposez une annonce de Garde </a>
+                        </li>
+                        <li><a href="{{ path('lister_annonce_garde') }}">Mes annonce de garde</a>
                         </li>
                     </ul>
                 </li>
-                <li><a href="veterinaires">Véterinaires</a>
+                <li><a href="{{ path('afficheVet_membre') }}">Véterinaires</a>
                 </li>
-                <li><a href="reclamations">Reclamation</a>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Feedback</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{{ path('reclamationAjout_membre')}}">Envoyer un FeedBack</a>
+                         </li>
+                        <li><a href="{{ path('MesReclamations_membre')}}">Mes Feedback</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Notre Boutique</a>
                     <ul class="dropdown-menu" role="menu">

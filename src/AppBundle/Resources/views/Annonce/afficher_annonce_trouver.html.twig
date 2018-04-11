@@ -18,7 +18,7 @@
             <div class="col-md-5">
 
                     <div id="owl-demo" class="owl-carousel owl-theme">
-                        <img src="{{ asset('images/pawLostFound/' ~ annonce.images)}}" class="img-responsive" alt="image animal" >
+                        <img src="{{ asset('images/pawLostFound/' ~ annonce.images)}}" class="img-responsive" alt="image animal" height="150" width="150" >
 
 
                     </div>
@@ -48,6 +48,7 @@
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son addresse : {{ annonce.utilisateur.addresse }}</li>
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son numero :  {{ annonce.utilisateur.numero}}</li>
                     <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son email :  {{ annonce.utilisateur.email}}</li>
+                    <a  class="btn btn-primary btn-block text-white" href="{{ path('lister_annonce_trouver' )}}">Retour a la page d'acceuil</a>
 
                 </ul>
             </div>

@@ -1,0 +1,44 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <!--Content Section Start -->
+        <!-- Best Deal Section Start -->
+        <div class="row">
+
+            <h3>Consulter vos Annonces de garde</h3>
+            {% for annonce in m %}
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="box">
+                        <div class="box-icon">
+                            <i class="livicon icon" data-name="desktop" data-size="55" data-loop="true" data-c="#01bc8c" data-hc="#01bc8c"></i>
+                        </div>
+                        <div class="info">
+                            <h5 class="success text-primary text-center">Voici quelque informations sur votre annonce</h5>
+                            <ul>
+                                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Type de l'animal : {{ annonce.type }}</li>
+                                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Sa race est :{{ annonce.race }}</li>
+                                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Son age est : {{ annonce.age }}</li>
+                                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Date de garde  : {{ annonce.datesit|date('Y-m-d') }}</li>
+                                <li><i class="livicon" data-name="check" data-size="18" data-loop="true" data-c="#787878" data-hc="787878"></i> Dure de garde  : {{ annonce.duresit }}</li>
+                            </ul>
+                            <a  class="btn btn-primary btn-block text-white" href="{{ path('afficher_annonce_garde',{ "id" : annonce.id} )}}">Consulter</a>
+                        </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+
+
+
+        </div>
+    </div>
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(m) }}
+    </div>
+    <br>
+{% endblock content%}

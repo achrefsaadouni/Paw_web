@@ -1,0 +1,72 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+    <br>
+    <div class="container">
+    <div class="text-center">
+        <h3 class="border-primary"><span class="heading_border bg-primary">L'offre d'adoption en question</span></h3>
+    </div>
+    <br>
+    <div style="text-align: center">
+        <div style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);max-width: 600px;margin: auto;text-align: center; ">
+            <img src="http://localhost/paw_web/web/images/pawAdoption/{{ annonce.images }}" alt="John" style="width:100%">
+            <p style="color: grey;font-size: 16px; margin-left: 430px;font-style: italic" >{{ annonce.date | date('d-m-Y') }} à {{ annonce.date | date('H:i') }}</p>
+            <h1>{{ annonce.type }}</h1>
+            <h4>Race : {{ annonce.race }}</h4>
+            <h4>Age : {{ annonce.age }}</h4>
+            <h4>Sexe : {{ annonce.sex }}</h4>
+            <h4>Couleur : {{ annonce.couleur }}</h4>
+            {% if annonce.typeadoption =='Temporaire' %}
+                <h4>Date début : {{ annonce.debutadoption | date('d-m-Y') }} jusqu'au : {{ annonce.finadoption | date('d-m-Y') }}</h4>
+            {% endif %}
+            <br>
+            <p style="color: grey;font-size: 16px; font-style: italic;text-align: center;" >Plus de détails : {{ annonce.messageComplementaire }}</p>
+
+            <br>
+        </div>
+        <div class="text-center">
+            <h3 class="border-primary"><span class="heading_border bg-primary">Les réponses</span></h3>
+        </div>
+        <div class="row">
+            {# table body #}
+            {% for item in reponses %}
+
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="thumbnail text-center">
+                        <a href="single_product.html"><img src="http://localhost/paw_web/web/images/pawUsers/{{ item.idUtilisateur.avatar }}" class="img-responsive" alt="htc image"></a>
+                        <br>
+                        <h5 class="text-primary">{{ item.date | date('d-m-Y') }} à {{ item.date | date('H:i') }}</h5>
+                        <ul>
+                            <li><b>Username:</b>&nbsp;{{ item.idUtilisateur.username }}</li>
+                            <br>
+                            <li><b>Nom :</b>&nbsp;{{ item.idUtilisateur.nom | upper}}</li>
+                            <br>
+                            <li><b>Prenom:</b>&nbsp;{{ item.idUtilisateur.prenom }}</li>
+                            <br>
+                            <li><b>Adresse:</b>&nbsp;{{ item.idUtilisateur.addresse }}</li>
+                            <br>
+                            <li><b>Numero:</b>&nbsp;{{ item.idUtilisateur.numero }}</li>
+                            <br>
+                            <li><b>Email:</b>&nbsp;{{ item.idUtilisateur.email }}</li>
+                            <br>
+                        </ul>
+                        <a href="{{ path('accepterReponse_membre',{'id':item.id,'ida':annonce.id}) }}"class="btn btn-primary btn-block text-white">Céder l'animal à cet utilisateur</a>
+                    </div>
+                </div>
+
+
+
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <br>
+
+
+
+
+</div>
+
+
+{% endblock content%}

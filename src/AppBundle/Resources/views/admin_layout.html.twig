@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+{% set user = app.user %}
 <head>
     <meta charset="UTF-8">
     <title>Admin Page</title>
@@ -176,9 +176,85 @@
                                     <i class="fa fa-angle-double-right"></i> Annonces Perdus
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ path('annoncetrouve') }}">
+                                    <i class="fa fa-angle-double-right"></i> Annonces Trouveés
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('stat') }}">
+                                    <i class="fa fa-angle-double-right"></i> Nos Statistiques
+                                </a>
+                            </li>
 
                         </ul>
                     </li>
+                    <li>
+                        <a href="#">
+                            <i class="livicon" data-name="doc-portrait" data-c="#5bc0de" data-hc="#5bc0de" data-size="18" data-loop="true"></i>
+                            <span class="title">Gérer les FeedBack</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="{{ path('LesReclamationsTraitees_Admin') }}">
+                                    <i class="fa fa-angle-double-right"></i> Les feedback traitées
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('LesReclamationsNonTraitees_Admin') }}">
+                                    <i class="fa fa-angle-double-right"></i> Les feedback traitées
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('statFeedback_admin') }}">
+                                    <i class="fa fa-angle-double-right"></i> Statistiques
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="livicon" data-name="doc-portrait" data-c="#5bc0de" data-hc="#5bc0de" data-size="18" data-loop="true"></i>
+                            <span class="title">Gérer les adoptions</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a href="{{ path('afficheAdoption_admin') }}">
+                                    <i class="fa fa-angle-double-right"></i> Les adoptions
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('statAdoption_admin') }}">
+                                    <i class="fa fa-angle-double-right"></i> Statistiques
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+
+                    <li>
+                        <a href="{{ path('accouplement_admin') }}">
+                            <i class="livicon" data-name="doc-portrait" data-c="#5bc0de" data-hc="#5bc0de" data-size="18" data-loop="true"></i>
+                            <span class="title">Gérer Accouplement</span>
+                            <span class="fa arrow"></span>
+                        </a>
+
+                    </li>
+
+
+                    <li>
+                        <a href="{{ path('ajouter_admin') }}">
+                            <i class="livicon" data-name="doc-portrait" data-c="#5bc0de" data-hc="#5bc0de" data-size="18" data-loop="true"></i>
+                            <span class="title">Ajouter Veterinaire</span>
+                            <span class="fa arrow"></span>
+                        </a>
+
+                    </li>
+
 
                 </ul>
                 <!-- END SIDEBAR MENU -->

@@ -5,6 +5,9 @@ parameters:
     produit_directory: '%kernel.project_dir%/web/images/pawBoutique'
     annonce_directory: '%kernel.project_dir%/web/images/pawLostFound'
     user_directory: '%kernel.project_dir%/web/images/pawUsers'
+    adoption_directory: '%kernel.project_dir%/web/images/pawAdoption'
+    accouplement_directory: '%kernel.project_dir%/web/images/pawPets'
+    veterinaire_directory: '%kernel.project_dir%/web/images/pawVets'
 services:
     # default configuration for services in *this* file
     _defaults:

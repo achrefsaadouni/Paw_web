@@ -1,0 +1,40 @@
+{% extends "AppBundle::client_layout.html.twig" %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<h3 align="center">La position du vétérinaire {{ v.nom}} {{ v.prenom}}</h3>
+<div id="map"></div>
+<script>
+    function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 9,
+            center: new google.maps.LatLng({{ v.latitude}}, {{ v.longitude }})
+        });
+        var marker = new google.maps.Marker({
+            position: {lat: {{ v.latitude }}, lng: {{ v.longitude }}},
+            map: map,
+            draggable: false
+        });
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArxvIgHziE481rfNg1Se16XnM9XH_G4i8&callback=initMap">
+</script>
+</body>
+</html>
+
+
+    {% endblock content%}

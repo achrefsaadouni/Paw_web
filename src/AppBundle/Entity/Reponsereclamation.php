@@ -22,6 +22,70 @@ class Reponsereclamation
     private $id;
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string $text
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    /**
+     * @return \Reclamation
+     */
+    public function getIdReclamation()
+    {
+        return $this->idReclamation;
+    }
+
+    /**
+     * @param \Reclamation $idReclamation
+     */
+    public function setIdReclamation($idReclamation)
+    {
+        $this->idReclamation = $idReclamation;
+    }
+
+    /**
      * @var string
      *
      * @ORM\Column(name="text", type="text", length=65535, nullable=false)

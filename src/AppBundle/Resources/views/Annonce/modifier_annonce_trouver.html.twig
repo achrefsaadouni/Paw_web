@@ -9,7 +9,7 @@
             <h2>Vous pouvez modifier votre annonce  </h2>
             <form enctype="multipart/form-data" method="post" class="contact">
                <div class="form-group">
-                  <select name="type">
+                  <label><h4>Le type de l'animal : </h4></label>       <select name="type">
                      <option value="chien">chien</option>
                      <option value="chat">chat</option>
                      <option value="cheval">cheval</option>
@@ -23,7 +23,7 @@
                   <input type="text" class="form-control input-lg" value="{{ m.couleur }}" name="couleur" placeholder="couleur">
                </div>
                <div class="form-group">
-                  <select name="colier">
+                  <label><h4>Porte t'il un colier : </h4></label>       <select name="colier">
                      <option {% if (m.colier=='oui') %} selected {% endif %} value="oui">oui</option>
                      <option {% if (m.colier=='non') %} selected {% endif %}  value="non">non</option>
                   </select>
@@ -40,7 +40,7 @@
                   <!--  <input type="text" class="form-control input-lg" name="sexe" placeholder="sexe"> -->
                </div>
                <div class="form-group">
-                  <input type="date" class="form-control input-lg" value="{{ (m.dateTrouvee).format("Y-m-d") }}" name="date" placeholder="date trouver">
+                  <label><h4>Trouvé le  : </h4></label>   <input type="date" class="form-control input-lg" value="{{ (m.dateTrouvee).format("Y-m-d") }}" name="date" placeholder="date trouver">
                </div>
                <div class="form-group">
                   <input type="text" class="form-control input-lg" value="{{ m.lieuTrouve }}" name="lieu" placeholder="lieu trouver">

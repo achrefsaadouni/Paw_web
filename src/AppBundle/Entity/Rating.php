@@ -22,6 +22,70 @@ class Rating
     private $id;
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getValeur()
+    {
+        return $this->valeur;
+    }
+
+    /**
+     * @param int $valeur
+     */
+    public function setValeur($valeur)
+    {
+        $this->valeur = $valeur;
+    }
+
+    /**
+     * @return \Utilisateur
+     */
+    public function getIdUtilisateur()
+    {
+        return $this->idUtilisateur;
+    }
+
+    /**
+     * @param \Utilisateur $idUtilisateur
+     */
+    public function setIdUtilisateur($idUtilisateur)
+    {
+        $this->idUtilisateur = $idUtilisateur;
+    }
+
+    /**
+     * @return \Veterinaire
+     */
+    public function getIdVeterinaire()
+    {
+        return $this->idVeterinaire;
+    }
+
+    /**
+     * @param \Veterinaire $idVeterinaire
+     */
+    public function setIdVeterinaire($idVeterinaire)
+    {
+        $this->idVeterinaire = $idVeterinaire;
+    }
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="valeur", type="integer", nullable=false)
