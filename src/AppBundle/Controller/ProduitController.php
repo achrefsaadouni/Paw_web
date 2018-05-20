@@ -7,8 +7,11 @@ use AppBundle\Form\ProduitType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class ProduitController extends Controller
 {
@@ -255,4 +258,30 @@ class ProduitController extends Controller
         return $this->renderBoutique([ "articles" => $result]);
 
     }
+
+
+    /**
+     * @param $type
+     * @param Request $request
+     * @return JsonResponse ;
+     * @Route("/mobile/boutique/type={type}",name="boutique_membre_mobile")
+     */
+    public function boutiqueMobileAction($type,Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $articles = $em->getRepository("AppBundle:Produit")->findBy(array('type' => $type));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $data=$serializer->normalize($articles);
+        return new JsonResponse($data);
+
+    }
+
+
+
+
+
+
+
+
+
 }

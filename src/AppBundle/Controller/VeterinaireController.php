@@ -2,11 +2,17 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Ratevet;
+use AppBundle\Entity\Rating;
 use AppBundle\Entity\Veterinaire;
 use AppBundle\Form\VeterinaireType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class VeterinaireController extends Controller
 {
@@ -93,5 +99,97 @@ class VeterinaireController extends Controller
                 'v'=>$vet
             ));
     }
+
+    /**
+     *@Route("/listerVeterinaire",name="vet_api")
+     */
+    public function AfficheVetAction()
+    {
+
+        $em=$this->getDoctrine()->getManager()->getRepository("AppBundle:Veterinaire")->findAll() ;
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted=$serializer->normalize($em);
+        return new JsonResponse($formatted);
+    }
+
+    /**
+     *@Route("/rate",name="rate_api")
+     */
+    public function RateAction(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager();
+
+        $rat= new Rating();
+        $em=$this->getDoctrine()->getManager();
+
+
+        $vet=$em->getRepository("AppBundle:Veterinaire")->find($request->get('id_veterinaire'));
+        $user=$em->getRepository("AppBundle:Utilisateur")->find($request->get('id_utilisateur'));
+        $rate=$em->getRepository("AppBundle:Rating")->findOneBy((array('idUtilisateur' => $user,'idVeterinaire' => $vet)));
+        if($rate)
+        {
+            $rate->setValeur($request->get('valeur'));
+
+        }
+        else{
+            $rat->setIdUtilisateur($user);
+            $rat->setIdVeterinaire($vet);
+            $rat->setValeur($request->get('valeur'));
+            $em->persist($rat);
+        }
+
+
+
+        $em->flush();
+
+        //$serializer= new Serializer([new ObjectNormalizer()]);
+        //$formatted=$serializer->normalize($rat);
+        return new Response("Done");
+        //return new JsonResponse($formatted);
+    }
+
+    /**
+     * @Route("/vote" ,name="vote_api")
+     */
+    public function VoteAction()
+    {
+        $retour = array();
+        $em = $this->getDoctrine()->getManager();
+
+        $vet=$em->getRepository("AppBundle:Rating")->findAll();
+        $r = $em->getRepository("AppBundle:Veterinaire")->findAll();
+        foreach ($r as $a)
+        {
+            $mahdi = new Ratevet();
+            $mahdi->setIdVet($a->getId());
+            $mahdi->setRate(0);
+            $mahdi->setNbr(0);
+           foreach ($vet as $p)
+           {
+               if ($p->getIdVeterinaire()==$a)
+               {
+
+                   $mahdi->setNbr($mahdi->getNbr()+1);
+                   $mahdi->setRate(($mahdi->getRate()+$p->getValeur())/$mahdi->getNbr());
+               }
+
+
+
+           }
+
+            array_push($retour, $mahdi);
+        }
+
+
+
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted=$serializer->normalize($retour);
+
+        return new JsonResponse($formatted);
+
+    }
+
+
 
 }

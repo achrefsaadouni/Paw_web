@@ -4,8 +4,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Annonce;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -173,4 +176,65 @@ class DressageController extends Controller
         return $this->redirectToRoute("lister_annonce_dressage", array('id'=>$id));
 
     }
+
+
+
+    /**
+     * @Route("/AjouterAnnonceDressage2",name="ajouter_annonce_dressage2")
+     */
+    public function AjouterAnnonceDressage2Action(Request $request)
+    {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $annonce = new Annonce();
+            $annonce->setAge($request->get('age'));
+            $annonce->setType($request->get('type'));
+            $annonce->setSex($request->get('sexe'));
+            $annonce->setRace($request->get('race'));
+            $annonce->setCouleur($request->get('couleur'));
+
+           // $annonce->setDatetr(new \DateTime($request->get('date')));
+
+            $annonce->setTypetr($request->get('typeTr'));
+
+            // $annonce->setDate($date->format("Y-m-d"));
+
+            $annonce->setMessageComplementaire($request->get('message'));
+            $annonce->setTypeAnnonce("Annonce Training");
+          //     exit(VarDumper::dump($annonce));
+            $em->persist($annonce);
+            $em->flush();
+            $serializer= new Serializer([new ObjectNormalizer()]);
+            $data =$serializer->normalize($annonce);
+            return new JsonResponse($data);
+    }
+
+    /**
+     * @Route("/getListDressage" ,name="/get_List_Dressage")
+     */
+    public function GetAllAction()
+    {
+        $em=$this->getDoctrine()->getManager()->getRepository("AppBundle:Annonce")->findBy(['typeAnnonce'=>'Annonce Training']);
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize($em);
+        return new JsonResponse($data) ;
+
+
+    }
+
+
+    /**
+     * @Route("/AfficherAnnonceDressage2/{id}", name="afficher_annonce_dressage2")
+     */
+    public function AfficherAnnonceDressageAction2($id)
+    {
+
+        $em=$this->getDoctrine()->getManager()->getRepository("AppBundle:Annonce")->findBy(['id'=>$id]);
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize($em);
+        return new JsonResponse($data) ;
+
+    }
+
 }

@@ -3,8 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Annonce;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -46,7 +49,6 @@ class GardeController extends Controller
                 $this->getParameter('annonce_directory'),
                 $fileName
             );
-
             $annonce->setImages($fileName);
 
             $em->persist($annonce);
@@ -166,4 +168,66 @@ class GardeController extends Controller
         return $this->redirectToRoute("lister_annonce_garde", array('id'=>$id));
 
     }
+
+    /**
+     * @Route("/AjouterAnnonceGarde2",name="ajouter_annonce_garde2")
+     */
+    public function AjouterAnnonceGarde2Action(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $annonce = new Annonce();
+        $annonce->setAge($request->get('age'));
+        $annonce->setType($request->get('type'));
+        $annonce->setSex($request->get('sexe'));
+        $annonce->setRace($request->get('race'));
+        $annonce->setCouleur($request->get('couleur'));
+        $utilisateur= $em->getRepository("AppBundle:Utilisateur")->find($request->get("user"));
+        $annonce->setUtilisateur($utilisateur);
+        // $annonce->setDatesit(new \DateTime($request->get('date')));
+
+        $annonce->setDuresit($request->get('dureSit'));
+        $annonce->setTodolist($request->get('todolist'));
+
+        // $annonce->setDate($date->format("Y-m-d"));
+
+        $annonce->setMessageComplementaire($request->get('message'));
+        $annonce->setTypeAnnonce("Annonce Sitting");
+
+        //     exit(VarDumper::dump($annonce));
+        $em->persist($annonce);
+        $em->flush();
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data =$serializer->normalize($annonce) ;
+        return new JsonResponse($data) ;
+    }
+
+    /**
+     * @Route("/getListGarde" ,name="/get_List_Garde")
+     */
+    public function GetAllAction()
+    {
+        $em=$this->getDoctrine()->getManager()->getRepository("AppBundle:Annonce")->findBy(['typeAnnonce'=>'Annonce Sitting']);
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize($em);
+        return new JsonResponse($data) ;
+
+
+    }
+
+
+    /**
+     * @Route("/AfficherAnnonceGarde2/{id}", name="afficher_annonce_Garde2")
+     */
+    public function AfficherAnnonceGardeAction2($id)
+    {
+
+        $em=$this->getDoctrine()->getManager()->getRepository("AppBundle:Annonce")->findBy(['id'=>$id]);
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize($em);
+        return new JsonResponse($data) ;
+
+    }
+
 }

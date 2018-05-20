@@ -1,5 +1,4 @@
 {% trans_default_domain 'FOSUserBundle' %}
-{% set user = app.user %}
 <!DOCTYPE html>
 <html>
 
@@ -110,8 +109,7 @@
                         </li>
                         <li><a href="{{ path('ajouter_annonce_trouver')}}">Ajouter une annonce Trouveé</a>
                         </li>
-                        <li><a href="{{ path('afficher_mes_annonce')}}">Mes annonces </a>
-                        </li>
+
 
                     </ul>
                 </li>
@@ -131,7 +129,7 @@
                         </li>
                         <li><a href="{{ path('ajouter_membre') }}">Ajouter une annonce</a>
                         </li>
-                        <li><a href="{{ path('afficher_mes_annonce_accouplement') }}">Mes annonces d'accouplement</a>
+                        <li><a href="{{ path('afficher_accouplement') }}">Mes annonces d'accouplement</a>
                         </li>
                     </ul>
                 </li>

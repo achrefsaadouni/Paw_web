@@ -5,8 +5,11 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Annonce;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\PieChart;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\VarDumper\VarDumper;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -40,7 +43,7 @@ class AnnonceController extends Controller
 
             $annonce->setUtilisateur($this->get('security.token_storage')->getToken()->getUser());
 
-            $annonce->setTypeAnnonce("annonce trouve");
+            $annonce->setTypeAnnonce("annonce_trouve");
 
 
 
@@ -94,7 +97,7 @@ class AnnonceController extends Controller
 
         $em=$this->getDoctrine()->getManager() ;
         $user = $this->getUser();
-        $annonce=$em->getRepository("AppBundle:Annonce")->findBy(['typeAnnonce'=>'annonce trouve']);
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy(['typeAnnonce'=>'annonce_trouve']);
 
 
         /**
@@ -105,7 +108,7 @@ class AnnonceController extends Controller
         $annonce= $paginator->paginate(
             $annonce,
             $request->query->getInt('page',1),
-            $request->query->getInt('limit',8)
+            $request->query->getInt('limit',4)
 
         );
 
@@ -121,7 +124,7 @@ class AnnonceController extends Controller
 
 
     /**
-     * @Route("/listerMesAnnonce", name="afficher_mes_annonce")
+     * @Route("/client/listerTousMesAnnonce", name="show_annonce")
      */
     public function AfficherMesAnnonceTrouverAction(Request $request)
     {
@@ -132,7 +135,7 @@ class AnnonceController extends Controller
             ->findBy(
                 [
                     'utilisateur'=>$this->get('security.token_storage')->getToken()->getUser(),
-                    'typeAnnonce'=>'annonce trouve'
+                    'typeAnnonce'=>'annonce_trouve'
                 ]
 
 
@@ -157,7 +160,7 @@ class AnnonceController extends Controller
         $annoncetrouve = $paginator->paginate(
             $annoncetrouve,
             $request->query->getInt('page', 1),
-            $request->query->getInt('limit', 8)
+            $request->query->getInt('limit', 4)
 
         );
         /**
@@ -480,7 +483,7 @@ class AnnonceController extends Controller
     {
         $em=$this->getDoctrine()->getManager() ;
         $user = $this->getUser();
-        $annonce=$em->getRepository("AppBundle:Annonce")->findBy(['typeAnnonce'=>'annonce trouve']);
+        $annonce=$em->getRepository("AppBundle:Annonce")->findBy(['typeAnnonce'=>'annonce_trouve']);
 
 
         /**
@@ -722,7 +725,7 @@ class AnnonceController extends Controller
         $em=$this->getDoctrine()->getManager() ;
         $user = $this->getUser();
         $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
-            'typeAnnonce'=>'annonce trouve'
+            'typeAnnonce'=>'annonce_trouve'
             ,'type'=>'chien'
 
         ]);
@@ -759,7 +762,7 @@ class AnnonceController extends Controller
         $em=$this->getDoctrine()->getManager() ;
         $user = $this->getUser();
         $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
-            'typeAnnonce'=>'annonce trouve',
+            'typeAnnonce'=>'annonce_trouve',
             'type'=>'chat'
 
         ]);
@@ -795,7 +798,7 @@ class AnnonceController extends Controller
         $em=$this->getDoctrine()->getManager() ;
         $user = $this->getUser();
         $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
-            'typeAnnonce'=>'annonce trouve',
+            'typeAnnonce'=>'annonce_trouve',
             'type'=>'cheval'
 
         ]);
@@ -830,7 +833,7 @@ class AnnonceController extends Controller
         $em=$this->getDoctrine()->getManager() ;
         $user = $this->getUser();
         $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
-            'typeAnnonce'=>'annonce trouve',
+            'typeAnnonce'=>'annonce_trouve',
             'type'=>'chevre'
 
         ]);
@@ -865,7 +868,7 @@ class AnnonceController extends Controller
         $em=$this->getDoctrine()->getManager() ;
         $user = $this->getUser();
         $annonce=$em->getRepository("AppBundle:Annonce")->findBy([
-            'typeAnnonce'=>'annonce trouve',
+            'typeAnnonce'=>'annonce_trouve',
             'type'=>'oiseaux'
 
         ]);
@@ -946,7 +949,7 @@ class AnnonceController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $annonceperdu = $em->getRepository('AppBundle:Annonce')->findBy(array('typeAnnonce'=> 'annonce perdu'));
-        $annoncetrouve = $em->getRepository('AppBundle:Annonce')->findBy(array('typeAnnonce'=> 'annonce trouve'));
+        $annoncetrouve = $em->getRepository('AppBundle:Annonce')->findBy(array('typeAnnonce'=> 'annonce_trouve'));
         $nbr1 = 1;
         $nbr2 = 1 ;
         foreach ($annonceperdu as $annonceperdus)
@@ -961,7 +964,7 @@ class AnnonceController extends Controller
         $pieChart->getData()->setArrayToDataTable(
             [['annonce', 'annonce'],
                 ['annonce perdu',     $nbr1],
-                ['annonce trouve',      $nbr2],
+                ['annonce_trouve',      $nbr2],
 
             ]
         );
@@ -1016,8 +1019,327 @@ class AnnonceController extends Controller
     }
 
 
+    //                                   mobile //////////////////////
+
+    /**
+     * @Route("/getAllAnnTR" ,name="getAll1")
+     */
+    public function GetAllAction()
+    {
+        $em=$this->getDoctrine()->getManager()->getRepository("AppBundle:Annonce")->findBy(['typeAnnonce'=>'annonce_trouve']);;
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize($em);
+        return new JsonResponse($data) ;
 
 
+    }
+
+
+
+
+    /**
+     * @Route("/AddAnnonceTrouver/new",name="add_annonce_trouver")
+     */
+    public function AjouterAnnonceTrouver2Action(Request $request)
+    {
+
+      //  if ($request->isMethod('post')) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $annonce = new Annonce();
+            $annonce->setAge($request->get('age'));
+            $annonce->setType($request->get('type'));
+            $annonce->setSex($request->get('sexe'));
+            $annonce->setRace($request->get('race'));
+
+            $annonce->setCouleur($request->get('couleur'));
+            $annonce->setColier($request->get('colier'));
+          //  $annonce->setDateTrouvee(new \DateTime($request->get('date'))) ;
+
+            $annonce->setLieuTrouve($request->get('lieu'));
+            $annonce->setMessageComplementaire($request->get('message'));
+
+            // $annonce->setDate($date->format("Y-m-d"));
+        $utilisateur = $em->getRepository("AppBundle:Utilisateur")->find($request->get("user"));
+           $annonce->setUtilisateur($utilisateur);
+
+            $annonce->setTypeAnnonce("annonce_trouve");
+             $annonce->setImages($request->get('image'));
+              $em->persist($annonce);
+            $em->flush();
+            $serializer= new Serializer([new ObjectNormalizer()]) ;
+            $data = $serializer->normalize( $annonce);
+            return new JsonResponse($data) ;
+
+
+
+
+    }
+
+
+
+
+    /**
+     * @Route("/modifierAnnonceTrouver3", name="modifier_annonce_trouver_3")
+     */
+    public function modifier3Action(Request $request)
+    {
+      //  $user = $this->getUser();
+        $em=$this->getDoctrine()->getManager();
+        $id = $request->get('id');
+        $annonce = $em->getRepository('AppBundle:Annonce')->find($id);
+
+
+
+
+
+            //$annonce->setImages($fileName);
+
+
+          //  $annonce->setAge($request->get('age'));
+      //      $annonce->setType($request->get('type'));
+              $annonce->setSex($request->get('sexe'));
+              $annonce->setRace($request->get('race'));
+           $annonce->setCouleur($request->get('couleur'));
+
+           // $annonce->setDateTrouvee(new \DateTime($request->get('date'))) ;
+            $annonce->setLieuTrouve($request->get('lieu'));
+            $annonce->setMessageComplementaire($request->get('message'));
+            $em->persist($annonce);
+            $em->flush();
+            $serializer= new Serializer([new ObjectNormalizer()]) ;
+            $data = $serializer->normalize( $annonce);
+            return new JsonResponse($data) ;
+
+
+
+
+        }
+
+
+    /**
+     * @Route("/listerAnnoncePerdu1/{id}", name="afficher_annonce_perdu_1")
+     */
+    public function AfficherAnnoncePerdu1Action($id)
+    {
+
+        $em=$this->getDoctrine()->getManager()->getRepository("AppBundle:Annonce")->findBy(['id'=>$id]);
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize($em);
+        return new JsonResponse($data) ;
+
+
+
+    }
+
+
+
+
+ /**
+  * @Route("/listerMesAnnonce1", name="afficher_mes_annonce_1")
+  */
+    public function AfficherMesAnnonceTrouver1Action(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager()->getRepository("AppBundle:Annonce")
+            ->findBy(
+                [
+                    'utilisateur'=>$this->get('security.token_storage')->getToken()->getUser(),
+                    'typeAnnonce'=>'annonce_trouve'
+                ]
+
+
+            );
+
+
+
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize($em);
+        return new JsonResponse($data) ;
+
+
+
+
+    }
+
+
+
+    /**
+     * @Route("/supprimerAnnonceTrouver_1", name="supprimer_annonce_trouver_1")
+     */
+    public function supprimer9Action(Request $request)
+    {
+        $id = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $annonce = new Annonce();
+        $annonce = $em->getRepository('AppBundle:Annonce')->find($id);
+         $em->remove($annonce);
+         $em->flush();
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize( $annonce);
+        return new JsonResponse($data) ;
+
+
+
+
+    }
+
+// Annonce Perdu Mobile ////
+
+
+
+
+    /**
+     * @Route("/getAllAnnPR" ,name="getAll56")
+     */
+    public function GetAll56Action()
+    {
+        $em=$this->getDoctrine()->getManager()->getRepository("AppBundle:Annonce")->findBy(['typeAnnonce'=>'annonce perdu']);;
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize($em);
+        return new JsonResponse($data) ;
+
+
+    }
+
+
+
+
+    /**
+     * @Route("/AddAnnoncePR/new",name="add_annonce_perdu")
+     */
+    public function AjouterAnnoncePerdu56Action(Request $request)
+    {
+
+        //  if ($request->isMethod('post')) {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $annonce = new Annonce();
+        $annonce->setAge($request->get('age'));
+        $annonce->setType($request->get('type'));
+        $annonce->setSex($request->get('sexe'));
+        $annonce->setRace($request->get('race'));
+
+        $annonce->setCouleur($request->get('couleur'));
+        $annonce->setColier($request->get('colier'));
+        //  $annonce->setDateTrouvee(new \DateTime($request->get('date'))) ;
+
+        $annonce->setLieuPerdu($request->get('lieu'));
+        $annonce->setMessageComplementaire($request->get('message'));
+
+        // $annonce->setDate($date->format("Y-m-d"));
+        $utilisateur = $em->getRepository("AppBundle:Utilisateur")->find($request->get("user"));
+        $annonce->setUtilisateur($utilisateur);
+
+        $annonce->setTypeAnnonce("annonce perdu");
+        $annonce->setImages($request->get('image'));
+        $em->persist($annonce);
+        $em->flush();
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize( $annonce);
+        return new JsonResponse($data) ;
+
+
+
+
+    }
+
+
+
+
+    /**
+     * @Route("/modifierAnnoncePerdu56", name="modifier_annonce_Perdu_56")
+     */
+    public function modifier56Action(Request $request)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $id = $request->get('id');
+        $annonce = $em->getRepository('AppBundle:Annonce')->find($id);
+        $annonce->setSex($request->get('sexe'));
+        $annonce->setRace($request->get('race'));
+        $annonce->setCouleur($request->get('couleur'));
+         $annonce->setLieuPerdu($request->get('lieu'));
+        $annonce->setMessageComplementaire($request->get('message'));
+        $em->persist($annonce);
+        $em->flush();
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize( $annonce);
+        return new JsonResponse($data) ;
+
+
+
+
+    }
+
+
+    /**
+     * @Route("/listerAnnoncePerdu56/{id}", name="afficher_annonce_perdu_56")
+     */
+    public function AfficherAnnoncePerdu56Action($id)
+    {
+
+        $em=$this->getDoctrine()->getManager()->getRepository("AppBundle:Annonce")->findBy(['id'=>$id]);
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize($em);
+        return new JsonResponse($data) ;
+
+
+
+    }
+
+
+
+
+    /**
+     * @Route("/listerMesAnnonce56", name="afficher_mes_annonce_56")
+     */
+    public function AfficherMesAnnonceTrouver56Action(Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager()->getRepository("AppBundle:Annonce")
+            ->findBy(
+                [
+                    'utilisateur'=>$this->get('security.token_storage')->getToken()->getUser(),
+                    'typeAnnonce'=>'annonce_trouve'
+                ]
+
+
+            );
+
+
+
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize($em);
+        return new JsonResponse($data) ;
+
+
+
+
+    }
+
+
+
+    /**
+     * @Route("/supprimerAnnoncePerdu_56", name="supprimer_annonce_trouver_56")
+     */
+    public function supprimer56Action(Request $request)
+    {
+        $id = $request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $annonce = new Annonce();
+        $annonce = $em->getRepository('AppBundle:Annonce')->find($id);
+        $em->remove($annonce);
+        $em->flush();
+        $serializer= new Serializer([new ObjectNormalizer()]) ;
+        $data = $serializer->normalize( $annonce);
+        return new JsonResponse($data) ;
+
+
+
+
+    }
 
 
 

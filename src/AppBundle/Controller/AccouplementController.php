@@ -13,10 +13,13 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class AccouplementController extends Controller
 {
@@ -189,7 +192,7 @@ class AccouplementController extends Controller
 
     ///////////////////////////////////
     /**
-     * @Route("/listerMesAnnonce", name="afficher_mes_annonce_accouplement")
+     * @Route("/listerMesAnnonce", name="afficher_accouplement")
      */
     public function AfficherMesAnnonceAccouploumentAction(Request $request)
     {
@@ -279,6 +282,48 @@ class AccouplementController extends Controller
         //return $this->redirectToRoute('annonce');
 
         }
+
+    /**
+     *@Route("/listerMesAnnonce2",name="affiche_api")
+     */
+    public function AfficheApiAction()
+    {
+
+        $em=$this->getDoctrine()->getManager()->getRepository("AppBundle:Annonce")->findBytypeAnnonce("annonce_accouplement") ;
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted=$serializer->normalize($em);
+        return new JsonResponse($formatted);
+    }
+
+    /**
+     *@Route("/ajouterApi",name="ajout_api")
+     */
+    public function AjoutApiAction(Request $request)
+    {
+
+        $em=$this->getDoctrine()->getManager();
+        $acc= new Annonce();
+        $acc->setType($request->get('type'));
+        $acc->setAge($request->get('age'));
+        $acc->setSex($request->get('sex'));
+        $acc->setCouleur($request->get('couleur'));
+        $acc->setMessageComplementaire($request->get('messageComplementaire'));
+        $acc->setRace($request->get('race'));
+        $acc->setTypePoil($request->get('typePoil'));
+        $acc->setLieuTrouve($request->get('lieu_trouve'));
+        $acc->setVaccin($request->get('vaccin'));
+        $acc->setDossier($request->get('dossier'));
+        $acc->setTypeAnnonce('annonce_accouplement');
+        $acc->setImages($request->get('images'));
+        $em->persist($acc);
+        $em->flush();
+
+        $serializer= new Serializer([new ObjectNormalizer()]);
+        $formatted=$serializer->normalize($acc);
+        return new JsonResponse($formatted);
+    }
+
+
     }
 
 

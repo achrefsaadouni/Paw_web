@@ -1,7 +1,9 @@
 # app/config/security.yml
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: sha512
+        FOS\UserBundle\Model\UserInterface:
+            id: sdz_user.custom_encoder
+        FOS\UserBundle\Model\UserInterface: md5
 
     role_hierarchy:
         ROLE_USER:       ROLE_USER

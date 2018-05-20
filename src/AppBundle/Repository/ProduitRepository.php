@@ -13,7 +13,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
 
-
     public function findAllDispo($keyword)
     {
         $querybuilder = $this->createQueryBuilder("p");

@@ -9,6 +9,8 @@ parameters:
     accouplement_directory: '%kernel.project_dir%/web/images/pawPets'
     veterinaire_directory: '%kernel.project_dir%/web/images/pawVets'
 services:
+    sdz_user.custom_encoder:
+        class: 'AppBundle\Security\Encoder\CustomEncoder'
     # default configuration for services in *this* file
     _defaults:
         # automatically injects dependencies in your services

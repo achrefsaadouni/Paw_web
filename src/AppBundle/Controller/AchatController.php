@@ -7,8 +7,11 @@ use AppBundle\Entity\Panier;
 use JMS\Payment\CoreBundle\Form\ChoosePaymentMethodType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class AchatController extends Controller
 {
@@ -396,5 +399,114 @@ class AchatController extends Controller
     {
        return  $this->render("@App/Membre/fail.html.twig");
     }
+
+
+
+
+
+
+    /**
+     * @return Response ;
+     * @Route("/mobile/code" ,name="mobile_code")
+     */
+    public function GenerateCodeAction()
+    {
+        $code =$this->generateUniqueFileName();
+        return new Response($code);
+    }
+
+
+
+
+    /**
+     * @return Response ;
+     * @Route("/mobile/mail" ,name="mobile_mail")
+     */
+
+    public function sendmailMobile(Request $request)
+    {
+
+        $mailer = $this->container->get('mailer');
+        $transporter = \Swift_SmtpTransport::newInstance ('smtp.gmail.com',465,'ssl')
+            ->setUsername('pawzcorporation@gmail.com')
+            ->setPassword('pawz0000');
+        $mailer = \Swift_Mailer::newInstance($transporter);
+        $message = \Swift_Message::newInstance('Verification')
+            ->setSubject('Confirmation Du Paiement')
+            ->setFrom('pawzcorporation@gmail.com')
+            ->setTo($request->get("recepteur"))
+            ->setBody("Pour Confimer votre Commande veuillez Utiliser ce code : " .$request->get("code") . "\n NB: ce Code est a usage unique");
+        $mailer->send($message);
+
+        return new Response("done");
+    }
+
+
+
+    /**
+     * @return Response ;
+     * @Route("/mobile/payer" ,name="mobile_payer")
+     */
+
+    public function validerPanier(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $panier =  new Panier();
+        $user = $em->getRepository("AppBundle:Utilisateur")->find($request->get('user'));
+        $id = explode(",",$request->get("id"));
+        $nbr = explode(",",$request->get("nbr"));
+        for ($i=0;$i<count($id);$i++)
+        {
+            $article = $em->getRepository("AppBundle:Produit")->find($id[$i]);
+            for($j=0;$j<$nbr[$i];$j++)
+            {
+                $panier->addItem($article);
+            }
+
+        }
+        if($panier->getTotal()<30)
+        {
+            $panier->setTotal($panier->getTotal()+5);
+        }
+        $panier->payer($request->get("status"),$user,$em);
+        return new Response("done");
+    }
+
+
+
+    /**
+     * @param $user
+     * @param Request $request
+     * @return JsonResponse ;
+     * @Route("/mobile/consultermesAchat")
+     */
+    public function MesAchatAction(Request $request)
+    {
+        $em=$this->getDoctrine()->getManager();
+        $achats=$em->getRepository("AppBundle:Achat")->findBy(array('idClient' => $request->get("user")));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $data=$serializer->normalize($achats);
+        return new JsonResponse($data);
+    }
+
+
+
+    /**
+     * @param Request $request
+     * @return JsonResponse ;
+     * @Route("/mobile/consulterAchat")
+     */
+    public function ConsulterMobileAction(Request $request)
+    {
+        $user = $this->getUser();
+        $em=$this->getDoctrine()->getManager();
+        $ligneAchats=$em->getRepository("AppBundle:Ligneachat")->findBy(array('idAchat' =>$request->get("id")));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $data=$serializer->normalize($ligneAchats);
+        return new JsonResponse($data);
+
+    }
+
+
 
 }
