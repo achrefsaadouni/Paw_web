@@ -126,7 +126,7 @@ class AccouplementController extends Controller
         {
             $em->persist($annonce);
             $em->flush();
-            return $this->redirectToRoute('afficher_mes_annonce',array('id'=>$id));
+            return $this->redirectToRoute('afficher_accouplement',array('id'=>$id));
         }
 
 
