@@ -33,7 +33,7 @@ class DressageController extends Controller
 
             $annonce->setCouleur($request->get('couleur'));
 
-            $annonce->setDatetr(new \DateTime($request->get('date')));
+            $annonce->setDatetr(new \DateTime($request->get('dateTr')));
             $annonce->setTypetr($request->get('typeTr'));
 
             $annonce->setMessageComplementaire($request->get('message'));
@@ -48,7 +48,7 @@ class DressageController extends Controller
             $file = $request->files->get('image');
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move(
-                $this->getParameter('annonce_directory'),
+                $this->getParameter('annonce1_directory'),
                 $fileName
             );
 
@@ -135,8 +135,19 @@ class DressageController extends Controller
         $annonce = $em->getRepository('AppBundle:Annonce')->find($id);
         $dir=$_SERVER['DOCUMENT_ROOT'];
 
-        if($request->isMethod('post')){
 
+
+        if($request->isMethod('post')){
+            $image = $annonce->getImages();
+            unlink($dir."/Paw_WEB/web/images/pawDressage/".$image);
+            $file = $request->files->get('image');
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move(
+                $this->getParameter('annonce1_directory'),
+                $fileName
+            );
+
+            $annonce->setImages($fileName);
             $annonce->setAge($request->get('age'));
             $annonce->setType($request->get('type'));
             $annonce->setSex($request->get('sexe'));
@@ -145,11 +156,13 @@ class DressageController extends Controller
             $annonce->setDatetr(new \DateTime($request->get('dateTr'))) ;
             $annonce->setTypetr($request->get('typeTr'));
             $annonce->setMessageComplementaire($request->get('message'));
+
             $em->persist($annonce);
             $em->flush();
             return $this->redirectToRoute("lister_annonce_dressage", array('id'=>$id));
-
         }
+
+
 
 
         return $this->render('AppBundle:Services:modifier_annonce_dressage.html.twig',
@@ -157,9 +170,12 @@ class DressageController extends Controller
         );
     }
 
+
+
     /**
      * @Route("/SupprimerAnnonceDressage/{id}", name="supprimer_annonce_dressage")
      */
+
     public function supprimerAction( $id)
     {
 
@@ -169,7 +185,7 @@ class DressageController extends Controller
 
 
         $image = $annonce->getImages();
-        unlink($this->getParameter('annonce_directory') . '/' . $image);
+        unlink($this->getParameter('annonce1_directory') . '/' . $image);
 
         $em->remove($annonce);
         $em->flush();

@@ -46,7 +46,7 @@ class GardeController extends Controller
             $file = $request->files->get('image');
             $fileName = md5(uniqid()) . '.' . $file->guessExtension();
             $file->move(
-                $this->getParameter('annonce_directory'),
+                $this->getParameter('annonce1_directory'),
                 $fileName
             );
             $annonce->setImages($fileName);
@@ -131,6 +131,14 @@ class GardeController extends Controller
 
         if($request->isMethod('post')){
 
+            $image = $annonce->getImages();
+            $file = $request->files->get('image');
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move(
+                $this->getParameter('annonce1_directory'),
+                $fileName
+            );
+
             $annonce->setAge($request->get('age'));
             $annonce->setType($request->get('type'));
             $annonce->setSex($request->get('sexe'));
@@ -140,6 +148,7 @@ class GardeController extends Controller
             $annonce->setDuresit($request->get('duresit'));
             $annonce->setTodolist($request->get('todolist'));
             $annonce->setMessageComplementaire($request->get('message'));
+
             $em->persist($annonce);
             $em->flush();
             return $this->redirectToRoute("lister_annonce_garde", array('id'=>$id));

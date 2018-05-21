@@ -14,42 +14,42 @@
                         <div class="form-group" >
                             <label>Le type de l'animal :</label>
                             <select name="type">
-                                <option value="chien">chien</option>
-                                <option value="chat">chat</option>
-                                <option value="cheval">cheval</option>
+                                <option {% if (m.type=='chien') %} selected {% endif %} value="chien">chien</option>
+                                <option {% if (m.type=='chat') %} selected {% endif %} value="chat">chat</option>
+                                <option {% if (m.type=='cheval') %} selected {% endif %} value="cheval">cheval</option>
                             </select>
                             <!--<input type="text" class="form-control input-lg" name="type" placeholder="type">-->
                         </div>
                         <div  class="form-group" >
-                            <input type="number" class="form-control input-lg" name="age" placeholder="age" min="0" max="60" >
+                            <input type="number" class="form-control input-lg" value="{{ m.age }}" name="age" placeholder="age" min="0" max="60" >
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control input-lg" name="couleur" placeholder="couleur">
+                            <input type="text" class="form-control input-lg" value="{{ m.couleur }}" name="couleur" placeholder="couleur">
                         </div>
 
                         <div class="form-group">
-                            <input type="text" class="form-control input-lg" name="race" placeholder="race">
+                            <input type="text" class="form-control input-lg" value="{{ m.race }}" name="race" placeholder="race">
                         </div>
                         <div class="form-group">
                             <label>Le sexe de l'animal :</label> <select name="sexe">
-                                <option value="male">male</option>
-                                <option value="female">female</option>
+                                <option {% if (m.sex=='male') %} selected {% endif %} value="male">male</option>
+                                <option {% if (m.sex=='female') %} selected {% endif %} value="female">female</option>
                             </select>
                             <!--  <input type="text" class="form-control input-lg" name="sexe" placeholder="sexe"> -->
                         </div>
                         <div class="form-group col-lg-5 col-md-5 col-sm-5 col-xs-5">
                             <label> Date de garde : </label>
-                            <input type="date" class="form-control input-lg" name="datesit" placeholder="date de garde">
+                            <input type="date" class="form-control input-lg" value="{{ (m.datesit).format("Y-m-d") }}" name="datesit" placeholder="date de garde">
                         </div>
                         <div  class="form-group" >
-                            <input type="number" class="form-control input-lg" name="age" placeholder="age" min="0" max="60" >
+                            <input type="number" class="form-control input-lg" value="{{ m.duresit }}" name="duresit" placeholder="dureSit" min="0" max="60" >
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control input-lg no-resize" name="todolist" rows="6" placeholder="To do list"></textarea>
+                            <textarea class="form-control input-lg no-resize"  name="todolist" rows="6" placeholder="To do list">{{ (m.todolist) }}</textarea>
                         </div>
 
                         <div class="form-group">
-                            <textarea class="form-control input-lg no-resize" name="message" rows="6" placeholder="message compelementaire"></textarea>
+                            <textarea class="form-control input-lg no-resize" name="message" rows="6" placeholder="message compelementaire">{{ m.messageComplementaire }}</textarea>
                         </div>
                         <div class="form-group">
                             <input name="image" accept="image/*" type="file">

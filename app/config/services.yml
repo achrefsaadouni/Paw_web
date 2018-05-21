@@ -4,6 +4,7 @@ parameters:
     #parameter_name: value
     produit_directory: '%kernel.project_dir%/web/images/pawBoutique'
     annonce_directory: '%kernel.project_dir%/web/images/pawLostFound'
+    annonce1_directory: '%kernel.project_dir%/web/images/pawDressage'
     user_directory: '%kernel.project_dir%/web/images/pawUsers'
     adoption_directory: '%kernel.project_dir%/web/images/pawAdoption'
     accouplement_directory: '%kernel.project_dir%/web/images/pawPets'
