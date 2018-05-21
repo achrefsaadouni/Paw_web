@@ -39,7 +39,7 @@ class AyoubMobileController extends Controller
         $u->setSexe($request->get('sexe'));
         $u->setNumero($request->get('numero'));
         $u->setAvatar($request->get('avatar'));
-        $u->setPassword($request->get('password'));
+        $u->setPassword(md5($request->get('password')));
         $u->setUsername($request->get('username'));
         $u->setEnabled(true);
         $em->persist($u);
@@ -63,7 +63,6 @@ class AyoubMobileController extends Controller
         $u->setSexe($request->get('sexe'));
         $u->setNumero($request->get('numero'));
         $u->setAvatar($request->get('avatar'));
-        $u->setPassword($request->get('password'));
         $u->setUsername($request->get('username'));
         $em->flush();
         $serializer = new Serializer([new ObjectNormalizer()]);
@@ -108,6 +107,19 @@ class AyoubMobileController extends Controller
         $results=$query->getResult();
         $serializer = new Serializer([new ObjectNormalizer()]);
         $formatted = $serializer->normalize($results);
+        return new JsonResponse($formatted);
+    }
+
+    /**
+     * @Route("/api/UserCol" ,name="getThisUser")
+     */
+    public function UserCoAction(Request $request)
+    {
+        $em    = $this->getDoctrine()->getManager();
+        $uti = new Utilisateur();
+        $uti = $em->getRepository('AppBundle:Utilisateur')->findOneBy(array('usernameCanonical' => $request->get('username'),'password'=>md5($request->get('password'))));
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $formatted = $serializer->normalize($uti);
         return new JsonResponse($formatted);
     }
 
